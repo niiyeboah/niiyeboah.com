@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# Dev files
+motif.0.js

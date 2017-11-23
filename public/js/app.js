@@ -45,7 +45,7 @@ window.onload = () => {
                 date = date_arr[0] + "-" + date_arr[1] + "-" + date_arr[2];
                 date_el.value = date;
                 date_el.setAttribute("data-curr", date);
-                history.pushState("", "", date);
+                history.pushState(null, date, date);
             }
             d = date_el.value;
             prng = new PRNG(d);
@@ -56,8 +56,13 @@ window.onload = () => {
         }
     }, false);
     window.onresize = () => {
-        var date = document.getElementById("date").value.replace(/\/|\./g, "-");
-        if (Date.parse(date_el.value)) window.location.replace(date);
+        w = draw_el.clientWidth;
+        draw_el.style["height"] = draw_el.style["width"];
+        draw_el.innerHTML = "";
+        draw = SVG('drawing').size(w, w),
+        prng = new PRNG(d),
+        samai(w, draw, prng, sdark, slight);
+        history.pushState(null, d, d);
     }
     samai(w, draw, prng, sdark, slight);
 }
