@@ -108,7 +108,7 @@ function samai(w, draw, prng, dark, light) {
         var w = 4;
         var pw = w / 2;
         var p = hex;
-        if (window.width > 768) {
+        if (window.outerWidth > 768) {
             var colorlum = (hex, lum) => {
                 lum = lum || 0;
                 hex = String(hex).replace(/[^0-9a-f]/gi, '');
