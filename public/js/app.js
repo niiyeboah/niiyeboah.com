@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.onload = () => {
     var draw_el = document.getElementById("drawing"),
         date_el = document.getElementById("date"),
+        dl_el = document.getElementById("download"),
         w = draw_el.clientWidth,
         d = date_el.value,
         prng = new PRNG(d),
@@ -68,7 +69,29 @@ window.onload = () => {
         samai(w, draw, prng, sdark, slight);
         history.pushState(null, d, d);
     }
+    dl_el.addEventListener("click", (e) => {
+        downloadSVG(draw, true);
+        e.stopPropagation();
+    }, false);
     samai(w, draw, prng, sdark, slight);
+}
+
+function downloadSVG(draw, auto) {
+    var imgsrc = 'data:image/svg+xml;base64,' + btoa(draw.svg());
+        canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d"),
+        image = new Image;
+    image.src = imgsrc;
+    image.onload = () => {
+        context.drawImage(image, 0, 0);
+        var canvasdata = canvas.toDataURL("image/png"),
+            pngimg = '<img src="' + canvasdata + '">',
+            a = document.createElement("a");
+        a.download = "sama.png";
+        a.href = canvasdata;
+        if (auto) a.click();
+    };
+    return imgsrc;
 }
 
 function shuffle(arr, prng) {
@@ -213,6 +236,7 @@ function samai(w, draw, prng, dark, light) {
     };
     draw.clear();
     draw.rect(w, w).fill(generatePattern());
+    document.querySelector("body").style["background"] = "url('" + downloadSVG(draw) + "')";
 }
 
 class PRNG {

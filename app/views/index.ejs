@@ -10,14 +10,18 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div id="container">
-        <div id="top">
-            <img id="logo" src="img/logo.png" alt="Logo" />
-            <input id="date" type="text" value="<%=date %>" data-curr="<%=date %>" />
-        </div>
-        <div id="drawing_container">
-            <div id="drawing"></div>
-        </div>
+    <div id="outer">
+        <div id="container">
+            <div id="top">
+                <img id="logo" src="img/logo.png" alt="Logo" />
+                <input id="date" type="text" value="<%=date %>" data-curr="<%=date %>" />
+            </div>
+            <div id="drawing_container">
+                <div id="drawing"></div>
+                <canvas id="canvas" width="400px" height="400px"></canvas>
+                <a id="download" title="Download"></a>
+            </div>
+        </div>    
     </div>
 </body>
 </html>
