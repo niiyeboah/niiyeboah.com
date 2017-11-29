@@ -13,6 +13,7 @@ window.onload = () => {
         prng = new PRNG(d),
         prng_sa = new PRNG(d),
         draw = SVG('drawing').size(w, w),
+        /*
         dark = [
             "../img/f/black.png",
             "../img/f/dark_blue.png",
@@ -29,8 +30,11 @@ window.onload = () => {
             "../img/f/pink.png",
             "../img/f/orange.png"
         ],
-        sdark = sa(dark, d, prng_sa),
-        slight = sa(light, d, prng_sa);     
+        */
+        dark = ["#222", "#227", "#272", "#777", "#427", "#722"],      
+        light = ["#39C", "#3C6", "#CCC", "#FC3", "#C6C", "#F63"],
+        sdark = shuffle(dark, prng_sa),
+        slight = shuffle(light, prng_sa);
     draw_el.addEventListener("click", () => { 
         samai(w, draw, prng, sdark, slight);
     }, false);
@@ -50,8 +54,8 @@ window.onload = () => {
             d = date_el.value;
             prng = new PRNG(d);
             prng_sa = new PRNG(d);
-            sdark = sa(dark, d, prng_sa);
-            slight = sa(light, d, prng_sa);
+            sdark = shuffle(dark, prng_sa);
+            slight = shuffle(slight, prng_sa);
             samai(w, draw, prng, sdark, slight);
         }
     }, false);
@@ -67,32 +71,26 @@ window.onload = () => {
     samai(w, draw, prng, sdark, slight);
 }
 
-function sa(arr, date, prng) {
-    var a = arr.slice();
+function shuffle(arr, prng) {
     var random = (x, min) => {
         min = min || 0;
         return Math.round(prng.nextFloat() % (x - min)) + min;
+    };
+    var a = arr.slice();
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = random(i + 1);
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
     }
-    var shuffle = (a) => {
-        var j, x, i;
-        for (i = a.length - 1; i > 0; i--) {
-            j = random(i + 1);
-            x = a[i];
-            a[i] = a[j];
-            a[j] = x;
-        }
-    }
-    shuffle(a);
     return  a;
-}
+};
 
 function samai(w, draw, prng, dark, light) {
     var pw = w / 2, 	// Pattern Width
-        lc = 4, 	    // Pattern Line Count
-        lh = pw / lc, 	// Pattern Line Height
-        h = w,
-        da = dark.slice(),
-        li = light.slice();
+        lc = 2, 	    // Pattern Line Count
+        lh = pw / lc; 	// Pattern Line Height
         /*
         hex = [
             "#060",
@@ -105,7 +103,49 @@ function samai(w, draw, prng, dark, light) {
     var random = (x, min) => {
         min = min || 0;
         return Math.round(prng.nextFloat() % (x - min)) + min;
-    }
+    };
+    var fabric = (draw, hex, texture) => {
+        var w = 4;
+        var colorlum = (hex, lum) => {
+            lum = lum || 0;
+            hex = String(hex).replace(/[^0-9a-f]/gi, '');
+            if (hex.length < 6) {
+                hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+            }
+            var rgb = "#", c, i;
+            for (i = 0; i < 3; i++) {
+                c = parseInt(hex.substr(i * 2, 2), 16);
+                c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+                rgb += ("00" + c).substr(c.length);
+            }
+            return rgb;
+        }
+        var pw = w / 2;
+        var p = draw.pattern(w, w, (add) => {
+            add.rect(pw, pw).fill(hex);
+            add.rect(pw, pw).fill(colorlum(hex, 0.03)).move(pw, 0);
+            add.rect(pw, pw).fill(colorlum(hex, 0.06)).move(0, pw);
+            add.rect(pw, pw).fill(colorlum(hex, 0.09)).move(pw, pw);
+        });
+        if (texture > 0) {
+            p = draw.pattern(w * 2, w * 2, (add) => {
+                add.rect(w, w).fill(p);
+                add.rect(w, w).fill(p).move(w, 0).rotate(90);
+                add.rect(w, w).fill(p).move(0, w).rotate(180);
+                add.rect(w, w).fill(p).move(w, w).rotate(270);
+            });
+        }
+        if (texture > 1) {
+            w *= 2;
+            p = draw.pattern(w * 2, w * 2, (add) => {
+                add.rect(w, w).fill(p);
+                add.rect(w, w).fill(p).move(w, 0).rotate(90);
+                add.rect(w, w).fill(p).move(0, w).rotate(180);
+                add.rect(w, w).fill(p).move(w, w).rotate(270);
+            });
+        }
+        return p;
+    };
     var randomShape = (c, lh, lc, d) => {
         var sides = [3, 3],
             sideNumber = sides[random(1)],
@@ -132,11 +172,18 @@ function samai(w, draw, prng, dark, light) {
     var generatePattern = () => {
         var transformations = random(4, 2);
         var pattern = draw.pattern(pw, lh, (add) => {
-            add.rect(lh * (lc / 2), lh).fill(li.shift());
-            add.rect(lh * (lc / 2), lh).fill(da.shift()).move(lh * 2, 0);
-            randomShape(li.shift(), lh, lc, add);
-            randomShape(da.shift(), lh, lc, add);
-            randomShape(li.shift(), lh, lc, add);
+            add.rect(lh * (lc / 2), lh).fill(fabric(draw, light[0], 2));
+            add.rect(lh * (lc / 2), lh).fill(fabric(draw, dark[0], 1)).move(lh * (lc / 2), 0);
+            randomShape(fabric(draw, light[1], 0), lh, lc, add);
+            randomShape(fabric(draw, dark[1], 1), lh, lc, add);
+            randomShape(fabric(draw, light[2], 0), lh, lc, add);
+            /*
+            add.rect(lh * (lc / 2), lh).fill(fabric(draw, "#042", 2));
+            add.rect(lh * (lc / 2), lh).fill(fabric(draw, "#222", 1)).move(lh * (lc / 2), 0);
+            randomShape(fabric(draw, "#396", 0), lh, lc, add);
+            randomShape(fabric(draw, "#666", 1), lh, lc, add);
+            randomShape(fabric(draw, "#AAA", 0), lh, lc, add);
+            */
         });
         if (transformations > 1) {
             pattern = draw.pattern(pw, lh * 2, (add) => {
@@ -162,7 +209,7 @@ function samai(w, draw, prng, dark, light) {
         return pattern;
     };
     draw.clear();
-    draw.rect(w, h).fill(generatePattern());
+    draw.rect(w, w).fill(generatePattern());
 }
 
 class PRNG {

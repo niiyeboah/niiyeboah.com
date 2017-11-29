@@ -25,7 +25,6 @@ window.onload = () => {
         }
     });
     draw.rect(w, h).fill(pattern)
-    //.transform({ rotation: 90 });
     document.getElementById("drawing").style["width"] = w + "px"
     document.getElementById("drawing").style["height"] = h + "px"
 }
