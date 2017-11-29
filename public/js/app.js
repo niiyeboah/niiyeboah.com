@@ -106,43 +106,46 @@ function samai(w, draw, prng, dark, light) {
     };
     var fabric = (draw, hex, texture) => {
         var w = 4;
-        var colorlum = (hex, lum) => {
-            lum = lum || 0;
-            hex = String(hex).replace(/[^0-9a-f]/gi, '');
-            if (hex.length < 6) {
-                hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
-            }
-            var rgb = "#", c, i;
-            for (i = 0; i < 3; i++) {
-                c = parseInt(hex.substr(i * 2, 2), 16);
-                c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
-                rgb += ("00" + c).substr(c.length);
-            }
-            return rgb;
-        }
         var pw = w / 2;
-        var p = draw.pattern(w, w, (add) => {
-            add.rect(pw, pw).fill(hex);
-            add.rect(pw, pw).fill(colorlum(hex, 0.03)).move(pw, 0);
-            add.rect(pw, pw).fill(colorlum(hex, 0.06)).move(0, pw);
-            add.rect(pw, pw).fill(colorlum(hex, 0.09)).move(pw, pw);
-        });
-        if (texture > 0) {
-            p = draw.pattern(w * 2, w * 2, (add) => {
-                add.rect(w, w).fill(p);
-                add.rect(w, w).fill(p).move(w, 0).rotate(90);
-                add.rect(w, w).fill(p).move(0, w).rotate(180);
-                add.rect(w, w).fill(p).move(w, w).rotate(270);
+        var p = hex;
+        if (window.width > 768) {
+            var colorlum = (hex, lum) => {
+                lum = lum || 0;
+                hex = String(hex).replace(/[^0-9a-f]/gi, '');
+                if (hex.length < 6) {
+                    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+                }
+                var rgb = "#", c, i;
+                for (i = 0; i < 3; i++) {
+                    c = parseInt(hex.substr(i * 2, 2), 16);
+                    c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+                    rgb += ("00" + c).substr(c.length);
+                }
+                return rgb;
+            }
+            p = draw.pattern(w, w, (add) => {
+                add.rect(pw, pw).fill(hex);
+                add.rect(pw, pw).fill(colorlum(hex, 0.03)).move(pw, 0);
+                add.rect(pw, pw).fill(colorlum(hex, 0.06)).move(0, pw);
+                add.rect(pw, pw).fill(colorlum(hex, 0.09)).move(pw, pw);
             });
-        }
-        if (texture > 1) {
-            w *= 2;
-            p = draw.pattern(w * 2, w * 2, (add) => {
-                add.rect(w, w).fill(p);
-                add.rect(w, w).fill(p).move(w, 0).rotate(90);
-                add.rect(w, w).fill(p).move(0, w).rotate(180);
-                add.rect(w, w).fill(p).move(w, w).rotate(270);
-            });
+            if (texture > 0) {
+                p = draw.pattern(w * 2, w * 2, (add) => {
+                    add.rect(w, w).fill(p);
+                    add.rect(w, w).fill(p).move(w, 0).rotate(90);
+                    add.rect(w, w).fill(p).move(0, w).rotate(180);
+                    add.rect(w, w).fill(p).move(w, w).rotate(270);
+                });
+            }
+            if (texture > 1) {
+                w *= 2;
+                p = draw.pattern(w * 2, w * 2, (add) => {
+                    add.rect(w, w).fill(p);
+                    add.rect(w, w).fill(p).move(w, 0).rotate(90);
+                    add.rect(w, w).fill(p).move(0, w).rotate(180);
+                    add.rect(w, w).fill(p).move(w, w).rotate(270);
+                });
+            }
         }
         return p;
     };
