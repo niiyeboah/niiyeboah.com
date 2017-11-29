@@ -1,14 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth <= 768) {
-        var draw_el = document.getElementById("drawing");
-        draw_el.style["height"] = draw_el.style["width"];
-    }
-}, false);
-
 window.onload = () => {
     var draw_el = document.getElementById("drawing"),
         date_el = document.getElementById("date"),
         dl_el = document.getElementById("download"),
+        img_el = document.getElementById("drawing_image"),
         w = draw_el.clientWidth,
         d = date_el.value,
         prng = new PRNG(d),
@@ -36,7 +30,7 @@ window.onload = () => {
         light = ["#39C", "#3C6", "#CCC", "#FC3", "#C6C", "#F63"],
         sdark = shuffle(dark, prng_sa),
         slight = shuffle(light, prng_sa);
-    draw_el.addEventListener("click", () => { 
+    img_el.addEventListener("click", () => { 
         samai(w, draw, prng, sdark, slight);
     }, false);
     date_el.addEventListener("change", (e) => {
@@ -60,15 +54,6 @@ window.onload = () => {
             samai(w, draw, prng, sdark, slight);
         }
     }, false);
-    window.onresize = () => {
-        w = draw_el.clientWidth;
-        draw_el.style["height"] = draw_el.style["width"];
-        draw_el.innerHTML = "";
-        draw = SVG('drawing').size(w, w),
-        prng = new PRNG(d),
-        samai(w, draw, prng, sdark, slight);
-        history.pushState(null, d, d);
-    }
     dl_el.addEventListener("click", (e) => {
         downloadSVG(draw, true);
         e.stopPropagation();
@@ -78,9 +63,11 @@ window.onload = () => {
 
 function downloadSVG(draw, auto) {
     var imgsrc = 'data:image/svg+xml;base64,' + btoa(draw.svg());
-        canvas = document.getElementById("canvas"),
+        canvas = document.createElement("canvas"),
         context = canvas.getContext("2d"),
         image = new Image;
+    canvas.setAttribute("width", "400px");
+    canvas.setAttribute("height", "400px");
     image.src = imgsrc;
     image.onload = () => {
         context.drawImage(image, 0, 0);
@@ -234,9 +221,15 @@ function samai(w, draw, prng, dark, light) {
         */
         return pattern;
     };
+    
     draw.clear();
+    draw.viewbox(0, 0, w, w);
     draw.rect(w, w).fill(generatePattern());
-    document.querySelector("body").style["background"] = "url('" + downloadSVG(draw) + "')";
+    var data_uri = downloadSVG(draw);
+    //document.querySelector("#drawing").style["display"] = "none";
+    document.querySelector("#drawing_image").setAttribute("src", data_uri);
+    document.querySelector("body").style["background"] = "url('" + data_uri + "')";
+    console.log(prng._count);
 }
 
 class PRNG {
@@ -248,12 +241,14 @@ class PRNG {
         }
         this._seed = dateSeed() % 2147483647;
         if (this._seed <= 0) this._seed += 2147483646;
+        this._count = 0;
     }
-    next() {
+    _next() {
+        this._count++;
         return this._seed = this._seed * 16807 % 2147483647;
     }
     nextFloat() {
-        var result = (this.next() - 1) / 2147483646;
+        var result = (this._next() - 1) / 2147483646;
         while (result < 1) result *= 10;
         return result;
     }

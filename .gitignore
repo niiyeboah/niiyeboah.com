@@ -58,4 +58,4 @@ typings/
 .env
 
 # Dev files
-**/motif.0.js
+public/js/motif.1.js
