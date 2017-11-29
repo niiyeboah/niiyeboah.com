@@ -16,9 +16,9 @@
     "main": "server.js",
     "devDependencies": {},
     "author": "Nii Yeboah",
-    "license": "ISC",
+    "license": "MIT",
     "engines": {
-        "node": ">=4.4.1",
-        "npm": ">=2.14.20"
+        "node": ">=8.0.0",
+        "npm": ">=5.0.0"
     }
 }
