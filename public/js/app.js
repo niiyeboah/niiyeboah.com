@@ -35,7 +35,6 @@ window.onload = () => {
     }, false);
     date_el.addEventListener("change", (e) => {
         var date = date_el.value.replace(/\/|\./g, "-");
-        console.log(date_el.getAttribute("data-curr") !== date);
         if (date_el.getAttribute("data-curr") !== date) {
             var date_arr = date.split("-");
             if (Date.parse(date) && date_arr.length === 3) {
@@ -50,7 +49,7 @@ window.onload = () => {
             prng = new PRNG(d);
             prng_sa = new PRNG(d);
             sdark = shuffle(dark, prng_sa);
-            slight = shuffle(slight, prng_sa);
+            slight = shuffle(light, prng_sa);
             samai(w, draw, prng, sdark, slight);
         }
     }, false);
@@ -82,11 +81,11 @@ function downloadSVG(draw, auto) {
 }
 
 function shuffle(arr, prng) {
+    var a = arr.slice();
     var random = (x, min) => {
         min = min || 0;
         return Math.round(prng.nextFloat() % (x - min)) + min;
     };
-    var a = arr.slice();
     var j, x, i;
     for (i = a.length - 1; i > 0; i--) {
         j = random(i + 1);
