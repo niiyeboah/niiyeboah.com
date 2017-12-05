@@ -1,15 +1,21 @@
 var date_el = document.getElementById("date"),
     dl_el = document.getElementById("download"),
     img_el = document.getElementById("drawing_image"),
+    dc_el = document.getElementById("drawing_container"),
     body_el = document.querySelector("body"),
     fabric_enabled = window.innerWidth > 768,
     samai = new Samai({ date: date_el.value, fabric_enabled }),
     setImg = (uri) => {
         img_el.setAttribute("src", uri);
-        body_el.style["background"] = "url('" + uri + "')";
+        body_el.style["background-image"] = "url('" + uri + "')";
         body_el.style["background-size"] = samai.width + "px";
-    };
-setImg(samai.data_uri);
+    },
+    logo = new N.Logo("logo", 32);
+logo.animate(() => {
+    setImg(samai.data_uri);
+    date_el.style.opacity = 1,
+    dc_el.style.opacity = 1
+});
 img_el.addEventListener("click", () => setImg(samai.next()), false);
 date_el.addEventListener("change", (e) => {
     var date = date_el.value.replace(/\/|\./g, "-");

@@ -26,9 +26,11 @@ body { margin: 0; }
     font-size: 32px; 
     font-family: Verdana, Geneva, Tahoma, sans-serif; 
     font-weight: bold;
+    opacity: 0; 
+    transition: opacity 0.5s linear; 
 }
 #date:hover { color: #777; }
-#drawing_container { position: relative; }
+#drawing_container { position: relative; opacity: 0; transition: opacity 0.5s linear;  }
 #download { 
     height: 40px; 
     width: 40px; 
