@@ -12,7 +12,7 @@
         }
         canvas { display: inline-block; }
         #contact {  font-weight: normal; font-size: 18px; }
-        #role { font-size: 24px; font-weight: bold; color: #396; }
+        #role { font-size: 24px; font-weight: bold; color: #396; font-family:  }
         #role span { color: #000; }
         #logo { margin: 50px auto; }
         #email { text-decoration: none; color: #000; }
@@ -31,7 +31,7 @@
     </style>
 </head>
 <body>
-    <div id="logo">
+    <div id="logo" width="400px" height="400px">
         <canvas id="canvas">Canvas not supported in this browser</canvas>
     </div>
     <div id="info" class="margin">
@@ -51,7 +51,6 @@
             logo_el = document.getElementById("logo"),
             logoSize = getLogoSize(logo_el),
             logo = new N.Logo("canvas", logoSize);
-
         logo.animate();
 
         window.onresize = function () {
