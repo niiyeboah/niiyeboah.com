@@ -54,7 +54,8 @@
             resizing = setTimeout(function () {
                 logoSize = getLogoSize(logo_el);
                 logo.setWidth(logoSize);
-                logo.animate();
+                logo._initParams();
+                logo.draw();
             }, 500);
         }
 
