@@ -7,8 +7,8 @@
         body { 
             text-align: center; 
             margin: 0; 
-            font-family: Verdana, Geneva, Tahoma, sans-serif; 
-            background-image: radial-gradient(farthest-corner at 0 0, #FFF 55%, #CFA 110%); 
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background: radial-gradient(farthest-corner at 0 0, #FFF 55%, #CFA 110%);
         }
         canvas { display: inline-block; }
         #contact {  font-weight: normal; font-size: 18px; }
@@ -51,6 +51,7 @@
             logo_el = document.getElementById("logo"),
             logoSize = getLogoSize(logo_el),
             logo = new N.Logo("canvas", logoSize);
+
         logo.animate();
 
         window.onresize = function () {
