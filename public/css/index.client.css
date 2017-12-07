@@ -19,12 +19,10 @@ canvas { display: inline-block; }
 #icons a:hover { background: #EEE; }
 #icons a:active { background: #CFA; }
 .margin { margin-bottom: 25px; }
-#container { border: 20px solid #000; }
 
 @media only screen and (max-width: 480px) {
     #role { font-size: 14px; }
     #role span { font-size: 18px;  }
     #contact { font-size: 13px; }
     #info { margin-bottom: 50px; }
-    #container { border-width: 10px; }
 }

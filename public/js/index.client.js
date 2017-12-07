@@ -23,13 +23,10 @@ window.onresize = function () {
 function bodyHeight() {
     if (cont.clientHeight > window.innerHeight) {
         body.style.height = "auto";
-        cont.style.height = "auto";
         logo_el.style.paddingTop = "50px";
     } else {
         var h = logo_el.clientHeight + info.clientHeight;
-        var b = window.innerWidth <= 480 ? 20 : 40
         body.style.height = "100vh";
-        cont.style.height = window.innerHeight - b + "px";
         logo_el.style.paddingTop = (window.innerHeight - h) / 2 + "px";
     }
 }
