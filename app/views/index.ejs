@@ -3,35 +3,7 @@
 <head>
     <title><%=title %></title>
     <meta name="viewport" content="width=device-width">
-    <style>
-        body { 
-            text-align: center; 
-            margin: 0; 
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            background: radial-gradient(farthest-corner at 0 0, #FFF 55%, #CFA 110%);
-            background-color: #CFA;
-            height: 100vh;
-        }
-        canvas { display: inline-block; }
-        #contact {  font-weight: normal; font-size: 18px; }
-        #role { font-size: 24px; font-weight: bold; color: #396; font-family:  }
-        #role span { color: #000; font-size: 30px;  }
-        #logo { margin: auto; padding: 50px 0;  }
-        #email { text-decoration: none; color: #000; }
-        #email:hover { color: #777; }
-        #icons img { width: 35px; }
-        #icons a { display: inline-block; }
-        #icons a:hover { background: #EEE; }
-        #icons a:active { background: #CFA; }
-        .margin { margin-bottom: 25px; }
-
-        @media only screen and (max-width: 480px) {
-            #role { font-size: 14px; }
-            #role span { font-size: 18px;  }
-            #contact { font-size: 13px; }
-            #info { margin-bottom: 50px; }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/index.client.min.css" type="text/css">
 </head>
 <body>
     <div id="container">
@@ -40,7 +12,7 @@
         </div>
         <div id="info" class="margin">
             <div id="role" class="margin">Web Developer <span>//</span> Computational Artist</div>
-            <div id="contact" class="margin">Nii Yeboah | <a id="email" href="mailto:contact@niiyeboah.com">contact@niiyeboah.com</a></div>
+            <div id="contact" class="margin">Nii Yeboah <span>|</span> <a id="email" href="mailto:contact@niiyeboah.com">contact@niiyeboah.com</a></div>
             <div id="icons">
                 <a href="https://github.com/niiyeboah" title="GitHub"><img src="./img/github.png" /></a>
                 <a href="https://www.linkedin.com/in/niiyeboah/" title="Linkedin"><img src="./img/linkedin.png" /></a>
@@ -50,38 +22,5 @@
         </div>
     </div>
     <script type='text/javascript' src='./js/n-logo.min.js'></script>
-    <script type='text/javascript'>
-        var resizing = false,
-            logo_el = document.getElementById("logo"),
-            body = document.querySelector("body"),
-            cont = document.getElementById("container"),
-            logoSize = getLogoSize(logo_el),
-            logo = new N.Logo("canvas", logoSize);
-        
-        bodyHeight();
-        logo.animate();
-
-        window.onresize = function () {
-            clearTimeout(resizing);
-            resizing = setTimeout(function () {
-                logoSize = getLogoSize(logo_el);
-                logo.setWidth(logoSize);
-                logo._initParams();
-                logo.draw();
-                bodyHeight();
-            }, 500);
-        }
-
-        function bodyHeight() {
-            if (cont.clientHeight > window.innerHeight) body.style.height = "auto";
-            else body.style.height = "100vh";
-        }
-
-        function getLogoSize(el) {
-            var w = window.innerWidth, h = window.innerHeight;
-            var result = (w > h ? h : w) * (window.innerWidth <= 768 ? 0.8 : 0.5);
-            el.style.width = el.style.height = result;
-            return result;
-        }
-    </script>
+    <script type='text/javascript' src='./js/index.client.min.js'></script>
 </body>

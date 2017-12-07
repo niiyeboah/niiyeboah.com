@@ -1,0 +1,30 @@
+body { 
+    text-align: center; 
+    margin: 0; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: radial-gradient(farthest-corner at 0 0, #FFF 55%, #CFA 110%);
+    background-color: #CFA;
+    height: 100vh;
+}
+canvas { display: inline-block; }
+#contact {  font-weight: normal; font-size: 18px; }
+#contact span { font-weight: bold; }
+#role { font-size: 24px; font-weight: bold; color: #396; font-family:  }
+#role span { color: #000; font-size: 30px;  }
+#logo { margin: auto; padding: 50px 0;  }
+#email { text-decoration: none; color: #000; }
+#email:hover { color: #777; }
+#icons img { width: 35px; }
+#icons a { display: inline-block; }
+#icons a:hover { background: #EEE; }
+#icons a:active { background: #CFA; }
+.margin { margin-bottom: 25px; }
+#container { border: 20px solid #000; }
+
+@media only screen and (max-width: 480px) {
+    #role { font-size: 14px; }
+    #role span { font-size: 18px;  }
+    #contact { font-size: 13px; }
+    #info { margin-bottom: 50px; }
+    #container { border-width: 10px; }
+}
