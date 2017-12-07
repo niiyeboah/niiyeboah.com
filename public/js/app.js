@@ -3,12 +3,19 @@ var date_el = document.getElementById("date"),
     img_el = document.getElementById("drawing_image"),
     dc_el = document.getElementById("drawing_container"),
     body_el = document.querySelector("body"),
+    sama_el = document.getElementById("sama_number"),
+    sama = Number.parseInt(sama_el.getAttribute("data-n")),
     fabric_enabled = window.innerWidth > 768,
-    samai = new Samai({ date: date_el.value, fabric_enabled }),
+    samai = new Samai({ 
+        date: date_el.value, 
+        fabric_enabled,
+        n: sama
+    }),
     setImg = (uri) => {
         img_el.setAttribute("src", uri);
         body_el.style["background-image"] = "url('" + uri + "')";
         body_el.style["background-size"] = samai.width + "px";
+        if (sama > 1) sama_el.style.display = "block";
     },
     logo = new N.Logo("logo", 32);
 logo.animate(() => {
@@ -16,7 +23,12 @@ logo.animate(() => {
     date_el.style.opacity = 1,
     dc_el.style.opacity = 1
 });
-img_el.addEventListener("click", () => setImg(samai.next()), false);
+img_el.addEventListener("click", () => {
+    sama++;
+    sama_el.innerText = sama;
+    setImg(samai.next());
+    history.pushState(null, date, samai._getDateString() + "." + sama);
+}, false);
 date_el.addEventListener("change", (e) => {
     var date = date_el.value.replace(/\/|\./g, "-");
     if (date_el.getAttribute("data-curr") !== date) {
@@ -29,8 +41,11 @@ date_el.addEventListener("change", (e) => {
             date_el.setAttribute("data-curr", date);
             history.pushState(null, date, date);
         }
-        samai = new Samai({ date, fabric_enabled });
+        samai = new Samai({ date, fabric_enabled, n: 1 });
         setImg(samai.data_uri);
+        sama = 1;
+        sama_el.innerText = sama;
+        sama_el.style.display = "none";
     }
 }, false);
 dl_el.addEventListener("click", (e) => {
