@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "dependencies": {
         "express": "~4.16.2",
-        "morgan": "~1.9.0",
         "compression": "~1.7.1",
         "body-parser": "~1.18.2",
         "method-override": "~2.3.10",
@@ -12,13 +11,15 @@
     "scripts": {
         "start": "node server.js"
     },
-    "description": "meta-profile",
+    "description": "Personal Website",
     "main": "server.js",
-    "devDependencies": {},
+    "devDependencies": {
+        "morgan": "^1.9.0"
+    },
     "author": "Nii Yeboah",
     "license": "MIT",
     "engines": {
-        "node": "8.9.1",
+        "node": "8.9.3",
         "npm": "5.5.1"
     }
 }
