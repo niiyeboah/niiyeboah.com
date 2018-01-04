@@ -19,6 +19,7 @@ module.exports = function () {
 
   require('../app/routes/index.server.routes.js')(app)
   require('../app/routes/samai.server.routes.js')(app)
+  require('../app/routes/zs.server.routes.js')(app)
 
   app.use(express.static('./public'))
   app.use(express.static('./doc'))
