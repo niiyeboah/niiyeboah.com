@@ -30,10 +30,9 @@
 
             function ZipSplit(w) {
                 w *= 0.9;
-                // initialize SVG.js
+
                 draw.clear();
                 draw.size(w, w);
-
                 draw.rect(w, w).fill('#000');
 
                 var S = draw.text("S").fill("#C49200").font({
@@ -59,6 +58,7 @@
             }
 
             function centerLogo() {
+                console.log(logo.width)
                 logo.style.margin = ((window.innerHeight - logo.width) / 2 - 10) + "px auto 0";
             }
 
