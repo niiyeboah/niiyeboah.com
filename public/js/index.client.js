@@ -19,7 +19,7 @@ body.style.backgroundSize = samai.width + "px";
 bodyHeight()
 logo.animate()
 
-cont.onclick = () => window.location.replace("samai/"); 
+cont.onclick = () => window.location.href = "samai/"; 
 
 function bodyHeight() {
   if (cont.clientHeight > window.innerHeight) {
@@ -35,7 +35,7 @@ function bodyHeight() {
 function getLogoSize(el) {
   var w = window.innerWidth - 20
   var h = window.innerHeight
-  var result = (w > h ? h : w) * 0.4
+  var result = (w > h ? h : w) * (window.innerWidth <= 768 ? 0.8 : 0.4)
   el.style.width = el.style.height = result
   return result
 }
