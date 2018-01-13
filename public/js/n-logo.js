@@ -195,12 +195,9 @@ var Logo = function () {
         key: '_resetCanvas',
         value: function _resetCanvas() {
             var w = this._canvas.width;
-            this._context.save();
             this._context.clearRect(0, 0, w, w);
-            this._context.globalAlpha = 1;
             this._context.fillStyle = '#FFF';
             this._context.fillRect(0, 0, w, w);
-            this._context.restore();
         }
     }, {
         key: '_animationComplete',
@@ -238,14 +235,16 @@ var Logo = function () {
                 param.line.currY = IF_fn(y1, y2, f);
 
                 this._drawLine(param.line, param.segmentIndex);
-                this._hideInnerLineEdges();
 
                 if (f < 1) param.f += 0.1;else {
                     param.f = 0;
                     if (s + 2 <= param.line.segmentCount) param.segmentIndex++;else param.complete = true; // base case
                 }
 
-                if (!param.complete) this._drawBrushTip(param.line.currX, param.line.currY);else this._outerBorder();
+                if (!param.complete) this._drawBrushTip(param.line.currX, param.line.currY);else {
+                    this._outerBorder();
+                    this._HILE_animate();
+                }
             }
         }
 
@@ -271,11 +270,29 @@ var Logo = function () {
                 lw = this._lw,
                 iw = this._iw,
                 ih = this._lh;
-            this._context.save();
-            this._context.globalAlpha = 1;
             this._context.fillStyle = '#FFF';
             this._context.fillRect(w - lw - iw, w - lw - ih, iw, ih);
             this._context.fillRect(lw, lw, iw, ih);
+        }
+    }, {
+        key: '_HILE_fn',
+        value: function _HILE_fn() {
+            var _this2 = this;
+
+            this._context.globalAlpha = this._ga;
+            this._ga += 0.001;
+            this._hideInnerLineEdges();
+            if (this._context.globalAlpha <= 0.9) requestAnimationFrame(function () {
+                return _this2._HILE_fn();
+            });
+        }
+    }, {
+        key: '_HILE_animate',
+        value: function _HILE_animate() {
+            this._context.save();
+            this._ga = 0;
+            this._context.globalAlpha = 0;
+            this._HILE_fn();
             this._context.restore();
         }
     }, {
