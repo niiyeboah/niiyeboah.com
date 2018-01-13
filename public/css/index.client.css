@@ -81,11 +81,13 @@ canvas {
     margin: auto;
     padding: 20px 0;
     box-shadow: inset 0 0 20px #000;
+    border: solid #000;
+    border-width: 10px 0; 
 }
 
 @media only screen and (max-width: 480px) {
     #role {
-        font-size: 14px;
+        font-size: 16px;
     }
     #role span {
         font-size: 18px;
@@ -93,7 +95,5 @@ canvas {
     #contact {
         font-size: 13px;
     }
-    #info {
-        margin-bottom: 50px;
-    }
 }
+

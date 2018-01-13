@@ -22,12 +22,14 @@ logo.animate()
 cont.onclick = () => window.location.href = "samai/"; 
 
 function bodyHeight() {
-  if (cont.clientHeight > window.innerHeight) {
-    body.style.height = 'auto'
+  if (cont.clientHeight > window.innerHeight || 
+    (window.innerWidth > window.innerHeight && 
+    window.innerWidth <= 768)) {
+    cont.style.height = 'auto'
     logoEl.style.paddingTop = '50px'
   } else {
     var h = logoEl.clientHeight + info.clientHeight
-    body.style.height = '100vh'
+    cont.style.height = '100vh'
     logoEl.style.paddingTop = (window.innerHeight - h) / 2 + 'px'
   }
 }
