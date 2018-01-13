@@ -12,14 +12,18 @@ var samai = new Samai({
   fabric_enabled: false
 });
 
-logoEl.style.opacity = 1;
-body.style.background = "url('" + samai.data_uri + "')";
-body.style.backgroundSize = samai.width + "px";
+body.style.backgroundImage = "url('" + samai.data_uri + "')"
+body.style.backgroundSize = samai.width + "px"
 
 bodyHeight()
 logo.animate()
 
-cont.onclick = () => window.location.href = "samai/"; 
+cont.onclick = () => window.location.href = "samai/"
+
+setInterval(() => {
+  body.style.backgroundImage = "url('" + samai.next() + "')"
+  body.style.backgroundSize = samai.width + "px"
+}, 5000); 
 
 function bodyHeight() {
   if (cont.clientHeight > window.innerHeight || 

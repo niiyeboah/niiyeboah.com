@@ -282,7 +282,7 @@ var Logo = function () {
             this._context.globalAlpha = this._ga;
             this._ga += 0.001;
             this._hideInnerLineEdges();
-            if (this._context.globalAlpha <= 0.9) requestAnimationFrame(function () {
+            if (this._context.globalAlpha <= 0.99) requestAnimationFrame(function () {
                 return _this2._HILE_fn();
             });
         }

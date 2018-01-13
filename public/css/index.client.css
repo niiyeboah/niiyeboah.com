@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    transition: background-image 2s ease-in-out;
 }
 
 canvas {
@@ -44,7 +45,6 @@ canvas {
 #logo {
     margin: auto;
     padding: 50px 0;
-    opacity: 0;
 }
 
 #email {
@@ -58,6 +58,10 @@ canvas {
 
 #icons img {
     width: 35px;
+}
+
+#icons {
+    height: 39px;
 }
 
 #icons a {
