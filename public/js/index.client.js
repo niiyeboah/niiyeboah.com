@@ -9,7 +9,9 @@ var info = document.getElementById('info')
 var logoSize = getLogoSize(logoEl)
 var logo = new Logo('canvas', logoSize)
 var samai = new Samai({
-  fabric_enabled: false
+  fabric_enabled: false,
+  dark_colors: ["#222", "#072"], 
+  light_colors: ["#3A6", "#AAA", "#777"], 
 });
 
 body.style.backgroundImage = "url('" + samai.data_uri + "')"

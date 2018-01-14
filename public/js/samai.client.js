@@ -7,6 +7,7 @@ var imgEl = document.getElementById('drawing_image')
 var dcEl = document.getElementById('drawing_container')
 var bodyEl = document.querySelector('body')
 var samaEl = document.getElementById('sama_number')
+var logoEl = document.getElementById('logo')
 var sama = Number.parseInt(samaEl.getAttribute('data-n'))
 var fabricEnabled = window.innerWidth > 768
 var samai = new Samai({
@@ -60,3 +61,5 @@ dlEl.addEventListener('click', (e) => {
   samai.download()
   e.stopPropagation()
 }, false)
+
+logoEl.addEventListener('click', () => window.location.href = "/", false)
