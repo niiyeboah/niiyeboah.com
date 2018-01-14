@@ -1,5 +1,6 @@
 import Logo from './n-logo'
 import Samai from 'samai'
+import css from '../css/samai.css'
 
 var dateEl = document.getElementById('date')
 var dlEl = document.getElementById('download')
@@ -15,6 +16,7 @@ var samai = new Samai({
   fabric_enabled: fabricEnabled,
   n: sama
 })
+
 var setImg = (uri) => {
   imgEl.setAttribute('src', uri)
   bodyEl.style['background-image'] = 'url(\'' + uri + '\')'

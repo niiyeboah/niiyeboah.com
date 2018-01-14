@@ -1,5 +1,6 @@
 import Logo from './n-logo.js'
 import Samai from 'samai'
+import css from '../css/index.css'
 
 var resizing = false
 var logoEl = document.getElementById('logo')

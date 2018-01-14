@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -9,20 +10,33 @@ module.exports = {
     filename: './public/js/[name].js'
   },
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: [{ loader: 'style-loader' }],
+          use: {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }
+        })
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015']
+          }
         }
       }
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true
-    })
+    new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+    new ExtractTextPlugin('public/css/[name].css')
   ]
 }
