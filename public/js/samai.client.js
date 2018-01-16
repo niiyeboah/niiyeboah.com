@@ -10,17 +10,18 @@ var bodyEl = document.querySelector('body')
 var samaEl = document.getElementById('sama_number')
 var logoEl = document.getElementById('logo')
 var sama = Number.parseInt(samaEl.getAttribute('data-n'))
-var fabricEnabled = window.innerWidth > 768
 var samai = new Samai({
   date: dateEl.value,
-  fabric_enabled: fabricEnabled,
+  fabric_enabled: true,
   n: sama
 })
 
 var setImg = (uri) => {
-  imgEl.setAttribute('src', uri)
-  bodyEl.style['background-image'] = 'url(\'' + uri + '\')'
-  bodyEl.style['background-size'] = samai.width + 'px'
+  samai.getPNG().then(src => {
+    imgEl.setAttribute('src', src)
+    bodyEl.style.backgroundImage = 'url(\'' + src + '\')'
+  })
+  bodyEl.style.backgroundSize = samai.width + 'px'
   if (sama > 1) samaEl.style.display = 'block'
 }
 var logo = new Logo('logo', 32)

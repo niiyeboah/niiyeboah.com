@@ -10,13 +10,15 @@ var info = document.getElementById('info')
 var logoSize = getLogoSize(logoEl)
 var logo = new Logo('canvas', logoSize)
 var samai = new Samai({
-  fabric_enabled: false,
+  fabric_enabled: true,
   dark_colors: ["#222", "#072"], 
   light_colors: ["#3A6", "#AAA", "#777"], 
 });
 
-body.style.backgroundImage = "url('" + samai.data_uri + "')"
-body.style.backgroundSize = samai.width + "px"
+samai.getPNG().then(src => {
+  body.style.backgroundImage = "url('" + src + "')"
+  body.style.backgroundSize = samai.width + "px"
+})
 
 bodyHeight()
 logo.animate()
@@ -24,8 +26,11 @@ logo.animate()
 cont.onclick = () => window.location.href = "samai/"
 
 setInterval(() => {
-  body.style.backgroundImage = "url('" + samai.next() + "')"
-  body.style.backgroundSize = samai.width + "px"
+  samai.getPNG().then(src => {
+    samai.next()
+    body.style.backgroundImage = "url('" + src + "')"
+    body.style.backgroundSize = samai.width + "px"
+  })
 }, 5000); 
 
 function bodyHeight() {

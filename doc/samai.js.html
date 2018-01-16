@@ -122,8 +122,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @see http://www.niiyeboah.com/samai
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @example
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * var samai = new Samai();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * var body = document.querySelector("body");
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * body.style["background"] = "url('" + samai.data_uri + "')";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * var body = document.querySelector('body');
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * body.style['background'] = 'url('' + samai.data_uri + '')';
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @requires {@link http://svgjs.com/|SVG.js}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
@@ -146,28 +146,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @constructor
  * @memberof index
  * @param {Object} [options] - Options object for configuration.
- * @param {string|Object} [options.element = document.createElement("div")] - Element to draw pattern in.
+ * @param {string|Object} [options.element = document.createElement('div')] - Element to draw pattern in.
  * @param {string|Date} [options.date = new Date()] - Date to use for seed of PRNG.
  * @param {number} [options.width = 400] - Width of Samai.
- * @param {Array} [options.dark_colors = ["#222", "#227", "#272", "#777", "#427", "#722"]] - Array of dark colors.
- * @param {Array} [options.light_colors = ["#39C", "#3C6", "#CCC", "#FC3", "#C6C", "#F63"]] - Array of light colors.
+ * @param {Array} [options.dark_colors = ['#222', '#227', '#272', '#777', '#427', '#722']] - Array of dark colors.
+ * @param {Array} [options.light_colors = ['#39C', '#3C6', '#CCC', '#FC3', '#C6C', '#F63']] - Array of light colors.
  * @param {number} [options.line_count = 2] - Number of lines in the pattern.
  * @param {boolean} [options.fabric_enabled = false] - Enable fabric imiation.
- * @param {number} [options.n = 1] - Go to the nth pattern.
+ * @param {number} [options.n = 1] - Skip to the nth pattern.
  */
 var Samai = function () {
     function Samai() {
         var _ref = arguments.length > 0 &amp;&amp; arguments[0] !== undefined ? arguments[0] : {},
             _ref$element = _ref.element,
-            element = _ref$element === undefined ? document.createElement("div") : _ref$element,
+            element = _ref$element === undefined ? document.createElement('div') : _ref$element,
             _ref$date = _ref.date,
             date = _ref$date === undefined ? new Date() : _ref$date,
             _ref$width = _ref.width,
             width = _ref$width === undefined ? 400 : _ref$width,
             _ref$dark_colors = _ref.dark_colors,
-            dark_colors = _ref$dark_colors === undefined ? ["#222", "#227", "#272", "#777", "#427", "#722"] : _ref$dark_colors,
+            dark_colors = _ref$dark_colors === undefined ? ['#222', '#227', '#272', '#777', '#427', '#722'] : _ref$dark_colors,
             _ref$light_colors = _ref.light_colors,
-            light_colors = _ref$light_colors === undefined ? ["#39C", "#3C6", "#CCC", "#FC3", "#C6C", "#F63"] : _ref$light_colors,
+            light_colors = _ref$light_colors === undefined ? ['#39C', '#3C6', '#CCC', '#FC3', '#C6C', '#F63'] : _ref$light_colors,
             _ref$line_count = _ref.line_count,
             line_count = _ref$line_count === undefined ? 2 : _ref$line_count,
             _ref$fabric_enabled = _ref.fabric_enabled,
@@ -196,7 +196,7 @@ var Samai = function () {
         key: '_goto',
         value: function _goto(n) {
             /**
-             * Set PRNG state to create the nth pattern.
+             * Set the PRNG to the (n-1)th value.
              * @function _goto
              * @memberof index.Samai#
              * @param {number} n - sama number.
@@ -209,7 +209,7 @@ var Samai = function () {
         key: '_setDate',
         value: function _setDate(date) {
             /**
-             * Sets the date field with Date object.
+             * Sets the date field.
              * @function _setDate
              * @memberof index.Samai#
              * @param {string|Date} date - Date string.
@@ -219,7 +219,7 @@ var Samai = function () {
             var d = date || today;
             if (d instanceof Date) {
                 if (isNaN(d.getTime())) d = today;
-            } else if (typeof d === "string") {
+            } else if (typeof d === 'string') {
                 d = new Date(d);
                 if (isNaN(d.getTime())) d = today;
             } else d = today;
@@ -230,7 +230,7 @@ var Samai = function () {
         key: '_getDateString',
         value: function _getDateString() {
             /**
-             * Returns formatted date string from the date property.
+             * Returns a formatted date string from the date property.
              * @function _getDateString
              * @memberof index.Samai#
              * @returns {string}
@@ -238,8 +238,8 @@ var Samai = function () {
             var result,
                 month = this.date.getMonth() + 1,
                 day = this.date.getDate();
-            result = (month &lt; 10 ? "0" + month : month) + "-";
-            result += (day &lt; 10 ? "0" + day : day) + "-";
+            result = (month &lt; 10 ? '0' + month : month) + '-';
+            result += (day &lt; 10 ? '0' + day : day) + '-';
             result += this.date.getFullYear();
             return result;
         }
@@ -247,7 +247,7 @@ var Samai = function () {
         key: '_randomShape',
         value: function _randomShape(hex, svg) {
             /**
-             * Creates a random shape. 
+             * Creates a pseudo-random shape. 
              * [This method can be modified to create custom shapes]
              * @function _randomShape
              * @memberof index.Samai#
@@ -283,7 +283,7 @@ var Samai = function () {
             var _this = this;
 
             /**
-             * Generates random pattern. 
+             * Generates a pseudo-random pattern. 
              * [This method can be modified to create custom patterns]
              * @function _generatePattern
              * @memberof index.Samai#
@@ -306,12 +306,12 @@ var Samai = function () {
             });
             pattern = s.pattern(pw, lh * 2, function (add) {
                 add.rect(pw, lh).fill(pattern);
-                if (t0) add.rect(pw, lh).fill(pattern).move(0, lh).flip("y");else add.rect(pw, lh).fill(pattern).move(0, lh).rotate(180);
+                if (t0) add.rect(pw, lh).fill(pattern).move(0, lh).flip('y');else add.rect(pw, lh).fill(pattern).move(0, lh).rotate(180);
             });
             if (t1) {
                 pattern = s.pattern(pw * 2, lh * 2, function (add) {
                     add.rect(pw, lh * 2).fill(pattern);
-                    if (t2) add.rect(pw, lh * 2).fill(pattern).move(pw, 0).flip("x");else add.rect(pw, lh * 2).fill(pattern).move(pw, 0).rotate(180);
+                    if (t2) add.rect(pw, lh * 2).fill(pattern).move(pw, 0).flip('x');else add.rect(pw, lh * 2).fill(pattern).move(pw, 0).rotate(180);
                 });
             }
             s.viewbox(0, 0, this.width, this.width);
@@ -326,11 +326,11 @@ var Samai = function () {
             var _this2 = this;
 
             /**
-             * Creates {SVG.Pattern} to imitate the appearance of fabric.
+             * Creates a {SVG.Pattern} to imitate the appearance of fabric.
              * @function _fabric
              * @memberof index.Samai#
              * @param {string} hex - hex color or image url.
-             * @param {number} texture - the number 0, 1 or 2 to choose fabric texture.
+             * @param {number} texture - choose fabric texture. [0, 1, 2]
              * @returns {SVG.Pattern}
              */
             var pattern = hex;
@@ -346,7 +346,7 @@ var Samai = function () {
                         add.rect(w, w).fill(p).move(w, w).rotate(270);
                     });
                 };
-                var pattern = this.svg.pattern(w, w, function (add) {
+                pattern = this.svg.pattern(w, w, function (add) {
                     add.rect(uw, uw).fill(hex);
                     add.rect(uw, uw).fill(Samai.luminance(hex, lum)).move(uw, 0);
                     add.rect(uw, uw).fill(Samai.luminance(hex, lum * 2)).move(0, uw);
@@ -361,7 +361,7 @@ var Samai = function () {
         key: 'next',
         value: function next() {
             /**
-             * Generates next pattern and returns the data URI.
+             * Generates the next pattern and returns a data URI.
              * @function next
              * @memberof index.Samai#
              * @returns {string}
@@ -372,34 +372,41 @@ var Samai = function () {
     }, {
         key: 'download',
         value: function download() {
-            var _this3 = this;
-
             /**
-             * Converts pattern to PNG and then attempts download on client.
+             * Converts the pattern to a PNG and then attempts to download to client.
              * @function download
              * @memberof index.Samai#
              */
-            var canvas = document.createElement("canvas"),
-                context = canvas.getContext("2d"),
-                image = new Image();
-            canvas.setAttribute("width", this.width + "px");
-            canvas.setAttribute("height", this.width + "px");
-            image.src = this.data_uri;
-            image.onload = function () {
-                context.drawImage(image, 0, 0);
-                var canvasdata = canvas.toDataURL("image/png"),
-                    a = document.createElement("a");
-                a.download = "sama." + _this3._getDateString() + "." + _this3.prng.count / _this3._prngNo + ".png";
-                a.href = canvasdata;
-                a.click();
-            };
+            var a = document.createElement('a');
+            a.download = 'sama.' + this._getDateString() + '.' + this.prng.count / this._prngNo + '.png';
+            a.href = this.getPNG();
+            a.click();
+        }
+    }, {
+        key: 'getPNG',
+        value: function getPNG() {
+            var _this3 = this;
+
+            return new Promise(function (resolve, reject) {
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                var image = new Image();
+                canvas.setAttribute('width', _this3.width + 'px');
+                canvas.setAttribute('height', _this3.width + 'px');
+                image.src = _this3.data_uri;
+                image.onerror = reject;
+                image.onload = function () {
+                    context.drawImage(image, 0, 0);
+                    return resolve(canvas.toDataURL('image/png'));
+                };
+            });
         }
     }], [{
         key: 'shuffle',
         value: function shuffle(arr, prng) {
             /**
              * [Static] {@link https://goo.gl/ieQvse|Fisher–Yates shuffle algorithm}.
-             * Shuffles elements in an array and returns a new array.
+             * Shuffles elements in the input array and returns a new array.
              * @function shuffle
              * @memberof index.Samai#
              * @static
@@ -421,7 +428,7 @@ var Samai = function () {
         key: 'luminance',
         value: function luminance(hex, lum) {
             /**
-             * [Static] Returns brighter or darker hex color depending on the luminosity factor.
+             * [Static] Returnsa a brighter or darker hex color depending on the luminosity factor.
              * @function luminance
              * @memberof index.Samai#
              * @static
@@ -434,13 +441,13 @@ var Samai = function () {
             if (hex.length &lt; 6) {
                 hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
             }
-            var rgb = "#",
+            var rgb = '#',
                 c,
                 i;
             for (i = 0; i &lt; 3; i++) {
                 c = parseInt(hex.substr(i * 2, 2), 16);
                 c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
-                rgb += ("00" + c).substr(c.length);
+                rgb += ('00' + c).substr(c.length);
             }
             return rgb;
         }
@@ -570,7 +577,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jan 14 2018 21:19:37 GMT+0000 (DST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jan 16 2018 22:24:13 GMT+0000 (DST)
 </footer>
 
 <script> prettyPrint(); </script>
