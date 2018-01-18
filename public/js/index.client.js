@@ -11,7 +11,7 @@ var logoSize = getLogoSize(logoEl)
 var logo = new Logo('canvas', logoSize)
 var samai = new Samai({
   fabric_enabled: true,
-  dark_colors: ["#222", "#072"], 
+  dark_colors: ["#222", "#072", "#000"], 
   light_colors: ["#3A6", "#AAA", "#777"], 
 });
 
