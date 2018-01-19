@@ -7,7 +7,7 @@ body { margin: 0; }
 }
 #container { width: 408px; padding: 8px; }
 #logo { display: block; float: left; cursor: pointer; }
-#drawing, #drawing_image { border: 4px solid #000; width: 400px; height: 400px; cursor: pointer; display: block; }
+#drawing, #drawing_image { border: 4px solid #000; width: 400px; height: 400px; cursor: pointer; display: block; user-select: none; }
 #drawing_image:hover { box-shadow: 0 0 60px 0 #777; }
 #download:hover ~ #drawing_image { box-shadow: 0 0 60px 0 #777; }
 #top { margin-bottom: 8px; clear: both; height: 32px; user-select: none; }
