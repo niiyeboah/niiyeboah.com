@@ -1,1 +1,6709 @@
-!function(t){function e(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return t[i].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};e.m=t,e.c=n,e.d=function(t,n,i){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:i})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s=4)}([function(t,e,n){"use strict";(function(t){var n,i,r,s="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t};!function(o,a){"object"===s(e)&&"object"===s(t)?t.exports=a():(i=[],n=a,void 0!==(r="function"==typeof n?n.apply(e,i):n)&&(t.exports=r))}(0,function(){return function(t){function e(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return t[i].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};return e.m=t,e.c=n,e.i=function(t){return t},e.d=function(t,n,i){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:i})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s=0)}([function(t,e,n){function i(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var r=function(){function t(t,e){for(var n=0;n<e.length;n++){var i=e[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i)}}return function(e,n,i){return n&&t(e.prototype,n),i&&t(e,i),e}}(),s=function(){function t(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0],n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:420,r=arguments.length>2&&void 0!==arguments[2]&&arguments[2];i(this,t);var s;if(e){var o=document.getElementById(e);"CANVAS"!==o.tagName?(s=document.createElement("canvas"),o.appendChild(s)):s=o}else s=document.createElement("canvas");s.height=s.width=n,this._canvas=s,this._context=s.getContext("2d"),this._context.lineJoin="miter",this._context.strokeStyle="#000",this._context.globalAlpha=0,this._initParams(this._canvas.width),r&&this.draw()}return r(t,[{key:"draw",value:function(){this._initParams(),this._resetCanvas();var e=this._canvas.width,n=this._lw;this._context.save(),this._context.globalAlpha=1,this._context.beginPath(),this._context.moveTo(t._3_4ths(e),e-t._3_4ths(e/2)),this._context.lineTo(e-t._7_8ths(e/2),t._3_4ths(e/2)),this._context.lineTo(e-t._7_8ths(e/2),n/2),this._context.lineTo(e-n/2,n/2),this._context.lineTo(e-n/2,e-n/2),this._context.lineTo(t._7_8ths(e/2)+n/2,e-n/2),this._context.stroke(),this._context.beginPath(),this._context.moveTo(e-t._3_4ths(e),t._3_4ths(e/2)),this._context.lineTo(t._7_8ths(e/2),e-t._3_4ths(e/2)),this._context.lineTo(t._7_8ths(e/2),e-n/2),this._context.lineTo(n/2,e-n/2),this._context.lineTo(n/2,n/2),this._context.lineTo(e-t._7_8ths(e/2)-n/2,n/2),this._context.stroke(),this._context.restore(),this._hideInnerLineEdges()}},{key:"download",value:function(){var t=this._canvas.toDataURL("image/png"),e=document.createElement("a");e.download="n-logo.png",e.href=t,e.click()}},{key:"_animateLogo",value:function(t){var e=this;this._resetCanvas(),this._context.globalAlpha<1&&(this._context.globalAlpha+=.02),this._updateAllParam(),this._animationComplete()?t&&t():requestAnimationFrame(function(){return e._animateLogo(t)})}},{key:"animate",value:function(t){this._initParams(),this._animateLogo(t)}},{key:"setWidth",value:function(t){this._canvas.height=this._canvas.width=t}},{key:"_resetCanvas",value:function(){var t=this._canvas.width;this._context.clearRect(0,0,t,t),this._context.fillStyle="#FFF",this._context.fillRect(0,0,t,t)}},{key:"_animationComplete",value:function(){for(var t=!1,e=0;e<this._params.length;e++)this._params[e].complete&&(t=this._params[e].complete);return t}},{key:"_updateAllParam",value:function(){for(var t=0;t<this._params.length;t++)this._updateAndDrawLine(this._params[t])}},{key:"_updateAndDrawLine",value:function(t){if(!t.complete){var e=t.line,n=t.segmentIndex,i=t.f,r=e.vectorArray[n].x,s=e.vectorArray[n].y,o=e.vectorArray[n+1].x,a=e.vectorArray[n+1].y,h=function(t,e,n){return Math.round(t+(e-t)*n)};t.line.currX=h(r,o,i),t.line.currY=h(s,a,i),this._drawLine(t.line,t.segmentIndex),i<1?t.f+=.1:(t.f=0,n+2<=t.line.segmentCount?t.segmentIndex++:t.complete=!0),t.complete?(this._outerBorder(),this._HILE_animate()):this._drawBrushTip(t.line.currX,t.line.currY)}}},{key:"_drawLine",value:function(t,e){this._context.beginPath(),this._context.moveTo(t.vectorArray[0].x,t.vectorArray[0].y);for(var n=1;n<e+1;n++)this._context.lineTo(t.vectorArray[n].x,t.vectorArray[n].y);this._context.lineTo(t.currX,t.currY),this._context.stroke()}},{key:"_hideInnerLineEdges",value:function(){var t=this._canvas.width,e=this._lw,n=this._iw,i=this._lh;this._context.fillStyle="#FFF",this._context.fillRect(t-e-n,t-e-i,n,i),this._context.fillRect(e,e,n,i)}},{key:"_HILE_fn",value:function(){var t=this;this._context.globalAlpha=this._ga,this._ga+=.001,this._hideInnerLineEdges(),this._context.globalAlpha<=.99&&requestAnimationFrame(function(){return t._HILE_fn()})}},{key:"_HILE_animate",value:function(){this._context.save(),this._ga=0,this._context.globalAlpha=0,this._HILE_fn(),this._context.restore()}},{key:"_outerBorder",value:function(){this._context.beginPath(),this._context.moveTo(0,0),this._context.lineTo(this._canvas.width,0),this._context.lineTo(this._canvas.width,this._canvas.width),this._context.lineTo(0,this._canvas.width),this._context.lineTo(0,0),this._context.stroke()}},{key:"_drawBrushTip",value:function(t,e){this._context.save(),this._context.globalAlpha=1,this._context.beginPath(),this._context.arc(t,e,this._lw/2,0,2*Math.PI,!1),this._context.fillStyle="#000",this._context.fill(),this._context.restore()}},{key:"_initParams",value:function(){var e=this._canvas.width,n=Math.round(.08*e);this._lw=n,this._iw=Math.round((e-2*n)/2),this._lh=Math.round(t._3_4ths(this._iw)+.045*t._3_4ths(this._iw)),this._context.globalAlpha=0,this._context.lineWidth=n;var i=new o([new a(t._3_4ths(e),e-t._3_4ths(e/2)),new a(e-t._7_8ths(e/2),t._3_4ths(e/2)),new a(e-t._7_8ths(e/2),n/2),new a(e-n/2,n/2),new a(e-n/2,e-n/2),new a(t._7_8ths(e/2)+n/2,e-n/2)]),r=new o([new a(e-t._3_4ths(e),t._3_4ths(e/2)),new a(t._7_8ths(e/2),e-t._3_4ths(e/2)),new a(t._7_8ths(e/2),e-n/2),new a(n/2,e-n/2),new a(n/2,n/2),new a(e-t._7_8ths(e/2)-n/2,n/2)]);this._params=[],this._params.push(new h(i,0,0,!1)),this._params.push(new h(r,0,0,!1))}}],[{key:"_7_8ths",value:function(t){return Math.round(.875*t)}},{key:"_3_4ths",value:function(t){return Math.round(.75*t)}}]),t}();e.default=s;var o=e.Line=function t(e){i(this,t),this.vectorArray=e,this.segmentCount=e.length-1,this.currX=e[0].x,this.currY=e[0].y},a=e.Vector=function t(e,n){i(this,t),this.x=e,this.y=n},h=e.AnimationParam=function t(e,n,r,s){i(this,t),this.line=e,this.segmentIndex=n,this.f=r,this.complete=s}}])})}).call(e,n(1)(t))},function(t,e){t.exports=function(t){return t.webpackPolyfill||(t.deprecate=function(){},t.paths=[],t.children||(t.children=[]),Object.defineProperty(t,"loaded",{enumerable:!0,get:function(){return t.l}}),Object.defineProperty(t,"id",{enumerable:!0,get:function(){return t.i}}),t.webpackPolyfill=1),t}},function(t,e,n){!function(e,i){t.exports=i(n(3))}(0,function(t){return function(t){function e(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return t[i].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};return e.m=t,e.c=n,e.i=function(t){return t},e.d=function(t,n,i){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:i})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s=0)}([function(t,e,n){"use strict";function i(t){return t&&t.__esModule?t:{default:t}}function r(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var s=function(){function t(t,e){for(var n=0;n<e.length;n++){var i=e[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i)}}return function(e,n,i){return n&&t(e.prototype,n),i&&t(e,i),e}}(),o=n(2),a=i(o),h=n(1),u=i(h),l=function(){function t(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},n=e.element,i=void 0===n?document.createElement("div"):n,s=e.date,o=void 0===s?new Date:s,h=e.width,l=void 0===h?400:h,c=e.dark_colors,f=void 0===c?["#222","#227","#272","#777","#427","#722"]:c,d=e.light_colors,p=void 0===d?["#39C","#3C6","#CCC","#FC3","#C6C","#F63"]:d,m=e.line_count,x=void 0===m?2:m,v=e.fabric_enabled,y=void 0!==v&&v,g=e.n,w=void 0===g?1:g;r(this,t);var b=new u.default(this._setDate(o));this.svg=(0,a.default)(i),this.prng=new u.default(this.date),this.width=l,this.dark_colors=t.shuffle(f,b),this.light_colors=t.shuffle(p,b),this.pattern_width=l/x,this.line_count=x,this.line_height=this.pattern_width/x,this.fabric_enabled=y,this._prngNo=18,w>1&&this._goto(w),this._generatePattern()}return s(t,[{key:"_goto",value:function(t){for(var e=0;e<(t-1)*this._prngNo;e++)this.prng._next()}},{key:"_setDate",value:function(t){var e=new Date,n=t||e;return n instanceof Date?isNaN(n.getTime())&&(n=e):"string"==typeof n?(n=new Date(n),isNaN(n.getTime())&&(n=e)):n=e,this.date=n,this.date}},{key:"_getDateString",value:function(){var t,e=this.date.getMonth()+1,n=this.date.getDate();return t=(e<10?"0"+e:e)+"-",t+=(n<10?"0"+n:n)+"-",t+=this.date.getFullYear()}},{key:"_randomShape",value:function(t,e){for(var n=this.prng,i=this.line_count,r=this.line_height,s=[3],o=s[n.random(s.length-1)],a=[],h=n.random(1),u=n.random(i,1),l=i/2,c=n.random(i),f=c>l?n.random(i,l):n.random(l),d=0,p=0;p<o;p++){var m=p+1>Math.ceil(o/2)?u:0;d%2===h?a.push([(c+m)*r,0]):a.push([(f+m)*r,r]),p<o-1&&(d%2!==h?a.push([(c+m)*r,0]):a.push([(f+m)*r,r]),p++),d++}e.polygon(a).fill(t)}},{key:"_generatePattern",value:function(){var t=this,e=this.svg,n=this.pattern_width,i=this.line_count,r=this.line_height,s=this.prng.random(1),o=this.prng.random(1),a=this.prng.random(1);e.clear();var h=e.pattern(n,r,function(e){e.rect(r*(i/2),r).fill(t._fabric(t.light_colors[0],2)),e.rect(r*(i/2),r).fill(t._fabric(t.dark_colors[0],1)).move(r*(i/2),0),t._randomShape(t._fabric(t.light_colors[1],0),e),t._randomShape(t._fabric(t.dark_colors[1],1),e),t._randomShape(t._fabric(t.light_colors[2],0),e)});return h=e.pattern(n,2*r,function(t){t.rect(n,r).fill(h),s?t.rect(n,r).fill(h).move(0,r).flip("y"):t.rect(n,r).fill(h).move(0,r).rotate(180)}),o&&(h=e.pattern(2*n,2*r,function(t){t.rect(n,2*r).fill(h),a?t.rect(n,2*r).fill(h).move(n,0).flip("x"):t.rect(n,2*r).fill(h).move(n,0).rotate(180)})),e.viewbox(0,0,this.width,this.width),e.rect(this.width,this.width).fill(h),this.data_uri="data:image/svg+xml;base64,"+btoa(e.svg()),this.svg_pattern=h,h}},{key:"_fabric",value:function(e,n){var i=this,r=e;if(this.fabric_enabled){var s=4,o=s/2,a=function(t,e){return i.svg.pattern(2*t,2*t,function(n){n.rect(t,t).fill(e),n.rect(t,t).fill(e).move(t,0).rotate(90),n.rect(t,t).fill(e).move(0,t).rotate(180),n.rect(t,t).fill(e).move(t,t).rotate(270)})};r=this.svg.pattern(s,s,function(n){n.rect(o,o).fill(e),n.rect(o,o).fill(t.luminance(e,.03)).move(o,0),n.rect(o,o).fill(t.luminance(e,.06)).move(0,o),n.rect(o,o).fill(t.luminance(e,.09)).move(o,o)}),n>0&&(r=a(s,r)),n>1&&(r=a(s*=2,r))}return r}},{key:"next",value:function(){return this._generatePattern(),this.data_uri}},{key:"download",value:function(){var t=this;this.getPNG().then(function(e){var n=document.createElement("a");n.download="sama."+t._getDateString()+"."+t.prng.count/t._prngNo+".png",n.href=e,n.click()})}},{key:"getPNG",value:function(){var t=this;return new Promise(function(e,n){var i=document.createElement("canvas"),r=i.getContext("2d"),s=new Image;i.setAttribute("width",t.width+"px"),i.setAttribute("height",t.width+"px"),s.src=t.data_uri,s.onerror=n,s.onload=function(){return r.drawImage(s,0,0),e(i.toDataURL("image/png"))}})}}],[{key:"shuffle",value:function(t,e){var n,i,r,s=t.slice();for(r=s.length-1;r>0;r--)n=e.random(r+1),i=s[r],s[r]=s[n],s[n]=i;return s}},{key:"luminance",value:function(t,e){e=e||0,t=String(t).replace(/[^0-9a-f]/gi,""),t.length<6&&(t=t[0]+t[0]+t[1]+t[1]+t[2]+t[2]);var n,i,r="#";for(i=0;i<3;i++)n=parseInt(t.substr(2*i,2),16),n=Math.round(Math.min(Math.max(0,n+n*e),255)).toString(16),r+=("00"+n).substr(n.length);return r}}]),t}();e.default=l},function(t,e,n){"use strict";function i(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var r=function(){function t(t,e){for(var n=0;n<e.length;n++){var i=e[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i)}}return function(e,n,i){return n&&t(e.prototype,n),i&&t(e,i),e}}(),s=function(){function t(e){i(this,t),this._p=2147483647,this._c=2147483646,this._r=16807,this.count=0,this._seed=this._dateSeed(e)%this._p,this._seed<=0&&(this._seed+=this._c)}return r(t,[{key:"_dateSeed",value:function(t){return t=""+(t.getMonth()+1)+t.getDate()+t.getFullYear(),Number.parseInt(t)}},{key:"_next",value:function(){return this.count++,this._seed=this._seed*this._r%this._p}},{key:"_nextFloat",value:function(){for(var t=(this._next()-1)/this._c;t<1;)t*=10;return t}},{key:"random",value:function(t,e){return e=e||0,Math.floor(this._nextFloat()%(t+1-e))+e}}]),t}();e.default=s},function(e,n){e.exports=t}])})},function(t,e,n){var i;!function(r,s){void 0!==(i=function(){return s(r,r.document)}.call(e,n,e,t))&&(t.exports=i)}("undefined"!=typeof window?window:this,function(t,e){function n(t,e,n,i){return n+i.replace(g.regex.dots," .")}function i(t){for(var e=t.slice(0),n=e.length;n--;)Array.isArray(e[n])&&(e[n]=i(e[n]));return e}function r(t,e){return t instanceof e}function s(t,e){return(t.matches||t.matchesSelector||t.msMatchesSelector||t.mozMatchesSelector||t.webkitMatchesSelector||t.oMatchesSelector).call(t,e)}function o(t){return t.toLowerCase().replace(/-(.)/g,function(t,e){return e.toUpperCase()})}function a(t){return t.charAt(0).toUpperCase()+t.slice(1)}function h(t){return 4==t.length?["#",t.substring(1,2),t.substring(1,2),t.substring(2,3),t.substring(2,3),t.substring(3,4),t.substring(3,4)].join(""):t}function u(t){var e=t.toString(16);return 1==e.length?"0"+e:e}function l(t,e,n){if(null==e||null==n){var i=t.bbox();null==e?e=i.width/i.height*n:null==n&&(n=i.height/i.width*e)}return{width:e,height:n}}function c(t,e,n){return{x:e*t.a+n*t.c+0,y:e*t.b+n*t.d+0}}function f(t){return{a:t[0],b:t[1],c:t[2],d:t[3],e:t[4],f:t[5]}}function d(t){return t instanceof g.Matrix||(t=new g.Matrix(t)),t}function p(t,e){t.cx=null==t.cx?e.bbox().cx:t.cx,t.cy=null==t.cy?e.bbox().cy:t.cy}function m(t){for(var e=0,n=t.length,i="";e<n;e++)i+=t[e][0],null!=t[e][1]&&(i+=t[e][1],null!=t[e][2]&&(i+=" ",i+=t[e][2],null!=t[e][3]&&(i+=" ",i+=t[e][3],i+=" ",i+=t[e][4],null!=t[e][5]&&(i+=" ",i+=t[e][5],i+=" ",i+=t[e][6],null!=t[e][7]&&(i+=" ",i+=t[e][7])))));return i+" "}function x(e){for(var n=e.childNodes.length-1;n>=0;n--)e.childNodes[n]instanceof t.SVGElement&&x(e.childNodes[n]);return g.adopt(e).id(g.eid(e.nodeName))}function v(t){return null==t.x&&(t.x=0,t.y=0,t.width=0,t.height=0),t.w=t.width,t.h=t.height,t.x2=t.x+t.width,t.y2=t.y+t.height,t.cx=t.x+t.width/2,t.cy=t.y+t.height/2,t}function y(t){var e=t.toString().match(g.regex.reference);if(e)return e[1]}var g=this.SVG=function(t){if(g.supported)return t=new g.Doc(t),g.parser.draw||g.prepare(),t};if(g.ns="http://www.w3.org/2000/svg",g.xmlns="http://www.w3.org/2000/xmlns/",g.xlink="http://www.w3.org/1999/xlink",g.svgjs="http://svgjs.com/svgjs",g.supported=function(){return!!e.createElementNS&&!!e.createElementNS(g.ns,"svg").createSVGRect}(),!g.supported)return!1;g.did=1e3,g.eid=function(t){return"Svgjs"+a(t)+g.did++},g.create=function(t){var n=e.createElementNS(this.ns,t);return n.setAttribute("id",this.eid(t)),n},g.extend=function(){var t,e,n,i;for(t=[].slice.call(arguments),e=t.pop(),i=t.length-1;i>=0;i--)if(t[i])for(n in e)t[i].prototype[n]=e[n];g.Set&&g.Set.inherit&&g.Set.inherit()},g.invent=function(t){var e="function"==typeof t.create?t.create:function(){this.constructor.call(this,g.create(t.create))};return t.inherit&&(e.prototype=new t.inherit),t.extend&&g.extend(e,t.extend),t.construct&&g.extend(t.parent||g.Container,t.construct),e},g.adopt=function(e){if(!e)return null;if(e.instance)return e.instance;var n;return n="svg"==e.nodeName?e.parentNode instanceof t.SVGElement?new g.Nested:new g.Doc:"linearGradient"==e.nodeName?new g.Gradient("linear"):"radialGradient"==e.nodeName?new g.Gradient("radial"):g[a(e.nodeName)]?new(g[a(e.nodeName)]):new g.Element(e),n.type=e.nodeName,n.node=e,e.instance=n,n instanceof g.Doc&&n.namespace().defs(),n.setData(JSON.parse(e.getAttribute("svgjs:data"))||{}),n},g.prepare=function(){var t=e.getElementsByTagName("body")[0],n=(t?new g.Doc(t):g.adopt(e.documentElement).nested()).size(2,0);g.parser={body:t||e.documentElement,draw:n.style("opacity:0;position:absolute;left:-100%;top:-100%;overflow:hidden").node,poly:n.polyline().node,path:n.path().node,native:g.create("svg")}},g.parser={native:g.create("svg")},e.addEventListener("DOMContentLoaded",function(){g.parser.draw||g.prepare()},!1),g.regex={numberAndUnit:/^([+-]?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?)([a-z%]*)$/i,hex:/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i,rgb:/rgb\((\d+),(\d+),(\d+)\)/,reference:/#([a-z0-9\-_]+)/i,transforms:/\)\s*,?\s*/,whitespace:/\s/g,isHex:/^#[a-f0-9]{3,6}$/i,isRgb:/^rgb\(/,isCss:/[^:]+:[^;]+;?/,isBlank:/^(\s+)?$/,isNumber:/^[+-]?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i,isPercent:/^-?[\d\.]+%$/,isImage:/\.(jpg|jpeg|png|gif|svg)(\?[^=]+.*)?/i,delimiter:/[\s,]+/,hyphen:/([^e])\-/gi,pathLetters:/[MLHVCSQTAZ]/gi,isPathLetter:/[MLHVCSQTAZ]/i,numbersWithDots:/((\d?\.\d+(?:e[+-]?\d+)?)((?:\.\d+(?:e[+-]?\d+)?)+))+/gi,dots:/\./g},g.utils={map:function(t,e){var n,i=t.length,r=[];for(n=0;n<i;n++)r.push(e(t[n]));return r},filter:function(t,e){var n,i=t.length,r=[];for(n=0;n<i;n++)e(t[n])&&r.push(t[n]);return r},radians:function(t){return t%360*Math.PI/180},degrees:function(t){return 180*t/Math.PI%360},filterSVGElements:function(e){return this.filter(e,function(e){return e instanceof t.SVGElement})}},g.defaults={attrs:{"fill-opacity":1,"stroke-opacity":1,"stroke-width":0,"stroke-linejoin":"miter","stroke-linecap":"butt",fill:"#000000",stroke:"#000000",opacity:1,x:0,y:0,cx:0,cy:0,width:0,height:0,r:0,rx:0,ry:0,offset:0,"stop-opacity":1,"stop-color":"#000000","font-size":16,"font-family":"Helvetica, Arial, sans-serif","text-anchor":"start"}},g.Color=function(t){var e;this.r=0,this.g=0,this.b=0,t&&("string"==typeof t?g.regex.isRgb.test(t)?(e=g.regex.rgb.exec(t.replace(g.regex.whitespace,"")),this.r=parseInt(e[1]),this.g=parseInt(e[2]),this.b=parseInt(e[3])):g.regex.isHex.test(t)&&(e=g.regex.hex.exec(h(t)),this.r=parseInt(e[1],16),this.g=parseInt(e[2],16),this.b=parseInt(e[3],16)):"object"==typeof t&&(this.r=t.r,this.g=t.g,this.b=t.b))},g.extend(g.Color,{toString:function(){return this.toHex()},toHex:function(){return"#"+u(this.r)+u(this.g)+u(this.b)},toRgb:function(){return"rgb("+[this.r,this.g,this.b].join()+")"},brightness:function(){return this.r/255*.3+this.g/255*.59+this.b/255*.11},morph:function(t){return this.destination=new g.Color(t),this},at:function(t){return this.destination?(t=t<0?0:t>1?1:t,new g.Color({r:~~(this.r+(this.destination.r-this.r)*t),g:~~(this.g+(this.destination.g-this.g)*t),b:~~(this.b+(this.destination.b-this.b)*t)})):this}}),g.Color.test=function(t){return t+="",g.regex.isHex.test(t)||g.regex.isRgb.test(t)},g.Color.isRgb=function(t){return t&&"number"==typeof t.r&&"number"==typeof t.g&&"number"==typeof t.b},g.Color.isColor=function(t){return g.Color.isRgb(t)||g.Color.test(t)},g.Array=function(t,e){t=(t||[]).valueOf(),0==t.length&&e&&(t=e.valueOf()),this.value=this.parse(t)},g.extend(g.Array,{morph:function(t){if(this.destination=this.parse(t),this.value.length!=this.destination.length){for(var e=this.value[this.value.length-1],n=this.destination[this.destination.length-1];this.value.length>this.destination.length;)this.destination.push(n);for(;this.value.length<this.destination.length;)this.value.push(e)}return this},settle:function(){for(var t=0,e=this.value.length,n=[];t<e;t++)-1==n.indexOf(this.value[t])&&n.push(this.value[t]);return this.value=n},at:function(t){if(!this.destination)return this;for(var e=0,n=this.value.length,i=[];e<n;e++)i.push(this.value[e]+(this.destination[e]-this.value[e])*t);return new g.Array(i)},toString:function(){return this.value.join(" ")},valueOf:function(){return this.value},parse:function(t){return t=t.valueOf(),Array.isArray(t)?t:this.split(t)},split:function(t){return t.trim().split(g.regex.delimiter).map(parseFloat)},reverse:function(){return this.value.reverse(),this},clone:function(){var t=new this.constructor;return t.value=i(this.value),t}}),g.PointArray=function(t,e){g.Array.call(this,t,e||[[0,0]])},g.PointArray.prototype=new g.Array,g.PointArray.prototype.constructor=g.PointArray,g.extend(g.PointArray,{toString:function(){for(var t=0,e=this.value.length,n=[];t<e;t++)n.push(this.value[t].join(","));return n.join(" ")},toLine:function(){return{x1:this.value[0][0],y1:this.value[0][1],x2:this.value[1][0],y2:this.value[1][1]}},at:function(t){if(!this.destination)return this;for(var e=0,n=this.value.length,i=[];e<n;e++)i.push([this.value[e][0]+(this.destination[e][0]-this.value[e][0])*t,this.value[e][1]+(this.destination[e][1]-this.value[e][1])*t]);return new g.PointArray(i)},parse:function(t){var e=[];if(t=t.valueOf(),Array.isArray(t)){if(Array.isArray(t[0]))return t}else t=t.trim().split(g.regex.delimiter).map(parseFloat);t.length%2!=0&&t.pop();for(var n=0,i=t.length;n<i;n+=2)e.push([t[n],t[n+1]]);return e},move:function(t,e){var n=this.bbox();if(t-=n.x,e-=n.y,!isNaN(t)&&!isNaN(e))for(var i=this.value.length-1;i>=0;i--)this.value[i]=[this.value[i][0]+t,this.value[i][1]+e];return this},size:function(t,e){var n,i=this.bbox();for(n=this.value.length-1;n>=0;n--)i.width&&(this.value[n][0]=(this.value[n][0]-i.x)*t/i.width+i.x),i.height&&(this.value[n][1]=(this.value[n][1]-i.y)*e/i.height+i.y);return this},bbox:function(){return g.parser.poly.setAttribute("points",this.toString()),g.parser.poly.getBBox()}});for(var w={M:function(t,e,n){return e.x=n.x=t[0],e.y=n.y=t[1],["M",e.x,e.y]},L:function(t,e){return e.x=t[0],e.y=t[1],["L",t[0],t[1]]},H:function(t,e){return e.x=t[0],["H",t[0]]},V:function(t,e){return e.y=t[0],["V",t[0]]},C:function(t,e){return e.x=t[4],e.y=t[5],["C",t[0],t[1],t[2],t[3],t[4],t[5]]},S:function(t,e){return e.x=t[2],e.y=t[3],["S",t[0],t[1],t[2],t[3]]},Q:function(t,e){return e.x=t[2],e.y=t[3],["Q",t[0],t[1],t[2],t[3]]},T:function(t,e){return e.x=t[0],e.y=t[1],["T",t[0],t[1]]},Z:function(t,e,n){return e.x=n.x,e.y=n.y,["Z"]},A:function(t,e){return e.x=t[5],e.y=t[6],["A",t[0],t[1],t[2],t[3],t[4],t[5],t[6]]}},b="mlhvqtcsaz".split(""),_=0,k=b.length;_<k;++_)w[b[_]]=function(t){return function(e,n,i){if("H"==t)e[0]=e[0]+n.x;else if("V"==t)e[0]=e[0]+n.y;else if("A"==t)e[5]=e[5]+n.x,e[6]=e[6]+n.y;else for(var r=0,s=e.length;r<s;++r)e[r]=e[r]+(r%2?n.y:n.x);return w[t](e,n,i)}}(b[_].toUpperCase());g.PathArray=function(t,e){g.Array.call(this,t,e||[["M",0,0]])},g.PathArray.prototype=new g.Array,g.PathArray.prototype.constructor=g.PathArray,g.extend(g.PathArray,{toString:function(){return m(this.value)},move:function(t,e){var n=this.bbox();if(t-=n.x,e-=n.y,!isNaN(t)&&!isNaN(e))for(var i,r=this.value.length-1;r>=0;r--)i=this.value[r][0],"M"==i||"L"==i||"T"==i?(this.value[r][1]+=t,this.value[r][2]+=e):"H"==i?this.value[r][1]+=t:"V"==i?this.value[r][1]+=e:"C"==i||"S"==i||"Q"==i?(this.value[r][1]+=t,this.value[r][2]+=e,this.value[r][3]+=t,this.value[r][4]+=e,"C"==i&&(this.value[r][5]+=t,this.value[r][6]+=e)):"A"==i&&(this.value[r][6]+=t,this.value[r][7]+=e);return this},size:function(t,e){var n,i,r=this.bbox();for(n=this.value.length-1;n>=0;n--)i=this.value[n][0],"M"==i||"L"==i||"T"==i?(this.value[n][1]=(this.value[n][1]-r.x)*t/r.width+r.x,this.value[n][2]=(this.value[n][2]-r.y)*e/r.height+r.y):"H"==i?this.value[n][1]=(this.value[n][1]-r.x)*t/r.width+r.x:"V"==i?this.value[n][1]=(this.value[n][1]-r.y)*e/r.height+r.y:"C"==i||"S"==i||"Q"==i?(this.value[n][1]=(this.value[n][1]-r.x)*t/r.width+r.x,this.value[n][2]=(this.value[n][2]-r.y)*e/r.height+r.y,this.value[n][3]=(this.value[n][3]-r.x)*t/r.width+r.x,this.value[n][4]=(this.value[n][4]-r.y)*e/r.height+r.y,"C"==i&&(this.value[n][5]=(this.value[n][5]-r.x)*t/r.width+r.x,this.value[n][6]=(this.value[n][6]-r.y)*e/r.height+r.y)):"A"==i&&(this.value[n][1]=this.value[n][1]*t/r.width,this.value[n][2]=this.value[n][2]*e/r.height,this.value[n][6]=(this.value[n][6]-r.x)*t/r.width+r.x,this.value[n][7]=(this.value[n][7]-r.y)*e/r.height+r.y);return this},equalCommands:function(t){var e,n,i;for(t=new g.PathArray(t),i=this.value.length===t.value.length,e=0,n=this.value.length;i&&e<n;e++)i=this.value[e][0]===t.value[e][0];return i},morph:function(t){return t=new g.PathArray(t),this.equalCommands(t)?this.destination=t:this.destination=null,this},at:function(t){if(!this.destination)return this;var e,n,i,r,s=this.value,o=this.destination.value,a=[],h=new g.PathArray;for(e=0,n=s.length;e<n;e++){for(a[e]=[s[e][0]],i=1,r=s[e].length;i<r;i++)a[e][i]=s[e][i]+(o[e][i]-s[e][i])*t;"A"===a[e][0]&&(a[e][4]=+(0!=a[e][4]),a[e][5]=+(0!=a[e][5]))}return h.value=a,h},parse:function(t){if(t instanceof g.PathArray)return t.valueOf();var e,i,r={M:2,L:2,H:1,V:1,C:6,S:4,Q:4,T:2,A:7,Z:0};t="string"==typeof t?t.replace(g.regex.numbersWithDots,n).replace(g.regex.pathLetters," $& ").replace(g.regex.hyphen,"$1 -").trim().split(g.regex.delimiter):t.reduce(function(t,e){return[].concat.call(t,e)},[]);var i=[],s=new g.Point,o=new g.Point,a=0,h=t.length;do{g.regex.isPathLetter.test(t[a])?(e=t[a],++a):"M"==e?e="L":"m"==e&&(e="l"),i.push(w[e].call(null,t.slice(a,a+=r[e.toUpperCase()]).map(parseFloat),s,o))}while(h>a);return i},bbox:function(){return g.parser.path.setAttribute("d",this.toString()),g.parser.path.getBBox()}}),g.Number=g.invent({create:function(t,e){this.value=0,this.unit=e||"","number"==typeof t?this.value=isNaN(t)?0:isFinite(t)?t:t<0?-3.4e38:3.4e38:"string"==typeof t?(e=t.match(g.regex.numberAndUnit))&&(this.value=parseFloat(e[1]),"%"==e[5]?this.value/=100:"s"==e[5]&&(this.value*=1e3),this.unit=e[5]):t instanceof g.Number&&(this.value=t.valueOf(),this.unit=t.unit)},extend:{toString:function(){return("%"==this.unit?~~(1e8*this.value)/1e6:"s"==this.unit?this.value/1e3:this.value)+this.unit},toJSON:function(){return this.toString()},valueOf:function(){return this.value},plus:function(t){return t=new g.Number(t),new g.Number(this+t,this.unit||t.unit)},minus:function(t){return t=new g.Number(t),new g.Number(this-t,this.unit||t.unit)},times:function(t){return t=new g.Number(t),new g.Number(this*t,this.unit||t.unit)},divide:function(t){return t=new g.Number(t),new g.Number(this/t,this.unit||t.unit)},to:function(t){var e=new g.Number(this);return"string"==typeof t&&(e.unit=t),e},morph:function(t){return this.destination=new g.Number(t),t.relative&&(this.destination.value+=this.value),this},at:function(t){return this.destination?new g.Number(this.destination).minus(this).times(t).plus(this):this}}}),g.Element=g.invent({create:function(t){this._stroke=g.defaults.attrs.stroke,this._event=null,this.dom={},(this.node=t)&&(this.type=t.nodeName,this.node.instance=this,this._stroke=t.getAttribute("stroke")||this._stroke)},extend:{x:function(t){return this.attr("x",t)},y:function(t){return this.attr("y",t)},cx:function(t){return null==t?this.x()+this.width()/2:this.x(t-this.width()/2)},cy:function(t){return null==t?this.y()+this.height()/2:this.y(t-this.height()/2)},move:function(t,e){return this.x(t).y(e)},center:function(t,e){return this.cx(t).cy(e)},width:function(t){return this.attr("width",t)},height:function(t){return this.attr("height",t)},size:function(t,e){var n=l(this,t,e);return this.width(new g.Number(n.width)).height(new g.Number(n.height))},clone:function(t,e){this.writeDataToDom();var n=x(this.node.cloneNode(!0));return t?t.add(n):this.after(n),n},remove:function(){return this.parent()&&this.parent().removeElement(this),this},replace:function(t){return this.after(t).remove(),t},addTo:function(t){return t.put(this)},putIn:function(t){return t.add(this)},id:function(t){return this.attr("id",t)},inside:function(t,e){var n=this.bbox();return t>n.x&&e>n.y&&t<n.x+n.width&&e<n.y+n.height},show:function(){return this.style("display","")},hide:function(){return this.style("display","none")},visible:function(){return"none"!=this.style("display")},toString:function(){return this.attr("id")},classes:function(){var t=this.attr("class");return null==t?[]:t.trim().split(g.regex.delimiter)},hasClass:function(t){return-1!=this.classes().indexOf(t)},addClass:function(t){if(!this.hasClass(t)){var e=this.classes();e.push(t),this.attr("class",e.join(" "))}return this},removeClass:function(t){return this.hasClass(t)&&this.attr("class",this.classes().filter(function(e){return e!=t}).join(" ")),this},toggleClass:function(t){return this.hasClass(t)?this.removeClass(t):this.addClass(t)},reference:function(t){return g.get(this.attr(t))},parent:function(e){var n=this;if(!n.node.parentNode)return null;if(n=g.adopt(n.node.parentNode),!e)return n;for(;n&&n.node instanceof t.SVGElement;){if("string"==typeof e?n.matches(e):n instanceof e)return n;if("#document"==n.node.parentNode.nodeName)return null;n=g.adopt(n.node.parentNode)}},doc:function(){return this instanceof g.Doc?this:this.parent(g.Doc)},parents:function(t){var e=[],n=this;do{if(!(n=n.parent(t))||!n.node)break;e.push(n)}while(n.parent);return e},matches:function(t){return s(this.node,t)},native:function(){return this.node},svg:function(t){var n=e.createElement("svg");if(!(t&&this instanceof g.Parent))return n.appendChild(t=e.createElement("svg")),this.writeDataToDom(),t.appendChild(this.node.cloneNode(!0)),n.innerHTML.replace(/^<svg>/,"").replace(/<\/svg>$/,"");n.innerHTML="<svg>"+t.replace(/\n/,"").replace(/<(\w+)([^<]+?)\/>/g,"<$1$2></$1>")+"</svg>";for(var i=0,r=n.firstChild.childNodes.length;i<r;i++)this.node.appendChild(n.firstChild.firstChild);return this},writeDataToDom:function(){if(this.each||this.lines){(this.each?this:this.lines()).each(function(){this.writeDataToDom()})}return this.node.removeAttribute("svgjs:data"),Object.keys(this.dom).length&&this.node.setAttribute("svgjs:data",JSON.stringify(this.dom)),this},setData:function(t){return this.dom=t,this},is:function(t){return r(this,t)}}}),g.easing={"-":function(t){return t},"<>":function(t){return-Math.cos(t*Math.PI)/2+.5},">":function(t){return Math.sin(t*Math.PI/2)},"<":function(t){return 1-Math.cos(t*Math.PI/2)}},g.morph=function(t){return function(e,n){return new g.MorphObj(e,n).at(t)}},g.Situation=g.invent({create:function(t){this.init=!1,this.reversed=!1,this.reversing=!1,this.duration=new g.Number(t.duration).valueOf(),this.delay=new g.Number(t.delay).valueOf(),this.start=+new Date+this.delay,this.finish=this.start+this.duration,this.ease=t.ease,this.loop=0,this.loops=!1,this.animations={},this.attrs={},this.styles={},this.transforms=[],this.once={}}}),g.FX=g.invent({create:function(t){this._target=t,this.situations=[],this.active=!1,this.situation=null,this.paused=!1,this.lastPos=0,this.pos=0,this.absPos=0,this._speed=1},extend:{animate:function(t,e,n){"object"==typeof t&&(e=t.ease,n=t.delay,t=t.duration);var i=new g.Situation({duration:t||1e3,delay:n||0,ease:g.easing[e||"-"]||e});return this.queue(i),this},delay:function(t){var e=new g.Situation({duration:t,delay:0,ease:g.easing["-"]});return this.queue(e)},target:function(t){return t&&t instanceof g.Element?(this._target=t,this):this._target},timeToAbsPos:function(t){return(t-this.situation.start)/(this.situation.duration/this._speed)},absPosToTime:function(t){return this.situation.duration/this._speed*t+this.situation.start},startAnimFrame:function(){this.stopAnimFrame(),this.animationFrame=t.requestAnimationFrame(function(){this.step()}.bind(this))},stopAnimFrame:function(){t.cancelAnimationFrame(this.animationFrame)},start:function(){return!this.active&&this.situation&&(this.active=!0,this.startCurrent()),this},startCurrent:function(){return this.situation.start=+new Date+this.situation.delay/this._speed,this.situation.finish=this.situation.start+this.situation.duration/this._speed,this.initAnimations().step()},queue:function(t){return("function"==typeof t||t instanceof g.Situation)&&this.situations.push(t),this.situation||(this.situation=this.situations.shift()),this},dequeue:function(){return this.stop(),this.situation=this.situations.shift(),this.situation&&(this.situation instanceof g.Situation?this.start():this.situation.call(this)),this},initAnimations:function(){var t,e,n,i=this.situation;if(i.init)return this;for(t in i.animations)for(n=this.target()[t](),Array.isArray(n)||(n=[n]),Array.isArray(i.animations[t])||(i.animations[t]=[i.animations[t]]),e=n.length;e--;)i.animations[t][e]instanceof g.Number&&(n[e]=new g.Number(n[e])),i.animations[t][e]=n[e].morph(i.animations[t][e]);for(t in i.attrs)i.attrs[t]=new g.MorphObj(this.target().attr(t),i.attrs[t]);for(t in i.styles)i.styles[t]=new g.MorphObj(this.target().style(t),i.styles[t]);return i.initialTransformation=this.target().matrixify(),i.init=!0,this},clearQueue:function(){return this.situations=[],this},clearCurrent:function(){return this.situation=null,this},stop:function(t,e){var n=this.active;return this.active=!1,e&&this.clearQueue(),t&&this.situation&&(!n&&this.startCurrent(),this.atEnd()),this.stopAnimFrame(),this.clearCurrent()},reset:function(){if(this.situation){var t=this.situation;this.stop(),this.situation=t,this.atStart()}return this},finish:function(){for(this.stop(!0,!1);this.dequeue().situation&&this.stop(!0,!1););return this.clearQueue().clearCurrent(),this},atStart:function(){return this.at(0,!0)},atEnd:function(){return!0===this.situation.loops&&(this.situation.loops=this.situation.loop+1),"number"==typeof this.situation.loops?this.at(this.situation.loops,!0):this.at(1,!0)},at:function(t,e){var n=this.situation.duration/this._speed;return this.absPos=t,e||(this.situation.reversed&&(this.absPos=1-this.absPos),this.absPos+=this.situation.loop),this.situation.start=+new Date-this.absPos*n,this.situation.finish=this.situation.start+n,this.step(!0)},speed:function(t){return 0===t?this.pause():t?(this._speed=t,this.at(this.absPos,!0)):this._speed},loop:function(t,e){var n=this.last();return n.loops=null==t||t,n.loop=0,e&&(n.reversing=!0),this},pause:function(){return this.paused=!0,this.stopAnimFrame(),this},play:function(){return this.paused?(this.paused=!1,this.at(this.absPos,!0)):this},reverse:function(t){var e=this.last();return e.reversed=void 0===t?!e.reversed:t,this},progress:function(t){return t?this.situation.ease(this.pos):this.pos},after:function(t){var e=this.last(),n=function n(i){i.detail.situation==e&&(t.call(this,e),this.off("finished.fx",n))};return this.target().on("finished.fx",n),this._callStart()},during:function(t){var e=this.last(),n=function(n){n.detail.situation==e&&t.call(this,n.detail.pos,g.morph(n.detail.pos),n.detail.eased,e)};return this.target().off("during.fx",n).on("during.fx",n),this.after(function(){this.off("during.fx",n)}),this._callStart()},afterAll:function(t){var e=function e(n){t.call(this),this.off("allfinished.fx",e)};return this.target().off("allfinished.fx",e).on("allfinished.fx",e),this._callStart()},duringAll:function(t){var e=function(e){t.call(this,e.detail.pos,g.morph(e.detail.pos),e.detail.eased,e.detail.situation)};return this.target().off("during.fx",e).on("during.fx",e),this.afterAll(function(){this.off("during.fx",e)}),this._callStart()},last:function(){return this.situations.length?this.situations[this.situations.length-1]:this.situation},add:function(t,e,n){return this.last()[n||"animations"][t]=e,this._callStart()},step:function(t){if(t||(this.absPos=this.timeToAbsPos(+new Date)),!1!==this.situation.loops){var e,n,i;e=Math.max(this.absPos,0),n=Math.floor(e),!0===this.situation.loops||n<this.situation.loops?(this.pos=e-n,i=this.situation.loop,this.situation.loop=n):(this.absPos=this.situation.loops,this.pos=1,i=this.situation.loop-1,this.situation.loop=this.situation.loops),this.situation.reversing&&(this.situation.reversed=this.situation.reversed!=Boolean((this.situation.loop-i)%2))}else this.absPos=Math.min(this.absPos,1),this.pos=this.absPos;this.pos<0&&(this.pos=0),this.situation.reversed&&(this.pos=1-this.pos);var r=this.situation.ease(this.pos);for(var s in this.situation.once)s>this.lastPos&&s<=r&&(this.situation.once[s].call(this.target(),this.pos,r),delete this.situation.once[s]);return this.active&&this.target().fire("during",{pos:this.pos,eased:r,fx:this,situation:this.situation}),this.situation?(this.eachAt(),1==this.pos&&!this.situation.reversed||this.situation.reversed&&0==this.pos?(this.stopAnimFrame(),this.target().fire("finished",{fx:this,situation:this.situation}),this.situations.length||(this.target().fire("allfinished"),this.situations.length||(this.target().off(".fx"),this.active=!1)),this.active?this.dequeue():this.clearCurrent()):!this.paused&&this.active&&this.startAnimFrame(),this.lastPos=r,this):this},eachAt:function(){var t,e,n,i=this,r=this.target(),s=this.situation;for(t in s.animations)n=[].concat(s.animations[t]).map(function(t){return"string"!=typeof t&&t.at?t.at(s.ease(i.pos),i.pos):t}),r[t].apply(r,n);for(t in s.attrs)n=[t].concat(s.attrs[t]).map(function(t){return"string"!=typeof t&&t.at?t.at(s.ease(i.pos),i.pos):t}),r.attr.apply(r,n);for(t in s.styles)n=[t].concat(s.styles[t]).map(function(t){return"string"!=typeof t&&t.at?t.at(s.ease(i.pos),i.pos):t}),r.style.apply(r,n);if(s.transforms.length){for(n=s.initialTransformation,t=0,e=s.transforms.length;t<e;t++){var o=s.transforms[t];o instanceof g.Matrix?n=o.relative?n.multiply((new g.Matrix).morph(o).at(s.ease(this.pos))):n.morph(o).at(s.ease(this.pos)):(o.relative||o.undo(n.extract()),n=n.multiply(o.at(s.ease(this.pos))))}r.matrix(n)}return this},once:function(t,e,n){var i=this.last();return n||(t=i.ease(t)),i.once[t]=e,this},_callStart:function(){return setTimeout(function(){this.start()}.bind(this),0),this}},parent:g.Element,construct:{animate:function(t,e,n){return(this.fx||(this.fx=new g.FX(this))).animate(t,e,n)},delay:function(t){return(this.fx||(this.fx=new g.FX(this))).delay(t)},stop:function(t,e){return this.fx&&this.fx.stop(t,e),this},finish:function(){return this.fx&&this.fx.finish(),this},pause:function(){return this.fx&&this.fx.pause(),this},play:function(){return this.fx&&this.fx.play(),this},speed:function(t){if(this.fx){if(null==t)return this.fx.speed();this.fx.speed(t)}return this}}}),g.MorphObj=g.invent({create:function(t,e){return g.Color.isColor(e)?new g.Color(t).morph(e):g.regex.delimiter.test(t)?new g.Array(t).morph(e):g.regex.numberAndUnit.test(e)?new g.Number(t).morph(e):(this.value=t,void(this.destination=e))},extend:{at:function(t,e){return e<1?this.value:this.destination},valueOf:function(){return this.value}}}),g.extend(g.FX,{attr:function(t,e,n){if("object"==typeof t)for(var i in t)this.attr(i,t[i]);else this.add(t,e,"attrs");return this},style:function(t,e){if("object"==typeof t)for(var n in t)this.style(n,t[n]);else this.add(t,e,"styles");return this},x:function(t,e){if(this.target()instanceof g.G)return this.transform({x:t},e),this;var n=new g.Number(t);return n.relative=e,this.add("x",n)},y:function(t,e){if(this.target()instanceof g.G)return this.transform({y:t},e),this;var n=new g.Number(t);return n.relative=e,this.add("y",n)},cx:function(t){return this.add("cx",new g.Number(t))},cy:function(t){return this.add("cy",new g.Number(t))},move:function(t,e){return this.x(t).y(e)},center:function(t,e){return this.cx(t).cy(e)},size:function(t,e){if(this.target()instanceof g.Text)this.attr("font-size",t);else{var n;t&&e||(n=this.target().bbox()),t||(t=n.width/n.height*e),e||(e=n.height/n.width*t),this.add("width",new g.Number(t)).add("height",new g.Number(e))}return this},width:function(t){return this.add("width",new g.Number(t))},height:function(t){return this.add("height",new g.Number(t))},plot:function(t,e,n,i){return 4==arguments.length?this.plot([t,e,n,i]):this.add("plot",new(this.target().morphArray)(t))},leading:function(t){return this.target().leading?this.add("leading",new g.Number(t)):this},viewbox:function(t,e,n,i){return this.target()instanceof g.Container&&this.add("viewbox",new g.ViewBox(t,e,n,i)),this},update:function(t){if(this.target()instanceof g.Stop){if("number"==typeof t||t instanceof g.Number)return this.update({offset:arguments[0],color:arguments[1],opacity:arguments[2]});null!=t.opacity&&this.attr("stop-opacity",t.opacity),null!=t.color&&this.attr("stop-color",t.color),null!=t.offset&&this.attr("offset",t.offset)}return this}}),g.Box=g.invent({create:function(t,e,n,i){if(!("object"!=typeof t||t instanceof g.Element))return g.Box.call(this,null!=t.left?t.left:t.x,null!=t.top?t.top:t.y,t.width,t.height);4==arguments.length&&(this.x=t,this.y=e,this.width=n,this.height=i),v(this)},extend:{merge:function(t){var e=new this.constructor;return e.x=Math.min(this.x,t.x),e.y=Math.min(this.y,t.y),e.width=Math.max(this.x+this.width,t.x+t.width)-e.x,e.height=Math.max(this.y+this.height,t.y+t.height)-e.y,v(e)},transform:function(t){var e,n=1/0,i=-1/0,r=1/0,s=-1/0;return[new g.Point(this.x,this.y),new g.Point(this.x2,this.y),new g.Point(this.x,this.y2),new g.Point(this.x2,this.y2)].forEach(function(e){e=e.transform(t),n=Math.min(n,e.x),i=Math.max(i,e.x),r=Math.min(r,e.y),s=Math.max(s,e.y)}),e=new this.constructor,e.x=n,e.width=i-n,e.y=r,e.height=s-r,v(e),e}}}),g.BBox=g.invent({create:function(t){if(g.Box.apply(this,[].slice.call(arguments)),t instanceof g.Element){var n;try{if(e.documentElement.contains){if(!e.documentElement.contains(t.node))throw new Exception("Element not in the dom")}else{for(var i=t.node;i.parentNode;)i=i.parentNode;if(i!=e)throw new Exception("Element not in the dom")}n=t.node.getBBox()}catch(e){if(t instanceof g.Shape){var r=t.clone(g.parser.draw.instance).show();n=r.node.getBBox(),r.remove()}else n={x:t.node.clientLeft,y:t.node.clientTop,width:t.node.clientWidth,height:t.node.clientHeight}}g.Box.call(this,n)}},inherit:g.Box,parent:g.Element,construct:{bbox:function(){return new g.BBox(this)}}}),g.BBox.prototype.constructor=g.BBox,g.extend(g.Element,{tbox:function(){return console.warn("Use of TBox is deprecated and mapped to RBox. Use .rbox() instead."),this.rbox(this.doc())}}),g.RBox=g.invent({create:function(t){g.Box.apply(this,[].slice.call(arguments)),t instanceof g.Element&&g.Box.call(this,t.node.getBoundingClientRect())},inherit:g.Box,parent:g.Element,extend:{addOffset:function(){return this.x+=t.pageXOffset,this.y+=t.pageYOffset,this}},construct:{rbox:function(t){return t?new g.RBox(this).transform(t.screenCTM().inverse()):new g.RBox(this).addOffset()}}}),g.RBox.prototype.constructor=g.RBox,g.Matrix=g.invent({create:function(t){var e,n=f([1,0,0,1,0,0]);for(t=t instanceof g.Element?t.matrixify():"string"==typeof t?f(t.split(g.regex.delimiter).map(parseFloat)):6==arguments.length?f([].slice.call(arguments)):Array.isArray(t)?f(t):"object"==typeof t?t:n,e=C.length-1;e>=0;--e)this[C[e]]=null!=t[C[e]]?t[C[e]]:n[C[e]]},extend:{extract:function(){var t=c(this,0,1),e=c(this,1,0),n=180/Math.PI*Math.atan2(t.y,t.x)-90;return{x:this.e,y:this.f,transformedX:(this.e*Math.cos(n*Math.PI/180)+this.f*Math.sin(n*Math.PI/180))/Math.sqrt(this.a*this.a+this.b*this.b),transformedY:(this.f*Math.cos(n*Math.PI/180)+this.e*Math.sin(-n*Math.PI/180))/Math.sqrt(this.c*this.c+this.d*this.d),skewX:-n,skewY:180/Math.PI*Math.atan2(e.y,e.x),scaleX:Math.sqrt(this.a*this.a+this.b*this.b),scaleY:Math.sqrt(this.c*this.c+this.d*this.d),rotation:n,a:this.a,b:this.b,c:this.c,d:this.d,e:this.e,f:this.f,matrix:new g.Matrix(this)}},clone:function(){return new g.Matrix(this)},morph:function(t){return this.destination=new g.Matrix(t),this},at:function(t){return this.destination?new g.Matrix({a:this.a+(this.destination.a-this.a)*t,b:this.b+(this.destination.b-this.b)*t,c:this.c+(this.destination.c-this.c)*t,d:this.d+(this.destination.d-this.d)*t,e:this.e+(this.destination.e-this.e)*t,f:this.f+(this.destination.f-this.f)*t}):this},multiply:function(t){return new g.Matrix(this.native().multiply(d(t).native()))},inverse:function(){return new g.Matrix(this.native().inverse())},translate:function(t,e){return new g.Matrix(this.native().translate(t||0,e||0))},scale:function(t,e,n,i){return 1==arguments.length?e=t:3==arguments.length&&(i=n,n=e,e=t),this.around(n,i,new g.Matrix(t,0,0,e,0,0))},rotate:function(t,e,n){return t=g.utils.radians(t),this.around(e,n,new g.Matrix(Math.cos(t),Math.sin(t),-Math.sin(t),Math.cos(t),0,0))},flip:function(t,e){return"x"==t?this.scale(-1,1,e,0):"y"==t?this.scale(1,-1,0,e):this.scale(-1,-1,t,null!=e?e:t)},skew:function(t,e,n,i){return 1==arguments.length?e=t:3==arguments.length&&(i=n,n=e,e=t),t=g.utils.radians(t),e=g.utils.radians(e),this.around(n,i,new g.Matrix(1,Math.tan(e),Math.tan(t),1,0,0))},skewX:function(t,e,n){return this.skew(t,0,e,n)},skewY:function(t,e,n){return this.skew(0,t,e,n)},around:function(t,e,n){return this.multiply(new g.Matrix(1,0,0,1,t||0,e||0)).multiply(n).multiply(new g.Matrix(1,0,0,1,-t||0,-e||0))},native:function(){for(var t=g.parser.native.createSVGMatrix(),e=C.length-1;e>=0;e--)t[C[e]]=this[C[e]];return t},toString:function(){return"matrix("+this.a+","+this.b+","+this.c+","+this.d+","+this.e+","+this.f+")"}},parent:g.Element,construct:{ctm:function(){return new g.Matrix(this.node.getCTM())},screenCTM:function(){if(this instanceof g.Nested){var t=this.rect(1,1),e=t.node.getScreenCTM();return t.remove(),new g.Matrix(e)}return new g.Matrix(this.node.getScreenCTM())}}}),g.Point=g.invent({create:function(t,e){var n,i={x:0,y:0};n=Array.isArray(t)?{x:t[0],y:t[1]}:"object"==typeof t?{x:t.x,y:t.y}:null!=t?{x:t,y:null!=e?e:t}:i,this.x=n.x,this.y=n.y},extend:{clone:function(){return new g.Point(this)},morph:function(t,e){return this.destination=new g.Point(t,e),this},at:function(t){return this.destination?new g.Point({x:this.x+(this.destination.x-this.x)*t,y:this.y+(this.destination.y-this.y)*t}):this},native:function(){var t=g.parser.native.createSVGPoint();return t.x=this.x,t.y=this.y,t},transform:function(t){return new g.Point(this.native().matrixTransform(t.native()))}}}),g.extend(g.Element,{point:function(t,e){return new g.Point(t,e).transform(this.screenCTM().inverse())}}),g.extend(g.Element,{attr:function(t,e,n){if(null==t){for(t={},e=this.node.attributes,n=e.length-1;n>=0;n--)t[e[n].nodeName]=g.regex.isNumber.test(e[n].nodeValue)?parseFloat(e[n].nodeValue):e[n].nodeValue;return t}if("object"==typeof t)for(e in t)this.attr(e,t[e]);else if(null===e)this.node.removeAttribute(t);else{if(null==e)return e=this.node.getAttribute(t),null==e?g.defaults.attrs[t]:g.regex.isNumber.test(e)?parseFloat(e):e;"stroke-width"==t?this.attr("stroke",parseFloat(e)>0?this._stroke:null):"stroke"==t&&(this._stroke=e),"fill"!=t&&"stroke"!=t||(g.regex.isImage.test(e)&&(e=this.doc().defs().image(e,0,0)),e instanceof g.Image&&(e=this.doc().defs().pattern(0,0,function(){this.add(e)}))),"number"==typeof e?e=new g.Number(e):g.Color.isColor(e)?e=new g.Color(e):Array.isArray(e)&&(e=new g.Array(e)),"leading"==t?this.leading&&this.leading(e):"string"==typeof n?this.node.setAttributeNS(n,t,e.toString()):this.node.setAttribute(t,e.toString()),!this.rebuild||"font-size"!=t&&"x"!=t||this.rebuild(t,e)}return this}}),g.extend(g.Element,{transform:function(t,e){var n,i,r=this;if("object"!=typeof t)return n=new g.Matrix(r).extract(),"string"==typeof t?n[t]:n;if(n=new g.Matrix(r),e=!!e||!!t.relative,null!=t.a)n=e?n.multiply(new g.Matrix(t)):new g.Matrix(t);else if(null!=t.rotation)p(t,r),n=e?n.rotate(t.rotation,t.cx,t.cy):n.rotate(t.rotation-n.extract().rotation,t.cx,t.cy);else if(null!=t.scale||null!=t.scaleX||null!=t.scaleY){if(p(t,r),t.scaleX=null!=t.scale?t.scale:null!=t.scaleX?t.scaleX:1,t.scaleY=null!=t.scale?t.scale:null!=t.scaleY?t.scaleY:1,!e){var s=n.extract();t.scaleX=1*t.scaleX/s.scaleX,t.scaleY=1*t.scaleY/s.scaleY}n=n.scale(t.scaleX,t.scaleY,t.cx,t.cy)}else if(null!=t.skew||null!=t.skewX||null!=t.skewY){if(p(t,r),t.skewX=null!=t.skew?t.skew:null!=t.skewX?t.skewX:0,t.skewY=null!=t.skew?t.skew:null!=t.skewY?t.skewY:0,!e){var s=n.extract();n=n.multiply((new g.Matrix).skew(s.skewX,s.skewY,t.cx,t.cy).inverse())}n=n.skew(t.skewX,t.skewY,t.cx,t.cy)}else t.flip?("x"==t.flip||"y"==t.flip?t.offset=null==t.offset?r.bbox()["c"+t.flip]:t.offset:null==t.offset?(i=r.bbox(),t.flip=i.cx,t.offset=i.cy):t.flip=t.offset,n=(new g.Matrix).flip(t.flip,t.offset)):null==t.x&&null==t.y||(e?n=n.translate(t.x,t.y):(null!=t.x&&(n.e=t.x),null!=t.y&&(n.f=t.y)));return this.attr("transform",n)}}),g.extend(g.FX,{transform:function(t,e){var n,i,r=this.target();return"object"!=typeof t?(n=new g.Matrix(r).extract(),"string"==typeof t?n[t]:n):(e=!!e||!!t.relative,null!=t.a?n=new g.Matrix(t):null!=t.rotation?(p(t,r),n=new g.Rotate(t.rotation,t.cx,t.cy)):null!=t.scale||null!=t.scaleX||null!=t.scaleY?(p(t,r),t.scaleX=null!=t.scale?t.scale:null!=t.scaleX?t.scaleX:1,t.scaleY=null!=t.scale?t.scale:null!=t.scaleY?t.scaleY:1,n=new g.Scale(t.scaleX,t.scaleY,t.cx,t.cy)):null!=t.skewX||null!=t.skewY?(p(t,r),t.skewX=null!=t.skewX?t.skewX:0,t.skewY=null!=t.skewY?t.skewY:0,n=new g.Skew(t.skewX,t.skewY,t.cx,t.cy)):t.flip?("x"==t.flip||"y"==t.flip?t.offset=null==t.offset?r.bbox()["c"+t.flip]:t.offset:null==t.offset?(i=r.bbox(),t.flip=i.cx,t.offset=i.cy):t.flip=t.offset,n=(new g.Matrix).flip(t.flip,t.offset)):null==t.x&&null==t.y||(n=new g.Translate(t.x,t.y)),n?(n.relative=e,this.last().transforms.push(n),this._callStart()):this)}}),g.extend(g.Element,{untransform:function(){return this.attr("transform",null)},matrixify:function(){return(this.attr("transform")||"").split(g.regex.transforms).slice(0,-1).map(function(t){var e=t.trim().split("(");return[e[0],e[1].split(g.regex.delimiter).map(function(t){return parseFloat(t)})]}).reduce(function(t,e){return"matrix"==e[0]?t.multiply(f(e[1])):t[e[0]].apply(t,e[1])},new g.Matrix)},toParent:function(t){if(this==t)return this;var e=this.screenCTM(),n=t.screenCTM().inverse();return this.addTo(t).untransform().transform(n.multiply(e)),this},toDoc:function(){return this.toParent(this.doc())}}),g.Transformation=g.invent({create:function(t,e){if(arguments.length>1&&"boolean"!=typeof e)return this.constructor.call(this,[].slice.call(arguments));if(Array.isArray(t))for(var n=0,i=this.arguments.length;n<i;++n)this[this.arguments[n]]=t[n];else if("object"==typeof t)for(var n=0,i=this.arguments.length;n<i;++n)this[this.arguments[n]]=t[this.arguments[n]];this.inversed=!1,!0===e&&(this.inversed=!0)},extend:{arguments:[],method:"",at:function(t){for(var e=[],n=0,i=this.arguments.length;n<i;++n)e.push(this[this.arguments[n]]);var r=this._undo||new g.Matrix;return r=(new g.Matrix).morph(g.Matrix.prototype[this.method].apply(r,e)).at(t),this.inversed?r.inverse():r},undo:function(t){for(var e=0,n=this.arguments.length;e<n;++e)t[this.arguments[e]]=void 0===this[this.arguments[e]]?0:t[this.arguments[e]];return t.cx=this.cx,t.cy=this.cy,this._undo=new(g[a(this.method)])(t,!0).at(1),this}}}),g.Translate=g.invent({parent:g.Matrix,inherit:g.Transformation,create:function(t,e){this.constructor.apply(this,[].slice.call(arguments))},extend:{arguments:["transformedX","transformedY"],method:"translate"}}),g.Rotate=g.invent({parent:g.Matrix,inherit:g.Transformation,create:function(t,e){this.constructor.apply(this,[].slice.call(arguments))},extend:{arguments:["rotation","cx","cy"],method:"rotate",at:function(t){var e=(new g.Matrix).rotate((new g.Number).morph(this.rotation-(this._undo?this._undo.rotation:0)).at(t),this.cx,this.cy);return this.inversed?e.inverse():e},undo:function(t){return this._undo=t,this}}}),g.Scale=g.invent({parent:g.Matrix,inherit:g.Transformation,create:function(t,e){this.constructor.apply(this,[].slice.call(arguments))},extend:{arguments:["scaleX","scaleY","cx","cy"],method:"scale"}}),g.Skew=g.invent({parent:g.Matrix,inherit:g.Transformation,create:function(t,e){this.constructor.apply(this,[].slice.call(arguments))},extend:{arguments:["skewX","skewY","cx","cy"],method:"skew"}}),g.extend(g.Element,{style:function(t,e){if(0==arguments.length)return this.node.style.cssText||"";if(arguments.length<2)if("object"==typeof t)for(e in t)this.style(e,t[e]);else{if(!g.regex.isCss.test(t))return this.node.style[o(t)];for(t=t.split(/\s*;\s*/).filter(function(t){return!!t}).map(function(t){return t.split(/\s*:\s*/)});e=t.pop();)this.style(e[0],e[1])}else this.node.style[o(t)]=null===e||g.regex.isBlank.test(e)?"":e;return this}}),g.Parent=g.invent({create:function(t){this.constructor.call(this,t)},inherit:g.Element,extend:{children:function(){return g.utils.map(g.utils.filterSVGElements(this.node.childNodes),function(t){return g.adopt(t)})},add:function(t,e){return null==e?this.node.appendChild(t.node):t.node!=this.node.childNodes[e]&&this.node.insertBefore(t.node,this.node.childNodes[e]),this},put:function(t,e){return this.add(t,e),t},has:function(t){return this.index(t)>=0},index:function(t){return[].slice.call(this.node.childNodes).indexOf(t.node)},get:function(t){return g.adopt(this.node.childNodes[t])},first:function(){return this.get(0)},last:function(){return this.get(this.node.childNodes.length-1)},each:function(t,e){var n,i,r=this.children();for(n=0,i=r.length;n<i;n++)r[n]instanceof g.Element&&t.apply(r[n],[n,r]),e&&r[n]instanceof g.Container&&r[n].each(t,e);return this},removeElement:function(t){return this.node.removeChild(t.node),this},clear:function(){for(;this.node.hasChildNodes();)this.node.removeChild(this.node.lastChild);return delete this._defs,this},defs:function(){return this.doc().defs()}}}),g.extend(g.Parent,{ungroup:function(t,e){return 0===e||this instanceof g.Defs||this.node==g.parser.draw?this:(t=t||(this instanceof g.Doc?this:this.parent(g.Parent)),e=e||1/0,this.each(function(){return this instanceof g.Defs?this:this instanceof g.Parent?this.ungroup(t,e-1):this.toParent(t)}),this.node.firstChild||this.remove(),this)},flatten:function(t,e){return this.ungroup(t,e)}}),g.Container=g.invent({create:function(t){this.constructor.call(this,t)},inherit:g.Parent}),g.ViewBox=g.invent({create:function(t){var e,n,i,r,s,o,a,h=[0,0,0,0],u=1,l=1,c=/[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?/gi;if(t instanceof g.Element){for(o=t,a=t,s=(t.attr("viewBox")||"").match(c),t.bbox,i=new g.Number(t.width()),r=new g.Number(t.height());"%"==i.unit;)u*=i.value,i=new g.Number(o instanceof g.Doc?o.parent().offsetWidth:o.parent().width()),o=o.parent();for(;"%"==r.unit;)l*=r.value,r=new g.Number(a instanceof g.Doc?a.parent().offsetHeight:a.parent().height()),a=a.parent();this.x=0,this.y=0,this.width=i*u,this.height=r*l,this.zoom=1,s&&(e=parseFloat(s[0]),n=parseFloat(s[1]),i=parseFloat(s[2]),r=parseFloat(s[3]),this.zoom=this.width/this.height>i/r?this.height/r:this.width/i,this.x=e,this.y=n,this.width=i,this.height=r)}else t="string"==typeof t?t.match(c).map(function(t){return parseFloat(t)}):Array.isArray(t)?t:"object"==typeof t?[t.x,t.y,t.width,t.height]:4==arguments.length?[].slice.call(arguments):h,this.x=t[0],this.y=t[1],this.width=t[2],this.height=t[3]},extend:{toString:function(){return this.x+" "+this.y+" "+this.width+" "+this.height},morph:function(t,e,n,i){return this.destination=new g.ViewBox(t,e,n,i),this},at:function(t){return this.destination?new g.ViewBox([this.x+(this.destination.x-this.x)*t,this.y+(this.destination.y-this.y)*t,this.width+(this.destination.width-this.width)*t,this.height+(this.destination.height-this.height)*t]):this}},parent:g.Container,construct:{viewbox:function(t,e,n,i){return 0==arguments.length?new g.ViewBox(this):this.attr("viewBox",new g.ViewBox(t,e,n,i))}}}),["click","dblclick","mousedown","mouseup","mouseover","mouseout","mousemove","touchstart","touchmove","touchleave","touchend","touchcancel"].forEach(function(t){g.Element.prototype[t]=function(e){return g.on(this.node,t,e),this}}),g.listeners=[],g.handlerMap=[],g.listenerId=0,g.on=function(t,e,n,i,r){var s=n.bind(i||t.instance||t),o=(g.handlerMap.indexOf(t)+1||g.handlerMap.push(t))-1,a=e.split(".")[0],h=e.split(".")[1]||"*";g.listeners[o]=g.listeners[o]||{},g.listeners[o][a]=g.listeners[o][a]||{},g.listeners[o][a][h]=g.listeners[o][a][h]||{},n._svgjsListenerId||(n._svgjsListenerId=++g.listenerId),g.listeners[o][a][h][n._svgjsListenerId]=s,t.addEventListener(a,s,r||!1)},g.off=function(t,e,n){var i=g.handlerMap.indexOf(t),r=e&&e.split(".")[0],s=e&&e.split(".")[1],o="";if(-1!=i)if(n){if("function"==typeof n&&(n=n._svgjsListenerId),!n)return;g.listeners[i][r]&&g.listeners[i][r][s||"*"]&&(t.removeEventListener(r,g.listeners[i][r][s||"*"][n],!1),delete g.listeners[i][r][s||"*"][n])}else if(s&&r){if(g.listeners[i][r]&&g.listeners[i][r][s]){for(n in g.listeners[i][r][s])g.off(t,[r,s].join("."),n);delete g.listeners[i][r][s]}}else if(s)for(e in g.listeners[i])for(o in g.listeners[i][e])s===o&&g.off(t,[e,s].join("."));else if(r){if(g.listeners[i][r]){for(o in g.listeners[i][r])g.off(t,[r,o].join("."));delete g.listeners[i][r]}}else{for(e in g.listeners[i])g.off(t,e);delete g.listeners[i],delete g.handlerMap[i]}},g.extend(g.Element,{on:function(t,e,n,i){return g.on(this.node,t,e,n,i),this},off:function(t,e){return g.off(this.node,t,e),this},fire:function(e,n){return e instanceof t.Event?this.node.dispatchEvent(e):this.node.dispatchEvent(e=new t.CustomEvent(e,{detail:n,cancelable:!0})),this._event=e,this},event:function(){return this._event}}),g.Defs=g.invent({create:"defs",inherit:g.Container}),g.G=g.invent({create:"g",inherit:g.Container,extend:{x:function(t){return null==t?this.transform("x"):this.transform({x:t-this.x()},!0)},y:function(t){return null==t?this.transform("y"):this.transform({y:t-this.y()},!0)},cx:function(t){return null==t?this.gbox().cx:this.x(t-this.gbox().width/2)},cy:function(t){return null==t?this.gbox().cy:this.y(t-this.gbox().height/2)},gbox:function(){var t=this.bbox(),e=this.transform();return t.x+=e.x,t.x2+=e.x,t.cx+=e.x,t.y+=e.y,t.y2+=e.y,t.cy+=e.y,t}},construct:{group:function(){return this.put(new g.G)}}}),g.extend(g.Element,{siblings:function(){return this.parent().children()},position:function(){return this.parent().index(this)},next:function(){return this.siblings()[this.position()+1]},previous:function(){return this.siblings()[this.position()-1]},forward:function(){var t=this.position()+1,e=this.parent();return e.removeElement(this).add(this,t),e instanceof g.Doc&&e.node.appendChild(e.defs().node),this},backward:function(){var t=this.position();return t>0&&this.parent().removeElement(this).add(this,t-1),this},front:function(){var t=this.parent();return t.node.appendChild(this.node),t instanceof g.Doc&&t.node.appendChild(t.defs().node),this},back:function(){return this.position()>0&&this.parent().removeElement(this).add(this,0),this},before:function(t){t.remove();var e=this.position();return this.parent().add(t,e),this},after:function(t){t.remove();var e=this.position();return this.parent().add(t,e+1),this}}),g.Mask=g.invent({create:function(){this.constructor.call(this,g.create("mask")),this.targets=[]},inherit:g.Container,extend:{remove:function(){for(var t=this.targets.length-1;t>=0;t--)this.targets[t]&&this.targets[t].unmask();return this.targets=[],this.parent().removeElement(this),this}},construct:{mask:function(){return this.defs().put(new g.Mask)}}}),g.extend(g.Element,{maskWith:function(t){return this.masker=t instanceof g.Mask?t:this.parent().mask().add(t),this.masker.targets.push(this),this.attr("mask",'url("#'+this.masker.attr("id")+'")')},unmask:function(){return delete this.masker,this.attr("mask",null)}}),g.ClipPath=g.invent({create:function(){this.constructor.call(this,g.create("clipPath")),this.targets=[]},inherit:g.Container,extend:{remove:function(){for(var t=this.targets.length-1;t>=0;t--)this.targets[t]&&this.targets[t].unclip();return this.targets=[],this.parent().removeElement(this),this}},construct:{clip:function(){return this.defs().put(new g.ClipPath)}}}),g.extend(g.Element,{clipWith:function(t){return this.clipper=t instanceof g.ClipPath?t:this.parent().clip().add(t),this.clipper.targets.push(this),this.attr("clip-path",'url("#'+this.clipper.attr("id")+'")')},unclip:function(){return delete this.clipper,this.attr("clip-path",null)}}),g.Gradient=g.invent({create:function(t){this.constructor.call(this,g.create(t+"Gradient")),this.type=t},inherit:g.Container,extend:{at:function(t,e,n){return this.put(new g.Stop).update(t,e,n)},update:function(t){return this.clear(),"function"==typeof t&&t.call(this,this),this},fill:function(){return"url(#"+this.id()+")"},toString:function(){return this.fill()},attr:function(t,e,n){return"transform"==t&&(t="gradientTransform"),g.Container.prototype.attr.call(this,t,e,n)}},construct:{gradient:function(t,e){return this.defs().gradient(t,e)}}}),g.extend(g.Gradient,g.FX,{from:function(t,e){return"radial"==(this._target||this).type?this.attr({fx:new g.Number(t),fy:new g.Number(e)}):this.attr({x1:new g.Number(t),y1:new g.Number(e)})},to:function(t,e){return"radial"==(this._target||this).type?this.attr({cx:new g.Number(t),cy:new g.Number(e)}):this.attr({x2:new g.Number(t),y2:new g.Number(e)})}}),g.extend(g.Defs,{gradient:function(t,e){return this.put(new g.Gradient(t)).update(e)}}),g.Stop=g.invent({create:"stop",inherit:g.Element,extend:{update:function(t){return("number"==typeof t||t instanceof g.Number)&&(t={offset:arguments[0],color:arguments[1],opacity:arguments[2]}),null!=t.opacity&&this.attr("stop-opacity",t.opacity),null!=t.color&&this.attr("stop-color",t.color),null!=t.offset&&this.attr("offset",new g.Number(t.offset)),this}}}),g.Pattern=g.invent({create:"pattern",inherit:g.Container,extend:{fill:function(){return"url(#"+this.id()+")"},update:function(t){return this.clear(),"function"==typeof t&&t.call(this,this),this},toString:function(){return this.fill()},attr:function(t,e,n){return"transform"==t&&(t="patternTransform"),g.Container.prototype.attr.call(this,t,e,n)}},construct:{pattern:function(t,e,n){return this.defs().pattern(t,e,n)}}}),g.extend(g.Defs,{pattern:function(t,e,n){return this.put(new g.Pattern).update(n).attr({x:0,y:0,width:t,height:e,patternUnits:"userSpaceOnUse"})}}),g.Doc=g.invent({create:function(t){t&&(t="string"==typeof t?e.getElementById(t):t,"svg"==t.nodeName?this.constructor.call(this,t):(this.constructor.call(this,g.create("svg")),t.appendChild(this.node),this.size("100%","100%")),this.namespace().defs())},inherit:g.Container,extend:{namespace:function(){return this.attr({xmlns:g.ns,version:"1.1"}).attr("xmlns:xlink",g.xlink,g.xmlns).attr("xmlns:svgjs",g.svgjs,g.xmlns)},defs:function(){if(!this._defs){var t;(t=this.node.getElementsByTagName("defs")[0])?this._defs=g.adopt(t):this._defs=new g.Defs,this.node.appendChild(this._defs.node)}return this._defs},parent:function(){return"#document"==this.node.parentNode.nodeName?null:this.node.parentNode},spof:function(){var t=this.node.getScreenCTM();return t&&this.style("left",-t.e%1+"px").style("top",-t.f%1+"px"),this},remove:function(){return this.parent()&&this.parent().removeChild(this.node),this},clear:function(){for(;this.node.hasChildNodes();)this.node.removeChild(this.node.lastChild);return delete this._defs,g.parser.draw.parentNode||this.node.appendChild(g.parser.draw),this}}}),g.Shape=g.invent({create:function(t){this.constructor.call(this,t)},inherit:g.Element}),g.Bare=g.invent({create:function(t,e){if(this.constructor.call(this,g.create(t)),e)for(var n in e.prototype)"function"==typeof e.prototype[n]&&(this[n]=e.prototype[n])},inherit:g.Element,extend:{words:function(t){for(;this.node.hasChildNodes();)this.node.removeChild(this.node.lastChild);return this.node.appendChild(e.createTextNode(t)),this}}}),g.extend(g.Parent,{element:function(t,e){return this.put(new g.Bare(t,e))}}),g.Symbol=g.invent({create:"symbol",inherit:g.Container,construct:{symbol:function(){return this.put(new g.Symbol)}}}),g.Use=g.invent({create:"use",inherit:g.Shape,extend:{element:function(t,e){return this.attr("href",(e||"")+"#"+t,g.xlink)}},construct:{use:function(t,e){return this.put(new g.Use).element(t,e)}}}),g.Rect=g.invent({create:"rect",inherit:g.Shape,construct:{rect:function(t,e){return this.put(new g.Rect).size(t,e)}}}),g.Circle=g.invent({create:"circle",inherit:g.Shape,construct:{circle:function(t){return this.put(new g.Circle).rx(new g.Number(t).divide(2)).move(0,0)}}}),g.extend(g.Circle,g.FX,{rx:function(t){return this.attr("r",t)},ry:function(t){return this.rx(t)}}),g.Ellipse=g.invent({create:"ellipse",inherit:g.Shape,construct:{ellipse:function(t,e){return this.put(new g.Ellipse).size(t,e).move(0,0)}}}),g.extend(g.Ellipse,g.Rect,g.FX,{rx:function(t){return this.attr("rx",t)},ry:function(t){return this.attr("ry",t)}}),g.extend(g.Circle,g.Ellipse,{x:function(t){return null==t?this.cx()-this.rx():this.cx(t+this.rx())},y:function(t){return null==t?this.cy()-this.ry():this.cy(t+this.ry())},cx:function(t){return null==t?this.attr("cx"):this.attr("cx",t)},cy:function(t){return null==t?this.attr("cy"):this.attr("cy",t)},width:function(t){return null==t?2*this.rx():this.rx(new g.Number(t).divide(2))},height:function(t){return null==t?2*this.ry():this.ry(new g.Number(t).divide(2))},size:function(t,e){var n=l(this,t,e);return this.rx(new g.Number(n.width).divide(2)).ry(new g.Number(n.height).divide(2))}}),g.Line=g.invent({create:"line",inherit:g.Shape,extend:{array:function(){return new g.PointArray([[this.attr("x1"),this.attr("y1")],[this.attr("x2"),this.attr("y2")]])},plot:function(t,e,n,i){return null==t?this.array():(t=void 0!==e?{x1:t,y1:e,x2:n,y2:i}:new g.PointArray(t).toLine(),this.attr(t))},move:function(t,e){return this.attr(this.array().move(t,e).toLine())},size:function(t,e){var n=l(this,t,e);return this.attr(this.array().size(n.width,n.height).toLine())}},construct:{line:function(t,e,n,i){return g.Line.prototype.plot.apply(this.put(new g.Line),null!=t?[t,e,n,i]:[0,0,0,0])}}}),g.Polyline=g.invent({create:"polyline",inherit:g.Shape,construct:{polyline:function(t){return this.put(new g.Polyline).plot(t||new g.PointArray)}}}),g.Polygon=g.invent({create:"polygon",inherit:g.Shape,construct:{polygon:function(t){return this.put(new g.Polygon).plot(t||new g.PointArray)}}}),g.extend(g.Polyline,g.Polygon,{array:function(){return this._array||(this._array=new g.PointArray(this.attr("points")))},plot:function(t){return null==t?this.array():this.clear().attr("points","string"==typeof t?t:this._array=new g.PointArray(t))},clear:function(){return delete this._array,this},move:function(t,e){return this.attr("points",this.array().move(t,e))},size:function(t,e){var n=l(this,t,e);return this.attr("points",this.array().size(n.width,n.height))}}),g.extend(g.Line,g.Polyline,g.Polygon,{morphArray:g.PointArray,x:function(t){return null==t?this.bbox().x:this.move(t,this.bbox().y)},y:function(t){return null==t?this.bbox().y:this.move(this.bbox().x,t)},width:function(t){var e=this.bbox();return null==t?e.width:this.size(t,e.height)},height:function(t){var e=this.bbox();return null==t?e.height:this.size(e.width,t)}}),g.Path=g.invent({create:"path",inherit:g.Shape,extend:{morphArray:g.PathArray,array:function(){return this._array||(this._array=new g.PathArray(this.attr("d")))},plot:function(t){return null==t?this.array():this.clear().attr("d","string"==typeof t?t:this._array=new g.PathArray(t))},clear:function(){return delete this._array,this},move:function(t,e){return this.attr("d",this.array().move(t,e))},x:function(t){return null==t?this.bbox().x:this.move(t,this.bbox().y)},y:function(t){return null==t?this.bbox().y:this.move(this.bbox().x,t)},size:function(t,e){var n=l(this,t,e);return this.attr("d",this.array().size(n.width,n.height))},width:function(t){return null==t?this.bbox().width:this.size(t,this.bbox().height)},height:function(t){return null==t?this.bbox().height:this.size(this.bbox().width,t)}},construct:{path:function(t){return this.put(new g.Path).plot(t||new g.PathArray)}}}),g.Image=g.invent({create:"image",inherit:g.Shape,extend:{load:function(e){if(!e)return this;var n=this,i=new t.Image;return g.on(i,"load",function(){var t=n.parent(g.Pattern);null!==t&&(0==n.width()&&0==n.height()&&n.size(i.width,i.height),t&&0==t.width()&&0==t.height()&&t.size(n.width(),n.height()),"function"==typeof n._loaded&&n._loaded.call(n,{width:i.width,height:i.height,ratio:i.width/i.height,url:e}))}),g.on(i,"error",function(t){"function"==typeof n._error&&n._error.call(n,t)}),this.attr("href",i.src=this.src=e,g.xlink)},loaded:function(t){return this._loaded=t,this},error:function(t){return this._error=t,this}},construct:{image:function(t,e,n){return this.put(new g.Image).load(t).size(e||0,n||e||0)}}}),g.Text=g.invent({create:function(){this.constructor.call(this,g.create("text")),this.dom.leading=new g.Number(1.3),this._rebuild=!0,this._build=!1,this.attr("font-family",g.defaults.attrs["font-family"])},inherit:g.Shape,extend:{x:function(t){return null==t?this.attr("x"):this.attr("x",t)},y:function(t){var e=this.attr("y"),n="number"==typeof e?e-this.bbox().y:0;return null==t?"number"==typeof e?e-n:e:this.attr("y","number"==typeof t?t+n:t)},cx:function(t){return null==t?this.bbox().cx:this.x(t-this.bbox().width/2)},cy:function(t){return null==t?this.bbox().cy:this.y(t-this.bbox().height/2)},text:function(t){if(void 0===t){for(var t="",e=this.node.childNodes,n=0,i=e.length;n<i;++n)0!=n&&3!=e[n].nodeType&&1==g.adopt(e[n]).dom.newLined&&(t+="\n"),t+=e[n].textContent;return t}if(this.clear().build(!0),"function"==typeof t)t.call(this,this);else{t=t.split("\n");for(var n=0,r=t.length;n<r;n++)this.tspan(t[n]).newLine()}return this.build(!1).rebuild()},size:function(t){return this.attr("font-size",t).rebuild()},leading:function(t){return null==t?this.dom.leading:(this.dom.leading=new g.Number(t),this.rebuild())},lines:function(){var t=(this.textPath&&this.textPath()||this).node,e=g.utils.map(g.utils.filterSVGElements(t.childNodes),function(t){return g.adopt(t)});return new g.Set(e)},rebuild:function(t){if("boolean"==typeof t&&(this._rebuild=t),this._rebuild){var e=this,n=0,i=this.dom.leading*new g.Number(this.attr("font-size"));this.lines().each(function(){this.dom.newLined&&(e.textPath()||this.attr("x",e.attr("x")),"\n"==this.text()?n+=i:(this.attr("dy",i+n),n=0))}),this.fire("rebuild")}return this},build:function(t){return this._build=!!t,this},setData:function(t){return this.dom=t,this.dom.leading=new g.Number(t.leading||1.3),this}},construct:{text:function(t){return this.put(new g.Text).text(t)},plain:function(t){return this.put(new g.Text).plain(t)}}}),g.Tspan=g.invent({create:"tspan",inherit:g.Shape,extend:{text:function(t){return null==t?this.node.textContent+(this.dom.newLined?"\n":""):("function"==typeof t?t.call(this,this):this.plain(t),this)},dx:function(t){return this.attr("dx",t)},dy:function(t){return this.attr("dy",t)},newLine:function(){var t=this.parent(g.Text);return this.dom.newLined=!0,this.dy(t.dom.leading*t.attr("font-size")).attr("x",t.x())}}}),g.extend(g.Text,g.Tspan,{plain:function(t){return!1===this._build&&this.clear(),this.node.appendChild(e.createTextNode(t)),this},tspan:function(t){var e=(this.textPath&&this.textPath()||this).node,n=new g.Tspan;return!1===this._build&&this.clear(),e.appendChild(n.node),n.text(t)},clear:function(){for(var t=(this.textPath&&this.textPath()||this).node;t.hasChildNodes();)t.removeChild(t.lastChild);return this},length:function(){return this.node.getComputedTextLength()}}),g.TextPath=g.invent({create:"textPath",inherit:g.Parent,parent:g.Text,construct:{morphArray:g.PathArray,path:function(t){for(var e=new g.TextPath,n=this.doc().defs().path(t);this.node.hasChildNodes();)e.node.appendChild(this.node.firstChild);return this.node.appendChild(e.node),e.attr("href","#"+n,g.xlink),this},array:function(){var t=this.track();return t?t.array():null},plot:function(t){var e=this.track(),n=null;return e&&(n=e.plot(t)),null==t?n:this},track:function(){var t=this.textPath();if(t)return t.reference("href")},textPath:function(){if(this.node.firstChild&&"textPath"==this.node.firstChild.nodeName)return g.adopt(this.node.firstChild)}}}),g.Nested=g.invent({create:function(){this.constructor.call(this,g.create("svg")),this.style("overflow","visible")},inherit:g.Container,construct:{nested:function(){return this.put(new g.Nested)}}}),g.A=g.invent({create:"a",inherit:g.Container,extend:{to:function(t){return this.attr("href",t,g.xlink)},show:function(t){return this.attr("show",t,g.xlink)},target:function(t){return this.attr("target",t)}},construct:{link:function(t){return this.put(new g.A).to(t)}}}),g.extend(g.Element,{linkTo:function(t){var e=new g.A;return"function"==typeof t?t.call(e,e):e.to(t),this.parent().put(e).put(this)}}),g.Marker=g.invent({create:"marker",inherit:g.Container,extend:{width:function(t){return this.attr("markerWidth",t)},height:function(t){return this.attr("markerHeight",t)},ref:function(t,e){return this.attr("refX",t).attr("refY",e)},update:function(t){return this.clear(),"function"==typeof t&&t.call(this,this),this},toString:function(){return"url(#"+this.id()+")"}},construct:{marker:function(t,e,n){return this.defs().marker(t,e,n)}}}),g.extend(g.Defs,{marker:function(t,e,n){return this.put(new g.Marker).size(t,e).ref(t/2,e/2).viewbox(0,0,t,e).attr("orient","auto").update(n)}}),g.extend(g.Line,g.Polyline,g.Polygon,g.Path,{marker:function(t,e,n,i){var r=["marker"];return"all"!=t&&r.push(t),r=r.join("-"),t=arguments[1]instanceof g.Marker?arguments[1]:this.doc().marker(e,n,i),this.attr(r,t)}});var P={stroke:["color","width","opacity","linecap","linejoin","miterlimit","dasharray","dashoffset"],fill:["color","opacity","rule"],prefix:function(t,e){return"color"==e?t:t+"-"+e}};["fill","stroke"].forEach(function(t){var e,n={};n[t]=function(n){if(void 0===n)return this;if("string"==typeof n||g.Color.isRgb(n)||n&&"function"==typeof n.fill)this.attr(t,n);else for(e=P[t].length-1;e>=0;e--)null!=n[P[t][e]]&&this.attr(P.prefix(t,P[t][e]),n[P[t][e]]);return this},g.extend(g.Element,g.FX,n)}),g.extend(g.Element,g.FX,{rotate:function(t,e,n){return this.transform({rotation:t,cx:e,cy:n})},skew:function(t,e,n,i){return 1==arguments.length||3==arguments.length?this.transform({skew:t,cx:e,cy:n}):this.transform({skewX:t,skewY:e,cx:n,cy:i})},scale:function(t,e,n,i){return 1==arguments.length||3==arguments.length?this.transform({scale:t,cx:e,cy:n}):this.transform({scaleX:t,scaleY:e,cx:n,cy:i})},translate:function(t,e){return this.transform({x:t,y:e})},flip:function(t,e){return e="number"==typeof t?t:e,this.transform({flip:t||"both",offset:e})},matrix:function(t){return this.attr("transform",new g.Matrix(6==arguments.length?[].slice.call(arguments):t))},opacity:function(t){return this.attr("opacity",t)},dx:function(t){return this.x(new g.Number(t).plus(this instanceof g.FX?0:this.x()),!0)},dy:function(t){return this.y(new g.Number(t).plus(this instanceof g.FX?0:this.y()),!0)},dmove:function(t,e){return this.dx(t).dy(e)}}),g.extend(g.Rect,g.Ellipse,g.Circle,g.Gradient,g.FX,{radius:function(t,e){var n=(this._target||this).type;return"radial"==n||"circle"==n?this.attr("r",new g.Number(t)):this.rx(t).ry(null==e?t:e)}}),g.extend(g.Path,{length:function(){return this.node.getTotalLength()},pointAt:function(t){return this.node.getPointAtLength(t)}}),g.extend(g.Parent,g.Text,g.Tspan,g.FX,{font:function(t,e){if("object"==typeof t)for(e in t)this.font(e,t[e]);return"leading"==t?this.leading(e):"anchor"==t?this.attr("text-anchor",e):"size"==t||"family"==t||"weight"==t||"stretch"==t||"variant"==t||"style"==t?this.attr("font-"+t,e):this.attr(t,e)}}),g.Set=g.invent({create:function(t){Array.isArray(t)?this.members=t:this.clear()},extend:{add:function(){var t,e,n=[].slice.call(arguments);for(t=0,e=n.length;t<e;t++)this.members.push(n[t]);return this},remove:function(t){var e=this.index(t);return e>-1&&this.members.splice(e,1),this},each:function(t){for(var e=0,n=this.members.length;e<n;e++)t.apply(this.members[e],[e,this.members]);return this},clear:function(){return this.members=[],this},length:function(){return this.members.length},has:function(t){return this.index(t)>=0},index:function(t){return this.members.indexOf(t)},get:function(t){return this.members[t]},first:function(){return this.get(0)},last:function(){return this.get(this.members.length-1)},valueOf:function(){return this.members},bbox:function(){if(0==this.members.length)return new g.RBox;var t=this.members[0].rbox(this.members[0].doc());return this.each(function(){t=t.merge(this.rbox(this.doc()))}),t}},construct:{set:function(t){return new g.Set(t)}}}),g.FX.Set=g.invent({create:function(t){this.set=t}}),g.Set.inherit=function(){var t,e=[];for(var t in g.Shape.prototype)"function"==typeof g.Shape.prototype[t]&&"function"!=typeof g.Set.prototype[t]&&e.push(t);e.forEach(function(t){g.Set.prototype[t]=function(){for(var e=0,n=this.members.length;e<n;e++)this.members[e]&&"function"==typeof this.members[e][t]&&this.members[e][t].apply(this.members[e],arguments);return"animate"==t?this.fx||(this.fx=new g.FX.Set(this)):this}}),e=[];for(var t in g.FX.prototype)"function"==typeof g.FX.prototype[t]&&"function"!=typeof g.FX.Set.prototype[t]&&e.push(t);e.forEach(function(t){g.FX.Set.prototype[t]=function(){for(var e=0,n=this.set.members.length;e<n;e++)this.set.members[e].fx[t].apply(this.set.members[e].fx,arguments);return this}})},g.extend(g.Element,{data:function(t,e,n){if("object"==typeof t)for(e in t)this.data(e,t[e]);else if(arguments.length<2)try{return JSON.parse(this.attr("data-"+t))}catch(e){return this.attr("data-"+t)}else this.attr("data-"+t,null===e?null:!0===n||"string"==typeof e||"number"==typeof e?e:JSON.stringify(e));return this}}),g.extend(g.Element,{remember:function(t,e){if("object"==typeof arguments[0])for(var e in t)this.remember(e,t[e]);else{if(1==arguments.length)return this.memory()[t];this.memory()[t]=e}return this},forget:function(){if(0==arguments.length)this._memory={};else for(var t=arguments.length-1;t>=0;t--)delete this.memory()[arguments[t]];return this},memory:function(){return this._memory||(this._memory={})}}),g.get=function(t){var n=e.getElementById(y(t)||t);return g.adopt(n)},g.select=function(t,n){return new g.Set(g.utils.map((n||e).querySelectorAll(t),function(t){return g.adopt(t)}))},g.extend(g.Parent,{select:function(t){return g.select(t,this.node)}});var C="abcdef".split("");if("function"!=typeof t.CustomEvent){var A=function(t,n){n=n||{bubbles:!1,cancelable:!1,detail:void 0};var i=e.createEvent("CustomEvent");return i.initCustomEvent(t,n.bubbles,n.cancelable,n.detail),i};A.prototype=t.Event.prototype,t.CustomEvent=A}return function(e){for(var n=0,i=["moz","webkit"],r=0;r<i.length&&!t.requestAnimationFrame;++r)e.requestAnimationFrame=e[i[r]+"RequestAnimationFrame"],e.cancelAnimationFrame=e[i[r]+"CancelAnimationFrame"]||e[i[r]+"CancelRequestAnimationFrame"];e.requestAnimationFrame=e.requestAnimationFrame||function(t){var i=(new Date).getTime(),r=Math.max(0,16-(i-n)),s=e.setTimeout(function(){t(i+r)},r);return n=i+r,s},e.cancelAnimationFrame=e.cancelAnimationFrame||e.clearTimeout}(t),g})},function(t,e,n){"use strict";function i(t){return t&&t.__esModule?t:{default:t}}var r=n(0),s=i(r),o=n(2),a=i(o),h=n(5),u=(i(h),document.getElementById("logo")),l=document.querySelector("body"),c=document.getElementById("container"),f=document.getElementById("info"),d=function(t){var e=window.innerWidth-20,n=window.innerHeight,i=(e>n?n:e)*(window.innerWidth<=768?.8:.4);return t.style.width=t.style.height=i,i}(u),p=new s.default("canvas",d),m=new a.default({fabric_enabled:!0,dark_colors:["#222","#072","#000"],light_colors:["#3A6","#AAA","#777"]});m.getPNG().then(function(t){l.style.backgroundImage="url('"+t+"')",l.style.backgroundSize=m.width+"px"}),function(){if(c.clientHeight>window.innerHeight||window.innerWidth>window.innerHeight&&window.innerWidth<=768)c.style.height="auto",u.style.paddingTop="50px";else{var t=u.clientHeight+f.clientHeight;c.style.height="100vh",u.style.paddingTop=(window.innerHeight-t)/2+"px"}}(),p.animate(),c.onclick=function(){return window.location.href="samai/"},setInterval(function(){m.getPNG().then(function(t){m.next(),l.style.backgroundImage="url('"+t+"')",l.style.backgroundSize=m.width+"px"})},5e3)},function(t,e){}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+(function webpackUniversalModuleDefinition(root, factory) {
+    if (( false ? 'undefined' : _typeof(exports)) === 'object' && ( false ? 'undefined' : _typeof(module)) === 'object') module.exports = factory();else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ((typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object') exports["Logo"] = factory();else root["Logo"] = factory();
+})(undefined, function () {
+    return (/******/function (modules) {
+            // webpackBootstrap
+            /******/ // The module cache
+            /******/var installedModules = {};
+            /******/
+            /******/ // The require function
+            /******/function __webpack_require__(moduleId) {
+                /******/
+                /******/ // Check if module is in cache
+                /******/if (installedModules[moduleId]) {
+                    /******/return installedModules[moduleId].exports;
+                    /******/
+                }
+                /******/ // Create a new module (and put it into the cache)
+                /******/var module = installedModules[moduleId] = {
+                    /******/i: moduleId,
+                    /******/l: false,
+                    /******/exports: {}
+                    /******/ };
+                /******/
+                /******/ // Execute the module function
+                /******/modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+                /******/
+                /******/ // Flag the module as loaded
+                /******/module.l = true;
+                /******/
+                /******/ // Return the exports of the module
+                /******/return module.exports;
+                /******/
+            }
+            /******/
+            /******/
+            /******/ // expose the modules object (__webpack_modules__)
+            /******/__webpack_require__.m = modules;
+            /******/
+            /******/ // expose the module cache
+            /******/__webpack_require__.c = installedModules;
+            /******/
+            /******/ // identity function for calling harmony imports with the correct context
+            /******/__webpack_require__.i = function (value) {
+                return value;
+            };
+            /******/
+            /******/ // define getter function for harmony exports
+            /******/__webpack_require__.d = function (exports, name, getter) {
+                /******/if (!__webpack_require__.o(exports, name)) {
+                    /******/Object.defineProperty(exports, name, {
+                        /******/configurable: false,
+                        /******/enumerable: true,
+                        /******/get: getter
+                        /******/ });
+                    /******/
+                }
+                /******/
+            };
+            /******/
+            /******/ // getDefaultExport function for compatibility with non-harmony modules
+            /******/__webpack_require__.n = function (module) {
+                /******/var getter = module && module.__esModule ?
+                /******/function getDefault() {
+                    return module['default'];
+                } :
+                /******/function getModuleExports() {
+                    return module;
+                };
+                /******/__webpack_require__.d(getter, 'a', getter);
+                /******/return getter;
+                /******/
+            };
+            /******/
+            /******/ // Object.prototype.hasOwnProperty.call
+            /******/__webpack_require__.o = function (object, property) {
+                return Object.prototype.hasOwnProperty.call(object, property);
+            };
+            /******/
+            /******/ // __webpack_public_path__
+            /******/__webpack_require__.p = "";
+            /******/
+            /******/ // Load entry module and return exports
+            /******/return __webpack_require__(__webpack_require__.s = 0);
+            /******/
+        }(
+        /************************************************************************/
+        /******/[
+        /* 0 */
+        /***/function (module, exports, __webpack_require__) {
+
+            "use strict";
+
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+
+            var _createClass = function () {
+                function defineProperties(target, props) {
+                    for (var i = 0; i < props.length; i++) {
+                        var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+                    }
+                }return function (Constructor, protoProps, staticProps) {
+                    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+                };
+            }();
+
+            function _classCallCheck(instance, Constructor) {
+                if (!(instance instanceof Constructor)) {
+                    throw new TypeError("Cannot call a class as a function");
+                }
+            }
+
+            var Logo = function () {
+                function Logo() {
+                    var element_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+                    var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 420;
+                    var drawLogo = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+                    _classCallCheck(this, Logo);
+
+                    var canvas;
+                    if (element_id) {
+                        var el = document.getElementById(element_id);
+                        if (el.tagName !== 'CANVAS') {
+                            canvas = document.createElement('canvas');
+                            el.appendChild(canvas);
+                        } else canvas = el;
+                    } else canvas = document.createElement('canvas');
+                    canvas.height = canvas.width = width;
+                    this._canvas = canvas;
+                    this._context = canvas.getContext('2d');
+                    this._context.lineJoin = 'miter';
+                    this._context.strokeStyle = '#000';
+                    this._context.globalAlpha = 0;
+                    this._initParams(this._canvas.width);
+                    if (drawLogo) this.draw();
+                }
+
+                _createClass(Logo, [{
+                    key: 'draw',
+                    value: function draw() {
+                        this._initParams();
+                        this._resetCanvas();
+
+                        var w = this._canvas.width;
+                        var lw = this._lw;
+
+                        this._context.save();
+                        this._context.globalAlpha = 1;
+
+                        this._context.beginPath();
+                        this._context.moveTo(Logo._3_4ths(w), w - Logo._3_4ths(w / 2));
+                        this._context.lineTo(w - Logo._7_8ths(w / 2), Logo._3_4ths(w / 2));
+                        this._context.lineTo(w - Logo._7_8ths(w / 2), lw / 2);
+                        this._context.lineTo(w - lw / 2, lw / 2);
+                        this._context.lineTo(w - lw / 2, w - lw / 2);
+                        this._context.lineTo(Logo._7_8ths(w / 2) + lw / 2, w - lw / 2);
+                        this._context.stroke();
+
+                        this._context.beginPath();
+                        this._context.moveTo(w - Logo._3_4ths(w), Logo._3_4ths(w / 2));
+                        this._context.lineTo(Logo._7_8ths(w / 2), w - Logo._3_4ths(w / 2));
+                        this._context.lineTo(Logo._7_8ths(w / 2), w - lw / 2);
+                        this._context.lineTo(lw / 2, w - lw / 2);
+                        this._context.lineTo(lw / 2, lw / 2);
+                        this._context.lineTo(w - Logo._7_8ths(w / 2) - lw / 2, lw / 2);
+                        this._context.stroke();
+
+                        this._context.restore();
+                        this._hideInnerLineEdges();
+                    }
+                }, {
+                    key: 'download',
+                    value: function download() {
+                        var canvasdata = this._canvas.toDataURL('image/png');
+                        var a = document.createElement('a');
+                        a.download = 'n-logo.png';
+                        a.href = canvasdata;
+                        a.click();
+                    }
+
+                    /**
+                     *- Clears canvas
+                     *- Updates global alpha for the fade effect
+                     *- Draw the logo
+                     *- Draw updated lines 
+                     *- Recursively call until both lines are removed  
+                     */
+
+                }, {
+                    key: '_animateLogo',
+                    value: function _animateLogo(callback) {
+                        var _this = this;
+
+                        this._resetCanvas();
+                        if (this._context.globalAlpha < 1) this._context.globalAlpha += 0.02;
+                        this._updateAllParam();
+                        if (!this._animationComplete()) requestAnimationFrame(function () {
+                            return _this._animateLogo(callback);
+                        });else if (callback) callback();
+                    }
+                }, {
+                    key: 'animate',
+                    value: function animate(callback) {
+                        this._initParams();
+                        this._animateLogo(callback);
+                    }
+                }, {
+                    key: 'setWidth',
+                    value: function setWidth(w) {
+                        this._canvas.height = this._canvas.width = w;
+                    }
+                }, {
+                    key: '_resetCanvas',
+                    value: function _resetCanvas() {
+                        var w = this._canvas.width;
+                        this._context.clearRect(0, 0, w, w);
+                        this._context.fillStyle = '#FFF';
+                        this._context.fillRect(0, 0, w, w);
+                    }
+                }, {
+                    key: '_animationComplete',
+                    value: function _animationComplete() {
+                        var complete = false;
+                        for (var i = 0; i < this._params.length; i++) {
+                            if (this._params[i].complete) complete = this._params[i].complete;
+                        }
+                        return complete;
+                    }
+                }, {
+                    key: '_updateAllParam',
+                    value: function _updateAllParam() {
+                        for (var i = 0; i < this._params.length; i++) {
+                            this._updateAndDrawLine(this._params[i]);
+                        }
+                    }
+                }, {
+                    key: '_updateAndDrawLine',
+                    value: function _updateAndDrawLine(param) {
+                        // AnimationParam
+                        if (!param.complete) {
+                            var l = param.line,
+                                s = param.segmentIndex,
+                                f = param.f,
+                                x1 = l.vectorArray[s].x,
+                                y1 = l.vectorArray[s].y,
+                                x2 = l.vectorArray[s + 1].x,
+                                y2 = l.vectorArray[s + 1].y,
+                                IF_fn = function IF_fn(x, y, f) {
+                                return Math.round(x + (y - x) * f);
+                            }; // Interpolation Formula
+
+                            param.line.currX = IF_fn(x1, x2, f);
+                            param.line.currY = IF_fn(y1, y2, f);
+
+                            this._drawLine(param.line, param.segmentIndex);
+
+                            if (f < 1) param.f += 0.1;else {
+                                param.f = 0;
+                                if (s + 2 <= param.line.segmentCount) param.segmentIndex++;else param.complete = true; // base case
+                            }
+
+                            if (!param.complete) this._drawBrushTip(param.line.currX, param.line.currY);else {
+                                this._outerBorder();
+                                this._HILE_animate();
+                            }
+                        }
+                    }
+
+                    /**
+                     * Draw Line segments until the segmentIndex 
+                     */
+
+                }, {
+                    key: '_drawLine',
+                    value: function _drawLine(line, segmentIndex) {
+                        this._context.beginPath();
+                        this._context.moveTo(line.vectorArray[0].x, line.vectorArray[0].y);
+                        for (var i = 1; i < segmentIndex + 1; i++) {
+                            this._context.lineTo(line.vectorArray[i].x, line.vectorArray[i].y);
+                        }
+                        this._context.lineTo(line.currX, line.currY);
+                        this._context.stroke();
+                    }
+                }, {
+                    key: '_hideInnerLineEdges',
+                    value: function _hideInnerLineEdges() {
+                        var w = this._canvas.width,
+                            lw = this._lw,
+                            iw = this._iw,
+                            ih = this._lh;
+                        this._context.fillStyle = '#FFF';
+                        this._context.fillRect(w - lw - iw, w - lw - ih, iw, ih);
+                        this._context.fillRect(lw, lw, iw, ih);
+                    }
+                }, {
+                    key: '_HILE_fn',
+                    value: function _HILE_fn() {
+                        var _this2 = this;
+
+                        this._context.globalAlpha = this._ga;
+                        this._ga += 0.001;
+                        this._hideInnerLineEdges();
+                        if (this._context.globalAlpha <= 0.99) requestAnimationFrame(function () {
+                            return _this2._HILE_fn();
+                        });
+                    }
+                }, {
+                    key: '_HILE_animate',
+                    value: function _HILE_animate() {
+                        this._context.save();
+                        this._ga = 0;
+                        this._context.globalAlpha = 0;
+                        this._HILE_fn();
+                        this._context.restore();
+                    }
+                }, {
+                    key: '_outerBorder',
+                    value: function _outerBorder() {
+                        this._context.beginPath();
+                        this._context.moveTo(0, 0);
+                        this._context.lineTo(this._canvas.width, 0);
+                        this._context.lineTo(this._canvas.width, this._canvas.width);
+                        this._context.lineTo(0, this._canvas.width);
+                        this._context.lineTo(0, 0);
+                        this._context.stroke();
+                    }
+                }, {
+                    key: '_drawBrushTip',
+                    value: function _drawBrushTip(x, y) {
+                        this._context.save();
+                        this._context.globalAlpha = 1;
+                        this._context.beginPath();
+                        this._context.arc(x, y, this._lw / 2, 0, 2 * Math.PI, false);
+                        this._context.fillStyle = '#000';
+                        this._context.fill();
+                        this._context.restore();
+                    }
+
+                    /**
+                     * Initializes global parameters
+                     */
+
+                }, {
+                    key: '_initParams',
+                    value: function _initParams() {
+                        var w = this._canvas.width;
+                        var lw = Math.round(w * 0.08); //-> Line Width
+
+                        this._lw = lw;
+                        this._iw = Math.round((w - lw * 2) / 2); //-> Inner Rect Width
+                        this._lh = Math.round(Logo._3_4ths(this._iw) + Logo._3_4ths(this._iw) * 0.045); //-> Inner Rect Height
+                        this._context.globalAlpha = 0;
+                        this._context.lineWidth = lw;
+
+                        var l1 = new Line([new Vector(Logo._3_4ths(w), w - Logo._3_4ths(w / 2)), new Vector(w - Logo._7_8ths(w / 2), Logo._3_4ths(w / 2)), new Vector(w - Logo._7_8ths(w / 2), lw / 2), new Vector(w - lw / 2, lw / 2), new Vector(w - lw / 2, w - lw / 2), new Vector(Logo._7_8ths(w / 2) + lw / 2, w - lw / 2)]);
+
+                        var l2 = new Line([new Vector(w - Logo._3_4ths(w), Logo._3_4ths(w / 2)), new Vector(Logo._7_8ths(w / 2), w - Logo._3_4ths(w / 2)), new Vector(Logo._7_8ths(w / 2), w - lw / 2), new Vector(lw / 2, w - lw / 2), new Vector(lw / 2, lw / 2), new Vector(w - Logo._7_8ths(w / 2) - lw / 2, lw / 2)]);
+
+                        this._params = [];
+                        this._params.push(new AnimationParam(l1, 0, 0, false));
+                        this._params.push(new AnimationParam(l2, 0, 0, false));
+                    }
+                }], [{
+                    key: '_7_8ths',
+                    value: function _7_8ths(x) {
+                        return Math.round(x * 0.875);
+                    }
+                }, {
+                    key: '_3_4ths',
+                    value: function _3_4ths(x) {
+                        return Math.round(x * 0.75);
+                    }
+                }]);
+
+                return Logo;
+            }();
+
+            exports.default = Logo;
+
+            var Line = exports.Line = function Line(vectors) {
+                _classCallCheck(this, Line);
+
+                this.vectorArray = vectors;
+                this.segmentCount = vectors.length - 1;
+                this.currX = vectors[0].x;
+                this.currY = vectors[0].y;
+            };
+
+            var Vector = exports.Vector = function Vector(x, y) {
+                _classCallCheck(this, Vector);
+
+                this.x = x;
+                this.y = y;
+            };
+
+            var AnimationParam = exports.AnimationParam = function AnimationParam(l, s, f, c) {
+                _classCallCheck(this, AnimationParam);
+
+                this.line = l; //- Line        -> the Line to be animated
+                this.segmentIndex = s; //- int         -> used to iterate through the segments (Vector pairs) in a Line
+                this.f = f; //- float       -> factor f for the interpolation formula used to animate the Line
+                this.complete = c; //- boolean     -> used to determine if the animation is complete
+            };
+
+            /***/
+        }]
+        /******/)
+    );
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)(module)))
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory(__webpack_require__(3));
+	else if(typeof define === 'function' && define.amd)
+		define(["svg.js"], factory);
+	else if(typeof exports === 'object')
+		exports["Samai"] = factory(require("svg.js"));
+	else
+		root["Samai"] = factory(root["SVG"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @module index
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @fileOverview Pseudo-randomly generated patterns inspired by the {@link https://en.wikipedia.org/wiki/Kente_cloth|Kente} cloth tradition of Ghana.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author {@link mailto:contact@niiyeboah.com|Nii Yeboah}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @see http://www.niiyeboah.com/samai
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @example
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * var samai = new Samai();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * var body = document.querySelector('body');
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * body.style['background'] = 'url('' + samai.data_uri + '')';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @requires {@link http://svgjs.com/|SVG.js}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+
+var _svg = __webpack_require__(2);
+
+var _svg2 = _interopRequireDefault(_svg);
+
+var _prng = __webpack_require__(1);
+
+var _prng2 = _interopRequireDefault(_prng);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Creates new Samai object.
+ * @class Samai
+ * @constructor
+ * @memberof index
+ * @param {Object} [options] - Options object for configuration.
+ * @param {string|Object} [options.element = document.createElement('div')] - Element to draw pattern in.
+ * @param {string|Date} [options.date = new Date()] - Date to use for seed of PRNG.
+ * @param {number} [options.width = 400] - Width of Samai.
+ * @param {Array} [options.dark_colors = ['#222', '#227', '#272', '#777', '#427', '#722']] - Array of dark colors.
+ * @param {Array} [options.light_colors = ['#39C', '#3C6', '#CCC', '#FC3', '#C6C', '#F63']] - Array of light colors.
+ * @param {number} [options.line_count = 2] - Number of lines in the pattern.
+ * @param {boolean} [options.fabric_enabled = false] - Enable fabric imiation.
+ * @param {number} [options.n = 1] - Skip to the nth pattern.
+ */
+var Samai = function () {
+    function Samai() {
+        var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+            _ref$element = _ref.element,
+            element = _ref$element === undefined ? document.createElement('div') : _ref$element,
+            _ref$date = _ref.date,
+            date = _ref$date === undefined ? new Date() : _ref$date,
+            _ref$width = _ref.width,
+            width = _ref$width === undefined ? 400 : _ref$width,
+            _ref$dark_colors = _ref.dark_colors,
+            dark_colors = _ref$dark_colors === undefined ? ['#222', '#227', '#272', '#777', '#427', '#722'] : _ref$dark_colors,
+            _ref$light_colors = _ref.light_colors,
+            light_colors = _ref$light_colors === undefined ? ['#39C', '#3C6', '#CCC', '#FC3', '#C6C', '#F63'] : _ref$light_colors,
+            _ref$line_count = _ref.line_count,
+            line_count = _ref$line_count === undefined ? 2 : _ref$line_count,
+            _ref$fabric_enabled = _ref.fabric_enabled,
+            fabric_enabled = _ref$fabric_enabled === undefined ? false : _ref$fabric_enabled,
+            _ref$n = _ref.n,
+            n = _ref$n === undefined ? 1 : _ref$n;
+
+        _classCallCheck(this, Samai);
+
+        var color_prng = new _prng2.default(this._setDate(date)); /** @member {Date} index.Samai#date - Date used for seed of PRNG.*/
+        this.svg = (0, _svg2.default)(element); /** @member {SVG.Doc} index.Samai#svg - SVG object used to draw pattern.*/
+        this.prng = new _prng2.default(this.date); /** @member {PRNG} index.Samai#prng - PRNG object used to generate random values.*/
+        this.width = width; /** @member {number} index.Samai#width - Width of the SVG.*/
+        this.dark_colors = Samai.shuffle(dark_colors, color_prng); /** @member {Array} index.Samai#dark_colors - Array of dark colors.*/
+        this.light_colors = Samai.shuffle(light_colors, color_prng); /** @member {Array} index.Samai#light_colors - Array of light colors.*/
+        this.pattern_width = width / line_count; /** @member {number} index.Samai#pattern_width - Width of single pattern element.*/
+        this.line_count = line_count; /** @member {number} index.Samai#line_count - Number of lines of the full pattern in the SVG.*/
+        this.line_height = this.pattern_width / line_count; /** @member {number} index.Samai#line_height - The height of each line of pattern elements.*/
+        this.fabric_enabled = fabric_enabled; /** @member {boolean} index.Samai#fabric_enabled - The height of each line of pattern elements.*/
+        this._prngNo = 18; /** @member {boolean} index.Samai#_prngNo - Number of PRNG calls during pattern creation.*/
+        if (n > 1) this._goto(n);
+        this._generatePattern();
+    }
+
+    _createClass(Samai, [{
+        key: '_goto',
+        value: function _goto(n) {
+            /**
+             * Set the PRNG to the (n-1)th value.
+             * @function _goto
+             * @memberof index.Samai#
+             * @param {number} n - sama number.
+             */
+            for (var i = 0; i < (n - 1) * this._prngNo; i++) {
+                this.prng._next();
+            }
+        }
+    }, {
+        key: '_setDate',
+        value: function _setDate(date) {
+            /**
+             * Sets the date field.
+             * @function _setDate
+             * @memberof index.Samai#
+             * @param {string|Date} date - Date string.
+             * @returns {Date}
+             */
+            var today = new Date();
+            var d = date || today;
+            if (d instanceof Date) {
+                if (isNaN(d.getTime())) d = today;
+            } else if (typeof d === 'string') {
+                d = new Date(d);
+                if (isNaN(d.getTime())) d = today;
+            } else d = today;
+            this.date = d;
+            return this.date;
+        }
+    }, {
+        key: '_getDateString',
+        value: function _getDateString() {
+            /**
+             * Returns a formatted date string from the date property.
+             * @function _getDateString
+             * @memberof index.Samai#
+             * @returns {string}
+             */
+            var result = void 0;
+            var month = this.date.getMonth() + 1;
+            var day = this.date.getDate();
+            result = (month < 10 ? '0' + month : month) + '-';
+            result += (day < 10 ? '0' + day : day) + '-';
+            result += this.date.getFullYear();
+            return result;
+        }
+    }, {
+        key: '_randomShape',
+        value: function _randomShape(hex, svg) {
+            /**
+             * Creates a pseudo-random shape.
+             * [This method can be modified to create custom shapes]
+             * @function _randomShape
+             * @memberof index.Samai#
+             * @param {string} hex - hex color or image url.
+             * @param {SVG.Doc} svg - SVG object used to create shape.
+             */
+            var p = this.prng;
+            var lc = this.line_count;
+            var lh = this.line_height;
+            var sides = [3 /*, 4*/];
+            var side_no = sides[p.random(sides.length - 1)];
+            var xy = [];
+            var r1 = p.random(1);
+            var r2 = p.random(lc, 1);
+            var lch = lc / 2;
+            var t = p.random(lc);
+            var b = t > lch ? p.random(lc, lch) : p.random(lch);
+            var j = 0;
+            for (var i = 0; i < side_no; i++) {
+                var l = i + 1 > Math.ceil(side_no / 2) ? r2 : 0;
+                if (j % 2 === r1) xy.push([(t + l) * lh, 0]);else xy.push([(b + l) * lh, lh]);
+                if (i < side_no - 1) {
+                    if (j % 2 !== r1) xy.push([(t + l) * lh, 0]);else xy.push([(b + l) * lh, lh]);
+                    i++;
+                }
+                j++;
+            }
+            svg.polygon(xy).fill(hex);
+        }
+    }, {
+        key: '_generatePattern',
+        value: function _generatePattern() {
+            var _this = this;
+
+            /**
+             * Generates a pseudo-random pattern.
+             * [This method can be modified to create custom patterns]
+             * @function _generatePattern
+             * @memberof index.Samai#
+             * @returns {SVG.Pattern}
+             */
+            var s = this.svg;
+            var pw = this.pattern_width;
+            var lc = this.line_count;
+            var lh = this.line_height;
+            var t0 = this.prng.random(1);
+            var t1 = this.prng.random(1);
+            var t2 = this.prng.random(1);
+            s.clear();
+            var pattern = s.pattern(pw, lh, function (add) {
+                add.rect(lh * (lc / 2), lh).fill(_this._fabric(_this.light_colors[0], 2));
+                add.rect(lh * (lc / 2), lh).fill(_this._fabric(_this.dark_colors[0], 1)).move(lh * (lc / 2), 0);
+                _this._randomShape(_this._fabric(_this.light_colors[1], 0), add);
+                _this._randomShape(_this._fabric(_this.dark_colors[1], 1), add);
+                _this._randomShape(_this._fabric(_this.light_colors[2], 0), add);
+            });
+            pattern = s.pattern(pw, lh * 2, function (add) {
+                add.rect(pw, lh).fill(pattern);
+                if (t0) add.rect(pw, lh).fill(pattern).move(0, lh).flip('y');else add.rect(pw, lh).fill(pattern).move(0, lh).rotate(180);
+            });
+            if (t1) {
+                pattern = s.pattern(pw * 2, lh * 2, function (add) {
+                    add.rect(pw, lh * 2).fill(pattern);
+                    if (t2) add.rect(pw, lh * 2).fill(pattern).move(pw, 0).flip('x');else add.rect(pw, lh * 2).fill(pattern).move(pw, 0).rotate(180);
+                });
+            }
+            s.viewbox(0, 0, this.width, this.width);
+            s.rect(this.width, this.width).fill(pattern);
+            this.data_uri = 'data:image/svg+xml;base64,' + btoa(s.svg());
+            this.svg_pattern = pattern;
+            return pattern;
+        }
+    }, {
+        key: '_fabric',
+        value: function _fabric(hex, texture) {
+            var _this2 = this;
+
+            /**
+             * Creates a {SVG.Pattern} to imitate the appearance of fabric.
+             * @function _fabric
+             * @memberof index.Samai#
+             * @param {string} hex - hex color or image url.
+             * @param {number} texture - choose fabric texture. [0, 1, 2]
+             * @returns {SVG.Pattern}
+             */
+            var pattern = hex;
+            if (this.fabric_enabled) {
+                var w = 4; // pattern width
+                var uw = w / 2; // pattern unit width
+                var lum = 0.03; // luminosity factor
+                var tessellate = function tessellate(w, p) {
+                    return _this2.svg.pattern(w * 2, w * 2, function (add) {
+                        add.rect(w, w).fill(p);
+                        add.rect(w, w).fill(p).move(w, 0).rotate(90);
+                        add.rect(w, w).fill(p).move(0, w).rotate(180);
+                        add.rect(w, w).fill(p).move(w, w).rotate(270);
+                    });
+                };
+                pattern = this.svg.pattern(w, w, function (add) {
+                    add.rect(uw, uw).fill(hex);
+                    add.rect(uw, uw).fill(Samai.luminance(hex, lum)).move(uw, 0);
+                    add.rect(uw, uw).fill(Samai.luminance(hex, lum * 2)).move(0, uw);
+                    add.rect(uw, uw).fill(Samai.luminance(hex, lum * 3)).move(uw, uw);
+                });
+                if (texture > 0) pattern = tessellate(w, pattern);
+                if (texture > 1) pattern = tessellate(w *= 2, pattern);
+            }
+            return pattern;
+        }
+    }, {
+        key: 'next',
+        value: function next() {
+            /**
+             * Generates the next pattern and returns a data URI.
+             * @function next
+             * @memberof index.Samai#
+             * @returns {string}
+             */
+            this._generatePattern();
+            return this.data_uri;
+        }
+    }, {
+        key: 'download',
+        value: function download() {
+            var _this3 = this;
+
+            /**
+             * Attempts to download to client.
+             * @function download
+             * @memberof index.Samai#
+             */
+            this.getPNG().then(function (png) {
+                var a = document.createElement('a');
+                a.download = 'sama.' + _this3._getDateString() + '.' + _this3.prng.count / _this3._prngNo + '.png';
+                a.href = png;
+                a.click();
+            });
+        }
+    }, {
+        key: 'getPNG',
+        value: function getPNG() {
+            var _this4 = this;
+
+            /**
+             * Converts the pattern to a PNG and returns a Promise.
+             * @function download
+             * @memberof index.Samai#
+             * @returns {Promise}
+             */
+            return new Promise(function (resolve, reject) {
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                var image = new Image();
+                canvas.setAttribute('width', _this4.width + 'px');
+                canvas.setAttribute('height', _this4.width + 'px');
+                image.src = _this4.data_uri;
+                image.onerror = reject;
+                image.onload = function () {
+                    context.drawImage(image, 0, 0);
+                    return resolve(canvas.toDataURL('image/png'));
+                };
+            });
+        }
+    }], [{
+        key: 'shuffle',
+        value: function shuffle(arr, prng) {
+            /**
+             * [Static] {@link https://goo.gl/ieQvse|Fisher–Yates shuffle algorithm}.
+             * Shuffles elements in the input array and returns a new array.
+             * @function shuffle
+             * @memberof index.Samai#
+             * @static
+             * @param {Array} arr - Input array.
+             * @param {PRNG} prng - PRNG object.
+             * @returns {Array}
+             */
+            var a = arr.slice();
+            var j = void 0,
+                x = void 0,
+                i = void 0;
+            for (i = a.length - 1; i > 0; i--) {
+                j = prng.random(i);
+                x = a[i];
+                a[i] = a[j];
+                a[j] = x;
+            }
+            return a;
+        }
+    }, {
+        key: 'luminance',
+        value: function luminance(hex, lum) {
+            /**
+             * [Static] Returnsa a brighter or darker hex color depending on the luminosity factor.
+             * @function luminance
+             * @memberof index.Samai#
+             * @static
+             * @param {string} hex - Hex color string.
+             * @param {number} lum - Luminosity factor.
+             * @returns {string}
+             */
+            lum = lum || 0;
+            hex = String(hex).replace(/[^0-9a-f]/gi, '');
+            if (hex.length < 6) {
+                hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+            }
+            var rgb = '#';
+            var c = void 0;
+            var i = void 0;
+            for (i = 0; i < 3; i++) {
+                c = parseInt(hex.substr(i * 2, 2), 16);
+                c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
+                rgb += ('00' + c).substr(c.length);
+            }
+            return rgb;
+        }
+    }]);
+
+    return Samai;
+}();
+
+exports.default = Samai;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * {@link https://goo.gl/h7Fmhy|Lehmer random number generator}.
+ * This code is adapted from a {@link https://goo.gl/CUs15K|gist} by {@link http://blixt.nyc|Blixt}.
+ * @class PRNG
+ * @memberof index
+ * @constructor
+ * @param {Date} date - Date used as seed.
+ */
+var PRNG = function () {
+    function PRNG(date) {
+        _classCallCheck(this, PRNG);
+
+        this._p = 2147483647; /** @member {number} index.PRNG#_p - Prime constant*/
+        this._c = 2147483646; /** @member {number} index.PRNG#_c - Coprime constant*/
+        this._r = 16807; /** @member {number} index.PRNG#_r - Primitive root modulo n constant*/
+        this.count = 0; /** @member {number} index.PRNG#count - Counter for number of values generated*/
+        this._seed = this._dateSeed(date) % this._p; /** @member {number} index.PRNG#_seed - Seed for random value generator*/
+        if (this._seed <= 0) this._seed += this._c;
+    }
+
+    _createClass(PRNG, [{
+        key: '_dateSeed',
+        value: function _dateSeed(date) {
+            /**
+             * Convert Date value to number for seed.
+             * @function _dateSeed
+             * @memberof index.PRNG#
+             * @param {Date} date - Date to convert to seed.
+             * @returns {number}
+             */
+            date = '' + (date.getMonth() + 1) + date.getDate() + date.getFullYear();
+            return Number.parseInt(date);
+        }
+    }, {
+        key: '_next',
+        value: function _next() {
+            /**
+             * Returns random integer and increments count.
+             * @function _next
+             * @memberof index.PRNG#
+             * @returns {number}
+             */
+            this.count++;
+            return this._seed = this._seed * this._r % this._p;
+        }
+    }, {
+        key: '_nextFloat',
+        value: function _nextFloat() {
+            /**
+             * Returns float between 0 and 1.
+             * @function _nextFloat
+             * @memberof index.PRNG#
+             * @returns {number}
+             */
+            var result = (this._next() - 1) / this._c;
+            while (result < 1) {
+                result *= 10;
+            }return result;
+        }
+    }, {
+        key: 'random',
+        value: function random(max, min) {
+            /**
+             * Returns random integer between min and max parameters.
+             * @function random
+             * @memberof index.PRNG#
+             * @param {number} max - Date to convert to seed.
+             * @param {number} min - Date to convert to seed.
+             * @returns {number}
+             */
+            min = min || 0;
+            return Math.floor(this._nextFloat() % (max + 1 - min)) + min;
+        }
+    }]);
+
+    return PRNG;
+}();
+
+exports.default = PRNG;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+
+/***/ })
+/******/ ]);
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+* svg.js - A lightweight library for manipulating and animating SVG.
+* @version 2.6.3
+* https://svgdotjs.github.io/
+*
+* @copyright Wout Fierens <wout@mick-wout.com>
+* @license MIT
+*
+* BUILT: Fri Jul 21 2017 14:50:37 GMT+0200 (Mitteleuropäische Sommerzeit)
+*/;
+(function(root, factory) {
+  /* istanbul ignore next */
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function(){
+      return factory(root, root.document)
+    }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+  } else if (typeof exports === 'object') {
+    module.exports = root.document ? factory(root, root.document) : function(w){ return factory(w, w.document) }
+  } else {
+    root.SVG = factory(root, root.document)
+  }
+}(typeof window !== "undefined" ? window : this, function(window, document) {
+
+// The main wrapping element
+var SVG = this.SVG = function(element) {
+  if (SVG.supported) {
+    element = new SVG.Doc(element)
+
+    if(!SVG.parser.draw)
+      SVG.prepare()
+
+    return element
+  }
+}
+
+// Default namespaces
+SVG.ns    = 'http://www.w3.org/2000/svg'
+SVG.xmlns = 'http://www.w3.org/2000/xmlns/'
+SVG.xlink = 'http://www.w3.org/1999/xlink'
+SVG.svgjs = 'http://svgjs.com/svgjs'
+
+// Svg support test
+SVG.supported = (function() {
+  return !! document.createElementNS &&
+         !! document.createElementNS(SVG.ns,'svg').createSVGRect
+})()
+
+// Don't bother to continue if SVG is not supported
+if (!SVG.supported) return false
+
+// Element id sequence
+SVG.did  = 1000
+
+// Get next named element id
+SVG.eid = function(name) {
+  return 'Svgjs' + capitalize(name) + (SVG.did++)
+}
+
+// Method for element creation
+SVG.create = function(name) {
+  // create element
+  var element = document.createElementNS(this.ns, name)
+
+  // apply unique id
+  element.setAttribute('id', this.eid(name))
+
+  return element
+}
+
+// Method for extending objects
+SVG.extend = function() {
+  var modules, methods, key, i
+
+  // Get list of modules
+  modules = [].slice.call(arguments)
+
+  // Get object with extensions
+  methods = modules.pop()
+
+  for (i = modules.length - 1; i >= 0; i--)
+    if (modules[i])
+      for (key in methods)
+        modules[i].prototype[key] = methods[key]
+
+  // Make sure SVG.Set inherits any newly added methods
+  if (SVG.Set && SVG.Set.inherit)
+    SVG.Set.inherit()
+}
+
+// Invent new element
+SVG.invent = function(config) {
+  // Create element initializer
+  var initializer = typeof config.create == 'function' ?
+    config.create :
+    function() {
+      this.constructor.call(this, SVG.create(config.create))
+    }
+
+  // Inherit prototype
+  if (config.inherit)
+    initializer.prototype = new config.inherit
+
+  // Extend with methods
+  if (config.extend)
+    SVG.extend(initializer, config.extend)
+
+  // Attach construct method to parent
+  if (config.construct)
+    SVG.extend(config.parent || SVG.Container, config.construct)
+
+  return initializer
+}
+
+// Adopt existing svg elements
+SVG.adopt = function(node) {
+  // check for presence of node
+  if (!node) return null
+
+  // make sure a node isn't already adopted
+  if (node.instance) return node.instance
+
+  // initialize variables
+  var element
+
+  // adopt with element-specific settings
+  if (node.nodeName == 'svg')
+    element = node.parentNode instanceof window.SVGElement ? new SVG.Nested : new SVG.Doc
+  else if (node.nodeName == 'linearGradient')
+    element = new SVG.Gradient('linear')
+  else if (node.nodeName == 'radialGradient')
+    element = new SVG.Gradient('radial')
+  else if (SVG[capitalize(node.nodeName)])
+    element = new SVG[capitalize(node.nodeName)]
+  else
+    element = new SVG.Element(node)
+
+  // ensure references
+  element.type  = node.nodeName
+  element.node  = node
+  node.instance = element
+
+  // SVG.Class specific preparations
+  if (element instanceof SVG.Doc)
+    element.namespace().defs()
+
+  // pull svgjs data from the dom (getAttributeNS doesn't work in html5)
+  element.setData(JSON.parse(node.getAttribute('svgjs:data')) || {})
+
+  return element
+}
+
+// Initialize parsing element
+SVG.prepare = function() {
+  // Select document body and create invisible svg element
+  var body = document.getElementsByTagName('body')[0]
+    , draw = (body ? new SVG.Doc(body) : SVG.adopt(document.documentElement).nested()).size(2, 0)
+
+  // Create parser object
+  SVG.parser = {
+    body: body || document.documentElement
+  , draw: draw.style('opacity:0;position:absolute;left:-100%;top:-100%;overflow:hidden').node
+  , poly: draw.polyline().node
+  , path: draw.path().node
+  , native: SVG.create('svg')
+  }
+}
+
+SVG.parser = {
+  native: SVG.create('svg')
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if(!SVG.parser.draw)
+    SVG.prepare()
+}, false)
+
+// Storage for regular expressions
+SVG.regex = {
+  // Parse unit value
+  numberAndUnit:    /^([+-]?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?)([a-z%]*)$/i
+
+  // Parse hex value
+, hex:              /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i
+
+  // Parse rgb value
+, rgb:              /rgb\((\d+),(\d+),(\d+)\)/
+
+  // Parse reference id
+, reference:        /#([a-z0-9\-_]+)/i
+
+  // splits a transformation chain
+, transforms:       /\)\s*,?\s*/
+
+  // Whitespace
+, whitespace:       /\s/g
+
+  // Test hex value
+, isHex:            /^#[a-f0-9]{3,6}$/i
+
+  // Test rgb value
+, isRgb:            /^rgb\(/
+
+  // Test css declaration
+, isCss:            /[^:]+:[^;]+;?/
+
+  // Test for blank string
+, isBlank:          /^(\s+)?$/
+
+  // Test for numeric string
+, isNumber:         /^[+-]?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i
+
+  // Test for percent value
+, isPercent:        /^-?[\d\.]+%$/
+
+  // Test for image url
+, isImage:          /\.(jpg|jpeg|png|gif|svg)(\?[^=]+.*)?/i
+
+  // split at whitespace and comma
+, delimiter:        /[\s,]+/
+
+  // The following regex are used to parse the d attribute of a path
+
+  // Matches all hyphens which are not after an exponent
+, hyphen:           /([^e])\-/gi
+
+  // Replaces and tests for all path letters
+, pathLetters:      /[MLHVCSQTAZ]/gi
+
+  // yes we need this one, too
+, isPathLetter:     /[MLHVCSQTAZ]/i
+
+  // matches 0.154.23.45
+, numbersWithDots:  /((\d?\.\d+(?:e[+-]?\d+)?)((?:\.\d+(?:e[+-]?\d+)?)+))+/gi
+
+  // matches .
+, dots:             /\./g
+}
+
+SVG.utils = {
+  // Map function
+  map: function(array, block) {
+    var i
+      , il = array.length
+      , result = []
+
+    for (i = 0; i < il; i++)
+      result.push(block(array[i]))
+
+    return result
+  }
+
+  // Filter function
+, filter: function(array, block) {
+    var i
+      , il = array.length
+      , result = []
+
+    for (i = 0; i < il; i++)
+      if (block(array[i]))
+        result.push(array[i])
+
+    return result
+  }
+
+  // Degrees to radians
+, radians: function(d) {
+    return d % 360 * Math.PI / 180
+  }
+
+  // Radians to degrees
+, degrees: function(r) {
+    return r * 180 / Math.PI % 360
+  }
+
+, filterSVGElements: function(nodes) {
+    return this.filter( nodes, function(el) { return el instanceof window.SVGElement })
+  }
+
+}
+
+SVG.defaults = {
+  // Default attribute values
+  attrs: {
+    // fill and stroke
+    'fill-opacity':     1
+  , 'stroke-opacity':   1
+  , 'stroke-width':     0
+  , 'stroke-linejoin':  'miter'
+  , 'stroke-linecap':   'butt'
+  , fill:               '#000000'
+  , stroke:             '#000000'
+  , opacity:            1
+    // position
+  , x:                  0
+  , y:                  0
+  , cx:                 0
+  , cy:                 0
+    // size
+  , width:              0
+  , height:             0
+    // radius
+  , r:                  0
+  , rx:                 0
+  , ry:                 0
+    // gradient
+  , offset:             0
+  , 'stop-opacity':     1
+  , 'stop-color':       '#000000'
+    // text
+  , 'font-size':        16
+  , 'font-family':      'Helvetica, Arial, sans-serif'
+  , 'text-anchor':      'start'
+  }
+
+}
+// Module for color convertions
+SVG.Color = function(color) {
+  var match
+
+  // initialize defaults
+  this.r = 0
+  this.g = 0
+  this.b = 0
+
+  if(!color) return
+
+  // parse color
+  if (typeof color === 'string') {
+    if (SVG.regex.isRgb.test(color)) {
+      // get rgb values
+      match = SVG.regex.rgb.exec(color.replace(SVG.regex.whitespace,''))
+
+      // parse numeric values
+      this.r = parseInt(match[1])
+      this.g = parseInt(match[2])
+      this.b = parseInt(match[3])
+
+    } else if (SVG.regex.isHex.test(color)) {
+      // get hex values
+      match = SVG.regex.hex.exec(fullHex(color))
+
+      // parse numeric values
+      this.r = parseInt(match[1], 16)
+      this.g = parseInt(match[2], 16)
+      this.b = parseInt(match[3], 16)
+
+    }
+
+  } else if (typeof color === 'object') {
+    this.r = color.r
+    this.g = color.g
+    this.b = color.b
+
+  }
+
+}
+
+SVG.extend(SVG.Color, {
+  // Default to hex conversion
+  toString: function() {
+    return this.toHex()
+  }
+  // Build hex value
+, toHex: function() {
+    return '#'
+      + compToHex(this.r)
+      + compToHex(this.g)
+      + compToHex(this.b)
+  }
+  // Build rgb value
+, toRgb: function() {
+    return 'rgb(' + [this.r, this.g, this.b].join() + ')'
+  }
+  // Calculate true brightness
+, brightness: function() {
+    return (this.r / 255 * 0.30)
+         + (this.g / 255 * 0.59)
+         + (this.b / 255 * 0.11)
+  }
+  // Make color morphable
+, morph: function(color) {
+    this.destination = new SVG.Color(color)
+
+    return this
+  }
+  // Get morphed color at given position
+, at: function(pos) {
+    // make sure a destination is defined
+    if (!this.destination) return this
+
+    // normalise pos
+    pos = pos < 0 ? 0 : pos > 1 ? 1 : pos
+
+    // generate morphed color
+    return new SVG.Color({
+      r: ~~(this.r + (this.destination.r - this.r) * pos)
+    , g: ~~(this.g + (this.destination.g - this.g) * pos)
+    , b: ~~(this.b + (this.destination.b - this.b) * pos)
+    })
+  }
+
+})
+
+// Testers
+
+// Test if given value is a color string
+SVG.Color.test = function(color) {
+  color += ''
+  return SVG.regex.isHex.test(color)
+      || SVG.regex.isRgb.test(color)
+}
+
+// Test if given value is a rgb object
+SVG.Color.isRgb = function(color) {
+  return color && typeof color.r == 'number'
+               && typeof color.g == 'number'
+               && typeof color.b == 'number'
+}
+
+// Test if given value is a color
+SVG.Color.isColor = function(color) {
+  return SVG.Color.isRgb(color) || SVG.Color.test(color)
+}
+// Module for array conversion
+SVG.Array = function(array, fallback) {
+  array = (array || []).valueOf()
+
+  // if array is empty and fallback is provided, use fallback
+  if (array.length == 0 && fallback)
+    array = fallback.valueOf()
+
+  // parse array
+  this.value = this.parse(array)
+}
+
+SVG.extend(SVG.Array, {
+  // Make array morphable
+  morph: function(array) {
+    this.destination = this.parse(array)
+
+    // normalize length of arrays
+    if (this.value.length != this.destination.length) {
+      var lastValue       = this.value[this.value.length - 1]
+        , lastDestination = this.destination[this.destination.length - 1]
+
+      while(this.value.length > this.destination.length)
+        this.destination.push(lastDestination)
+      while(this.value.length < this.destination.length)
+        this.value.push(lastValue)
+    }
+
+    return this
+  }
+  // Clean up any duplicate points
+, settle: function() {
+    // find all unique values
+    for (var i = 0, il = this.value.length, seen = []; i < il; i++)
+      if (seen.indexOf(this.value[i]) == -1)
+        seen.push(this.value[i])
+
+    // set new value
+    return this.value = seen
+  }
+  // Get morphed array at given position
+, at: function(pos) {
+    // make sure a destination is defined
+    if (!this.destination) return this
+
+    // generate morphed array
+    for (var i = 0, il = this.value.length, array = []; i < il; i++)
+      array.push(this.value[i] + (this.destination[i] - this.value[i]) * pos)
+
+    return new SVG.Array(array)
+  }
+  // Convert array to string
+, toString: function() {
+    return this.value.join(' ')
+  }
+  // Real value
+, valueOf: function() {
+    return this.value
+  }
+  // Parse whitespace separated string
+, parse: function(array) {
+    array = array.valueOf()
+
+    // if already is an array, no need to parse it
+    if (Array.isArray(array)) return array
+
+    return this.split(array)
+  }
+  // Strip unnecessary whitespace
+, split: function(string) {
+    return string.trim().split(SVG.regex.delimiter).map(parseFloat)
+  }
+  // Reverse array
+, reverse: function() {
+    this.value.reverse()
+
+    return this
+  }
+, clone: function() {
+    var clone = new this.constructor()
+    clone.value = array_clone(this.value)
+    return clone
+  }
+})
+// Poly points array
+SVG.PointArray = function(array, fallback) {
+  SVG.Array.call(this, array, fallback || [[0,0]])
+}
+
+// Inherit from SVG.Array
+SVG.PointArray.prototype = new SVG.Array
+SVG.PointArray.prototype.constructor = SVG.PointArray
+
+SVG.extend(SVG.PointArray, {
+  // Convert array to string
+  toString: function() {
+    // convert to a poly point string
+    for (var i = 0, il = this.value.length, array = []; i < il; i++)
+      array.push(this.value[i].join(','))
+
+    return array.join(' ')
+  }
+  // Convert array to line object
+, toLine: function() {
+    return {
+      x1: this.value[0][0]
+    , y1: this.value[0][1]
+    , x2: this.value[1][0]
+    , y2: this.value[1][1]
+    }
+  }
+  // Get morphed array at given position
+, at: function(pos) {
+    // make sure a destination is defined
+    if (!this.destination) return this
+
+    // generate morphed point string
+    for (var i = 0, il = this.value.length, array = []; i < il; i++)
+      array.push([
+        this.value[i][0] + (this.destination[i][0] - this.value[i][0]) * pos
+      , this.value[i][1] + (this.destination[i][1] - this.value[i][1]) * pos
+      ])
+
+    return new SVG.PointArray(array)
+  }
+  // Parse point string and flat array
+, parse: function(array) {
+    var points = []
+
+    array = array.valueOf()
+
+    // if it is an array
+    if (Array.isArray(array)) {
+      // and it is not flat, there is no need to parse it
+      if(Array.isArray(array[0])) {
+        return array
+      }
+    } else { // Else, it is considered as a string
+      // parse points
+      array = array.trim().split(SVG.regex.delimiter).map(parseFloat)
+    }
+
+    // validate points - https://svgwg.org/svg2-draft/shapes.html#DataTypePoints
+    // Odd number of coordinates is an error. In such cases, drop the last odd coordinate.
+    if (array.length % 2 !== 0) array.pop()
+
+    // wrap points in two-tuples and parse points as floats
+    for(var i = 0, len = array.length; i < len; i = i + 2)
+      points.push([ array[i], array[i+1] ])
+
+    return points
+  }
+  // Move point string
+, move: function(x, y) {
+    var box = this.bbox()
+
+    // get relative offset
+    x -= box.x
+    y -= box.y
+
+    // move every point
+    if (!isNaN(x) && !isNaN(y))
+      for (var i = this.value.length - 1; i >= 0; i--)
+        this.value[i] = [this.value[i][0] + x, this.value[i][1] + y]
+
+    return this
+  }
+  // Resize poly string
+, size: function(width, height) {
+    var i, box = this.bbox()
+
+    // recalculate position of all points according to new size
+    for (i = this.value.length - 1; i >= 0; i--) {
+      if(box.width) this.value[i][0] = ((this.value[i][0] - box.x) * width)  / box.width  + box.x
+      if(box.height) this.value[i][1] = ((this.value[i][1] - box.y) * height) / box.height + box.y
+    }
+
+    return this
+  }
+  // Get bounding box of points
+, bbox: function() {
+    SVG.parser.poly.setAttribute('points', this.toString())
+
+    return SVG.parser.poly.getBBox()
+  }
+})
+
+var pathHandlers = {
+  M: function(c, p, p0) {
+    p.x = p0.x = c[0]
+    p.y = p0.y = c[1]
+
+    return ['M', p.x, p.y]
+  },
+  L: function(c, p) {
+    p.x = c[0]
+    p.y = c[1]
+    return ['L', c[0], c[1]]
+  },
+  H: function(c, p) {
+    p.x = c[0]
+    return ['H', c[0]]
+  },
+  V: function(c, p) {
+    p.y = c[0]
+    return ['V', c[0]]
+  },
+  C: function(c, p) {
+    p.x = c[4]
+    p.y = c[5]
+    return ['C', c[0], c[1], c[2], c[3], c[4], c[5]]
+  },
+  S: function(c, p) {
+    p.x = c[2]
+    p.y = c[3]
+    return ['S', c[0], c[1], c[2], c[3]]
+  },
+  Q: function(c, p) {
+    p.x = c[2]
+    p.y = c[3]
+    return ['Q', c[0], c[1], c[2], c[3]]
+  },
+  T: function(c, p) {
+    p.x = c[0]
+    p.y = c[1]
+    return ['T', c[0], c[1]]
+  },
+  Z: function(c, p, p0) {
+    p.x = p0.x
+    p.y = p0.y
+    return ['Z']
+  },
+  A: function(c, p) {
+    p.x = c[5]
+    p.y = c[6]
+    return ['A', c[0], c[1], c[2], c[3], c[4], c[5], c[6]]
+  }
+}
+
+var mlhvqtcsa = 'mlhvqtcsaz'.split('')
+
+for(var i = 0, il = mlhvqtcsa.length; i < il; ++i){
+  pathHandlers[mlhvqtcsa[i]] = (function(i){
+    return function(c, p, p0) {
+      if(i == 'H') c[0] = c[0] + p.x
+      else if(i == 'V') c[0] = c[0] + p.y
+      else if(i == 'A'){
+        c[5] = c[5] + p.x,
+        c[6] = c[6] + p.y
+      }
+      else
+        for(var j = 0, jl = c.length; j < jl; ++j) {
+          c[j] = c[j] + (j%2 ? p.y : p.x)
+        }
+
+      return pathHandlers[i](c, p, p0)
+    }
+  })(mlhvqtcsa[i].toUpperCase())
+}
+
+// Path points array
+SVG.PathArray = function(array, fallback) {
+  SVG.Array.call(this, array, fallback || [['M', 0, 0]])
+}
+
+// Inherit from SVG.Array
+SVG.PathArray.prototype = new SVG.Array
+SVG.PathArray.prototype.constructor = SVG.PathArray
+
+SVG.extend(SVG.PathArray, {
+  // Convert array to string
+  toString: function() {
+    return arrayToString(this.value)
+  }
+  // Move path string
+, move: function(x, y) {
+    // get bounding box of current situation
+    var box = this.bbox()
+
+    // get relative offset
+    x -= box.x
+    y -= box.y
+
+    if (!isNaN(x) && !isNaN(y)) {
+      // move every point
+      for (var l, i = this.value.length - 1; i >= 0; i--) {
+        l = this.value[i][0]
+
+        if (l == 'M' || l == 'L' || l == 'T')  {
+          this.value[i][1] += x
+          this.value[i][2] += y
+
+        } else if (l == 'H')  {
+          this.value[i][1] += x
+
+        } else if (l == 'V')  {
+          this.value[i][1] += y
+
+        } else if (l == 'C' || l == 'S' || l == 'Q')  {
+          this.value[i][1] += x
+          this.value[i][2] += y
+          this.value[i][3] += x
+          this.value[i][4] += y
+
+          if (l == 'C')  {
+            this.value[i][5] += x
+            this.value[i][6] += y
+          }
+
+        } else if (l == 'A')  {
+          this.value[i][6] += x
+          this.value[i][7] += y
+        }
+
+      }
+    }
+
+    return this
+  }
+  // Resize path string
+, size: function(width, height) {
+    // get bounding box of current situation
+    var i, l, box = this.bbox()
+
+    // recalculate position of all points according to new size
+    for (i = this.value.length - 1; i >= 0; i--) {
+      l = this.value[i][0]
+
+      if (l == 'M' || l == 'L' || l == 'T')  {
+        this.value[i][1] = ((this.value[i][1] - box.x) * width)  / box.width  + box.x
+        this.value[i][2] = ((this.value[i][2] - box.y) * height) / box.height + box.y
+
+      } else if (l == 'H')  {
+        this.value[i][1] = ((this.value[i][1] - box.x) * width)  / box.width  + box.x
+
+      } else if (l == 'V')  {
+        this.value[i][1] = ((this.value[i][1] - box.y) * height) / box.height + box.y
+
+      } else if (l == 'C' || l == 'S' || l == 'Q')  {
+        this.value[i][1] = ((this.value[i][1] - box.x) * width)  / box.width  + box.x
+        this.value[i][2] = ((this.value[i][2] - box.y) * height) / box.height + box.y
+        this.value[i][3] = ((this.value[i][3] - box.x) * width)  / box.width  + box.x
+        this.value[i][4] = ((this.value[i][4] - box.y) * height) / box.height + box.y
+
+        if (l == 'C')  {
+          this.value[i][5] = ((this.value[i][5] - box.x) * width)  / box.width  + box.x
+          this.value[i][6] = ((this.value[i][6] - box.y) * height) / box.height + box.y
+        }
+
+      } else if (l == 'A')  {
+        // resize radii
+        this.value[i][1] = (this.value[i][1] * width)  / box.width
+        this.value[i][2] = (this.value[i][2] * height) / box.height
+
+        // move position values
+        this.value[i][6] = ((this.value[i][6] - box.x) * width)  / box.width  + box.x
+        this.value[i][7] = ((this.value[i][7] - box.y) * height) / box.height + box.y
+      }
+
+    }
+
+    return this
+  }
+  // Test if the passed path array use the same path data commands as this path array
+, equalCommands: function(pathArray) {
+    var i, il, equalCommands
+
+    pathArray = new SVG.PathArray(pathArray)
+
+    equalCommands = this.value.length === pathArray.value.length
+    for(i = 0, il = this.value.length; equalCommands && i < il; i++) {
+      equalCommands = this.value[i][0] === pathArray.value[i][0]
+    }
+
+    return equalCommands
+  }
+  // Make path array morphable
+, morph: function(pathArray) {
+    pathArray = new SVG.PathArray(pathArray)
+
+    if(this.equalCommands(pathArray)) {
+      this.destination = pathArray
+    } else {
+      this.destination = null
+    }
+
+    return this
+  }
+  // Get morphed path array at given position
+, at: function(pos) {
+    // make sure a destination is defined
+    if (!this.destination) return this
+
+    var sourceArray = this.value
+      , destinationArray = this.destination.value
+      , array = [], pathArray = new SVG.PathArray()
+      , i, il, j, jl
+
+    // Animate has specified in the SVG spec
+    // See: https://www.w3.org/TR/SVG11/paths.html#PathElement
+    for (i = 0, il = sourceArray.length; i < il; i++) {
+      array[i] = [sourceArray[i][0]]
+      for(j = 1, jl = sourceArray[i].length; j < jl; j++) {
+        array[i][j] = sourceArray[i][j] + (destinationArray[i][j] - sourceArray[i][j]) * pos
+      }
+      // For the two flags of the elliptical arc command, the SVG spec say:
+      // Flags and booleans are interpolated as fractions between zero and one, with any non-zero value considered to be a value of one/true
+      // Elliptical arc command as an array followed by corresponding indexes:
+      // ['A', rx, ry, x-axis-rotation, large-arc-flag, sweep-flag, x, y]
+      //   0    1   2        3                 4             5      6  7
+      if(array[i][0] === 'A') {
+        array[i][4] = +(array[i][4] != 0)
+        array[i][5] = +(array[i][5] != 0)
+      }
+    }
+
+    // Directly modify the value of a path array, this is done this way for performance
+    pathArray.value = array
+    return pathArray
+  }
+  // Absolutize and parse path to array
+, parse: function(array) {
+    // if it's already a patharray, no need to parse it
+    if (array instanceof SVG.PathArray) return array.valueOf()
+
+    // prepare for parsing
+    var i, x0, y0, s, seg, arr
+      , x = 0
+      , y = 0
+      , paramCnt = { 'M':2, 'L':2, 'H':1, 'V':1, 'C':6, 'S':4, 'Q':4, 'T':2, 'A':7, 'Z':0 }
+
+    if(typeof array == 'string'){
+
+      array = array
+        .replace(SVG.regex.numbersWithDots, pathRegReplace) // convert 45.123.123 to 45.123 .123
+        .replace(SVG.regex.pathLetters, ' $& ') // put some room between letters and numbers
+        .replace(SVG.regex.hyphen, '$1 -')      // add space before hyphen
+        .trim()                                 // trim
+        .split(SVG.regex.delimiter)   // split into array
+
+    }else{
+      array = array.reduce(function(prev, curr){
+        return [].concat.call(prev, curr)
+      }, [])
+    }
+
+    // array now is an array containing all parts of a path e.g. ['M', '0', '0', 'L', '30', '30' ...]
+    var arr = []
+      , p = new SVG.Point()
+      , p0 = new SVG.Point()
+      , index = 0
+      , len = array.length
+
+    do{
+      // Test if we have a path letter
+      if(SVG.regex.isPathLetter.test(array[index])){
+        s = array[index]
+        ++index
+      // If last letter was a move command and we got no new, it defaults to [L]ine
+      }else if(s == 'M'){
+        s = 'L'
+      }else if(s == 'm'){
+        s = 'l'
+      }
+
+      arr.push(pathHandlers[s].call(null,
+          array.slice(index, (index = index + paramCnt[s.toUpperCase()])).map(parseFloat),
+          p, p0
+        )
+      )
+
+    }while(len > index)
+
+    return arr
+
+  }
+  // Get bounding box of path
+, bbox: function() {
+    SVG.parser.path.setAttribute('d', this.toString())
+
+    return SVG.parser.path.getBBox()
+  }
+
+})
+
+// Module for unit convertions
+SVG.Number = SVG.invent({
+  // Initialize
+  create: function(value, unit) {
+    // initialize defaults
+    this.value = 0
+    this.unit  = unit || ''
+
+    // parse value
+    if (typeof value === 'number') {
+      // ensure a valid numeric value
+      this.value = isNaN(value) ? 0 : !isFinite(value) ? (value < 0 ? -3.4e+38 : +3.4e+38) : value
+
+    } else if (typeof value === 'string') {
+      unit = value.match(SVG.regex.numberAndUnit)
+
+      if (unit) {
+        // make value numeric
+        this.value = parseFloat(unit[1])
+
+        // normalize
+        if (unit[5] == '%')
+          this.value /= 100
+        else if (unit[5] == 's')
+          this.value *= 1000
+
+        // store unit
+        this.unit = unit[5]
+      }
+
+    } else {
+      if (value instanceof SVG.Number) {
+        this.value = value.valueOf()
+        this.unit  = value.unit
+      }
+    }
+
+  }
+  // Add methods
+, extend: {
+    // Stringalize
+    toString: function() {
+      return (
+        this.unit == '%' ?
+          ~~(this.value * 1e8) / 1e6:
+        this.unit == 's' ?
+          this.value / 1e3 :
+          this.value
+      ) + this.unit
+    }
+  , toJSON: function() {
+      return this.toString()
+    }
+  , // Convert to primitive
+    valueOf: function() {
+      return this.value
+    }
+    // Add number
+  , plus: function(number) {
+      number = new SVG.Number(number)
+      return new SVG.Number(this + number, this.unit || number.unit)
+    }
+    // Subtract number
+  , minus: function(number) {
+      number = new SVG.Number(number)
+      return new SVG.Number(this - number, this.unit || number.unit)
+    }
+    // Multiply number
+  , times: function(number) {
+      number = new SVG.Number(number)
+      return new SVG.Number(this * number, this.unit || number.unit)
+    }
+    // Divide number
+  , divide: function(number) {
+      number = new SVG.Number(number)
+      return new SVG.Number(this / number, this.unit || number.unit)
+    }
+    // Convert to different unit
+  , to: function(unit) {
+      var number = new SVG.Number(this)
+
+      if (typeof unit === 'string')
+        number.unit = unit
+
+      return number
+    }
+    // Make number morphable
+  , morph: function(number) {
+      this.destination = new SVG.Number(number)
+
+      if(number.relative) {
+        this.destination.value += this.value
+      }
+
+      return this
+    }
+    // Get morphed number at given position
+  , at: function(pos) {
+      // Make sure a destination is defined
+      if (!this.destination) return this
+
+      // Generate new morphed number
+      return new SVG.Number(this.destination)
+          .minus(this)
+          .times(pos)
+          .plus(this)
+    }
+
+  }
+})
+
+
+SVG.Element = SVG.invent({
+  // Initialize node
+  create: function(node) {
+    // make stroke value accessible dynamically
+    this._stroke = SVG.defaults.attrs.stroke
+    this._event = null
+
+    // initialize data object
+    this.dom = {}
+
+    // create circular reference
+    if (this.node = node) {
+      this.type = node.nodeName
+      this.node.instance = this
+
+      // store current attribute value
+      this._stroke = node.getAttribute('stroke') || this._stroke
+    }
+  }
+
+  // Add class methods
+, extend: {
+    // Move over x-axis
+    x: function(x) {
+      return this.attr('x', x)
+    }
+    // Move over y-axis
+  , y: function(y) {
+      return this.attr('y', y)
+    }
+    // Move by center over x-axis
+  , cx: function(x) {
+      return x == null ? this.x() + this.width() / 2 : this.x(x - this.width() / 2)
+    }
+    // Move by center over y-axis
+  , cy: function(y) {
+      return y == null ? this.y() + this.height() / 2 : this.y(y - this.height() / 2)
+    }
+    // Move element to given x and y values
+  , move: function(x, y) {
+      return this.x(x).y(y)
+    }
+    // Move element by its center
+  , center: function(x, y) {
+      return this.cx(x).cy(y)
+    }
+    // Set width of element
+  , width: function(width) {
+      return this.attr('width', width)
+    }
+    // Set height of element
+  , height: function(height) {
+      return this.attr('height', height)
+    }
+    // Set element size to given width and height
+  , size: function(width, height) {
+      var p = proportionalSize(this, width, height)
+
+      return this
+        .width(new SVG.Number(p.width))
+        .height(new SVG.Number(p.height))
+    }
+    // Clone element
+  , clone: function(parent, withData) {
+      // write dom data to the dom so the clone can pickup the data
+      this.writeDataToDom()
+
+      // clone element and assign new id
+      var clone = assignNewId(this.node.cloneNode(true))
+
+      // insert the clone in the given parent or after myself
+      if(parent) parent.add(clone)
+      else this.after(clone)
+
+      return clone
+    }
+    // Remove element
+  , remove: function() {
+      if (this.parent())
+        this.parent().removeElement(this)
+
+      return this
+    }
+    // Replace element
+  , replace: function(element) {
+      this.after(element).remove()
+
+      return element
+    }
+    // Add element to given container and return self
+  , addTo: function(parent) {
+      return parent.put(this)
+    }
+    // Add element to given container and return container
+  , putIn: function(parent) {
+      return parent.add(this)
+    }
+    // Get / set id
+  , id: function(id) {
+      return this.attr('id', id)
+    }
+    // Checks whether the given point inside the bounding box of the element
+  , inside: function(x, y) {
+      var box = this.bbox()
+
+      return x > box.x
+          && y > box.y
+          && x < box.x + box.width
+          && y < box.y + box.height
+    }
+    // Show element
+  , show: function() {
+      return this.style('display', '')
+    }
+    // Hide element
+  , hide: function() {
+      return this.style('display', 'none')
+    }
+    // Is element visible?
+  , visible: function() {
+      return this.style('display') != 'none'
+    }
+    // Return id on string conversion
+  , toString: function() {
+      return this.attr('id')
+    }
+    // Return array of classes on the node
+  , classes: function() {
+      var attr = this.attr('class')
+
+      return attr == null ? [] : attr.trim().split(SVG.regex.delimiter)
+    }
+    // Return true if class exists on the node, false otherwise
+  , hasClass: function(name) {
+      return this.classes().indexOf(name) != -1
+    }
+    // Add class to the node
+  , addClass: function(name) {
+      if (!this.hasClass(name)) {
+        var array = this.classes()
+        array.push(name)
+        this.attr('class', array.join(' '))
+      }
+
+      return this
+    }
+    // Remove class from the node
+  , removeClass: function(name) {
+      if (this.hasClass(name)) {
+        this.attr('class', this.classes().filter(function(c) {
+          return c != name
+        }).join(' '))
+      }
+
+      return this
+    }
+    // Toggle the presence of a class on the node
+  , toggleClass: function(name) {
+      return this.hasClass(name) ? this.removeClass(name) : this.addClass(name)
+    }
+    // Get referenced element form attribute value
+  , reference: function(attr) {
+      return SVG.get(this.attr(attr))
+    }
+    // Returns the parent element instance
+  , parent: function(type) {
+      var parent = this
+
+      // check for parent
+      if(!parent.node.parentNode) return null
+
+      // get parent element
+      parent = SVG.adopt(parent.node.parentNode)
+
+      if(!type) return parent
+
+      // loop trough ancestors if type is given
+      while(parent && parent.node instanceof window.SVGElement){
+        if(typeof type === 'string' ? parent.matches(type) : parent instanceof type) return parent
+        if(parent.node.parentNode.nodeName == '#document') return null // #720
+        parent = SVG.adopt(parent.node.parentNode)
+      }
+    }
+    // Get parent document
+  , doc: function() {
+      return this instanceof SVG.Doc ? this : this.parent(SVG.Doc)
+    }
+    // return array of all ancestors of given type up to the root svg
+  , parents: function(type) {
+      var parents = [], parent = this
+
+      do{
+        parent = parent.parent(type)
+        if(!parent || !parent.node) break
+
+        parents.push(parent)
+      } while(parent.parent)
+
+      return parents
+    }
+    // matches the element vs a css selector
+  , matches: function(selector){
+      return matches(this.node, selector)
+    }
+    // Returns the svg node to call native svg methods on it
+  , native: function() {
+      return this.node
+    }
+    // Import raw svg
+  , svg: function(svg) {
+      // create temporary holder
+      var well = document.createElement('svg')
+
+      // act as a setter if svg is given
+      if (svg && this instanceof SVG.Parent) {
+        // dump raw svg
+        well.innerHTML = '<svg>' + svg.replace(/\n/, '').replace(/<(\w+)([^<]+?)\/>/g, '<$1$2></$1>') + '</svg>'
+
+        // transplant nodes
+        for (var i = 0, il = well.firstChild.childNodes.length; i < il; i++)
+          this.node.appendChild(well.firstChild.firstChild)
+
+      // otherwise act as a getter
+      } else {
+        // create a wrapping svg element in case of partial content
+        well.appendChild(svg = document.createElement('svg'))
+
+        // write svgjs data to the dom
+        this.writeDataToDom()
+
+        // insert a copy of this node
+        svg.appendChild(this.node.cloneNode(true))
+
+        // return target element
+        return well.innerHTML.replace(/^<svg>/, '').replace(/<\/svg>$/, '')
+      }
+
+      return this
+    }
+  // write svgjs data to the dom
+  , writeDataToDom: function() {
+
+      // dump variables recursively
+      if(this.each || this.lines){
+        var fn = this.each ? this : this.lines();
+        fn.each(function(){
+          this.writeDataToDom()
+        })
+      }
+
+      // remove previously set data
+      this.node.removeAttribute('svgjs:data')
+
+      if(Object.keys(this.dom).length)
+        this.node.setAttribute('svgjs:data', JSON.stringify(this.dom)) // see #428
+
+      return this
+    }
+  // set given data to the elements data property
+  , setData: function(o){
+      this.dom = o
+      return this
+    }
+  , is: function(obj){
+      return is(this, obj)
+    }
+  }
+})
+
+SVG.easing = {
+  '-': function(pos){return pos}
+, '<>':function(pos){return -Math.cos(pos * Math.PI) / 2 + 0.5}
+, '>': function(pos){return  Math.sin(pos * Math.PI / 2)}
+, '<': function(pos){return -Math.cos(pos * Math.PI / 2) + 1}
+}
+
+SVG.morph = function(pos){
+  return function(from, to) {
+    return new SVG.MorphObj(from, to).at(pos)
+  }
+}
+
+SVG.Situation = SVG.invent({
+
+  create: function(o){
+    this.init = false
+    this.reversed = false
+    this.reversing = false
+
+    this.duration = new SVG.Number(o.duration).valueOf()
+    this.delay = new SVG.Number(o.delay).valueOf()
+
+    this.start = +new Date() + this.delay
+    this.finish = this.start + this.duration
+    this.ease = o.ease
+
+    // this.loop is incremented from 0 to this.loops
+    // it is also incremented when in an infinite loop (when this.loops is true)
+    this.loop = 0
+    this.loops = false
+
+    this.animations = {
+      // functionToCall: [list of morphable objects]
+      // e.g. move: [SVG.Number, SVG.Number]
+    }
+
+    this.attrs = {
+      // holds all attributes which are not represented from a function svg.js provides
+      // e.g. someAttr: SVG.Number
+    }
+
+    this.styles = {
+      // holds all styles which should be animated
+      // e.g. fill-color: SVG.Color
+    }
+
+    this.transforms = [
+      // holds all transformations as transformation objects
+      // e.g. [SVG.Rotate, SVG.Translate, SVG.Matrix]
+    ]
+
+    this.once = {
+      // functions to fire at a specific position
+      // e.g. "0.5": function foo(){}
+    }
+
+  }
+
+})
+
+
+SVG.FX = SVG.invent({
+
+  create: function(element) {
+    this._target = element
+    this.situations = []
+    this.active = false
+    this.situation = null
+    this.paused = false
+    this.lastPos = 0
+    this.pos = 0
+    // The absolute position of an animation is its position in the context of its complete duration (including delay and loops)
+    // When performing a delay, absPos is below 0 and when performing a loop, its value is above 1
+    this.absPos = 0
+    this._speed = 1
+  }
+
+, extend: {
+
+    /**
+     * sets or returns the target of this animation
+     * @param o object || number In case of Object it holds all parameters. In case of number its the duration of the animation
+     * @param ease function || string Function which should be used for easing or easing keyword
+     * @param delay Number indicating the delay before the animation starts
+     * @return target || this
+     */
+    animate: function(o, ease, delay){
+
+      if(typeof o == 'object'){
+        ease = o.ease
+        delay = o.delay
+        o = o.duration
+      }
+
+      var situation = new SVG.Situation({
+        duration: o || 1000,
+        delay: delay || 0,
+        ease: SVG.easing[ease || '-'] || ease
+      })
+
+      this.queue(situation)
+
+      return this
+    }
+
+    /**
+     * sets a delay before the next element of the queue is called
+     * @param delay Duration of delay in milliseconds
+     * @return this.target()
+     */
+  , delay: function(delay){
+      // The delay is performed by an empty situation with its duration
+      // attribute set to the duration of the delay
+      var situation = new SVG.Situation({
+        duration: delay,
+        delay: 0,
+        ease: SVG.easing['-']
+      })
+
+      return this.queue(situation)
+    }
+
+    /**
+     * sets or returns the target of this animation
+     * @param null || target SVG.Element which should be set as new target
+     * @return target || this
+     */
+  , target: function(target){
+      if(target && target instanceof SVG.Element){
+        this._target = target
+        return this
+      }
+
+      return this._target
+    }
+
+    // returns the absolute position at a given time
+  , timeToAbsPos: function(timestamp){
+      return (timestamp - this.situation.start) / (this.situation.duration/this._speed)
+    }
+
+    // returns the timestamp from a given absolute positon
+  , absPosToTime: function(absPos){
+      return this.situation.duration/this._speed * absPos + this.situation.start
+    }
+
+    // starts the animationloop
+  , startAnimFrame: function(){
+      this.stopAnimFrame()
+      this.animationFrame = window.requestAnimationFrame(function(){ this.step() }.bind(this))
+    }
+
+    // cancels the animationframe
+  , stopAnimFrame: function(){
+      window.cancelAnimationFrame(this.animationFrame)
+    }
+
+    // kicks off the animation - only does something when the queue is currently not active and at least one situation is set
+  , start: function(){
+      // dont start if already started
+      if(!this.active && this.situation){
+        this.active = true
+        this.startCurrent()
+      }
+
+      return this
+    }
+
+    // start the current situation
+  , startCurrent: function(){
+      this.situation.start = +new Date + this.situation.delay/this._speed
+      this.situation.finish = this.situation.start + this.situation.duration/this._speed
+      return this.initAnimations().step()
+    }
+
+    /**
+     * adds a function / Situation to the animation queue
+     * @param fn function / situation to add
+     * @return this
+     */
+  , queue: function(fn){
+      if(typeof fn == 'function' || fn instanceof SVG.Situation)
+        this.situations.push(fn)
+
+      if(!this.situation) this.situation = this.situations.shift()
+
+      return this
+    }
+
+    /**
+     * pulls next element from the queue and execute it
+     * @return this
+     */
+  , dequeue: function(){
+      // stop current animation
+      this.stop()
+
+      // get next animation from queue
+      this.situation = this.situations.shift()
+
+      if(this.situation){
+        if(this.situation instanceof SVG.Situation) {
+          this.start()
+        } else {
+          // If it is not a SVG.Situation, then it is a function, we execute it
+          this.situation.call(this)
+        }
+      }
+
+      return this
+    }
+
+    // updates all animations to the current state of the element
+    // this is important when one property could be changed from another property
+  , initAnimations: function() {
+      var i, j, source
+      var s = this.situation
+
+      if(s.init) return this
+
+      for(i in s.animations){
+        source = this.target()[i]()
+
+        if(!Array.isArray(source)) {
+          source = [source]
+        }
+
+        if(!Array.isArray(s.animations[i])) {
+          s.animations[i] = [s.animations[i]]
+        }
+
+        //if(s.animations[i].length > source.length) {
+        //  source.concat = source.concat(s.animations[i].slice(source.length, s.animations[i].length))
+        //}
+
+        for(j = source.length; j--;) {
+          // The condition is because some methods return a normal number instead
+          // of a SVG.Number
+          if(s.animations[i][j] instanceof SVG.Number)
+            source[j] = new SVG.Number(source[j])
+
+          s.animations[i][j] = source[j].morph(s.animations[i][j])
+        }
+      }
+
+      for(i in s.attrs){
+        s.attrs[i] = new SVG.MorphObj(this.target().attr(i), s.attrs[i])
+      }
+
+      for(i in s.styles){
+        s.styles[i] = new SVG.MorphObj(this.target().style(i), s.styles[i])
+      }
+
+      s.initialTransformation = this.target().matrixify()
+
+      s.init = true
+      return this
+    }
+  , clearQueue: function(){
+      this.situations = []
+      return this
+    }
+  , clearCurrent: function(){
+      this.situation = null
+      return this
+    }
+    /** stops the animation immediately
+     * @param jumpToEnd A Boolean indicating whether to complete the current animation immediately.
+     * @param clearQueue A Boolean indicating whether to remove queued animation as well.
+     * @return this
+     */
+  , stop: function(jumpToEnd, clearQueue){
+      var active = this.active
+      this.active = false
+
+      if(clearQueue){
+        this.clearQueue()
+      }
+
+      if(jumpToEnd && this.situation){
+        // initialize the situation if it was not
+        !active && this.startCurrent()
+        this.atEnd()
+      }
+
+      this.stopAnimFrame()
+
+      return this.clearCurrent()
+    }
+
+    /** resets the element to the state where the current element has started
+     * @return this
+     */
+  , reset: function(){
+      if(this.situation){
+        var temp = this.situation
+        this.stop()
+        this.situation = temp
+        this.atStart()
+      }
+      return this
+    }
+
+    // Stop the currently-running animation, remove all queued animations, and complete all animations for the element.
+  , finish: function(){
+
+      this.stop(true, false)
+
+      while(this.dequeue().situation && this.stop(true, false));
+
+      this.clearQueue().clearCurrent()
+
+      return this
+    }
+
+    // set the internal animation pointer at the start position, before any loops, and updates the visualisation
+  , atStart: function() {
+      return this.at(0, true)
+    }
+
+    // set the internal animation pointer at the end position, after all the loops, and updates the visualisation
+  , atEnd: function() {
+      if (this.situation.loops === true) {
+        // If in a infinite loop, we end the current iteration
+        this.situation.loops = this.situation.loop + 1
+      }
+
+      if(typeof this.situation.loops == 'number') {
+        // If performing a finite number of loops, we go after all the loops
+        return this.at(this.situation.loops, true)
+      } else {
+        // If no loops, we just go at the end
+        return this.at(1, true)
+      }
+    }
+
+    // set the internal animation pointer to the specified position and updates the visualisation
+    // if isAbsPos is true, pos is treated as an absolute position
+  , at: function(pos, isAbsPos){
+      var durDivSpd = this.situation.duration/this._speed
+
+      this.absPos = pos
+      // If pos is not an absolute position, we convert it into one
+      if (!isAbsPos) {
+        if (this.situation.reversed) this.absPos = 1 - this.absPos
+        this.absPos += this.situation.loop
+      }
+
+      this.situation.start = +new Date - this.absPos * durDivSpd
+      this.situation.finish = this.situation.start + durDivSpd
+
+      return this.step(true)
+    }
+
+    /**
+     * sets or returns the speed of the animations
+     * @param speed null || Number The new speed of the animations
+     * @return Number || this
+     */
+  , speed: function(speed){
+      if (speed === 0) return this.pause()
+
+      if (speed) {
+        this._speed = speed
+        // We use an absolute position here so that speed can affect the delay before the animation
+        return this.at(this.absPos, true)
+      } else return this._speed
+    }
+
+    // Make loopable
+  , loop: function(times, reverse) {
+      var c = this.last()
+
+      // store total loops
+      c.loops = (times != null) ? times : true
+      c.loop = 0
+
+      if(reverse) c.reversing = true
+      return this
+    }
+
+    // pauses the animation
+  , pause: function(){
+      this.paused = true
+      this.stopAnimFrame()
+
+      return this
+    }
+
+    // unpause the animation
+  , play: function(){
+      if(!this.paused) return this
+      this.paused = false
+      // We use an absolute position here so that the delay before the animation can be paused
+      return this.at(this.absPos, true)
+    }
+
+    /**
+     * toggle or set the direction of the animation
+     * true sets direction to backwards while false sets it to forwards
+     * @param reversed Boolean indicating whether to reverse the animation or not (default: toggle the reverse status)
+     * @return this
+     */
+  , reverse: function(reversed){
+      var c = this.last()
+
+      if(typeof reversed == 'undefined') c.reversed = !c.reversed
+      else c.reversed = reversed
+
+      return this
+    }
+
+
+    /**
+     * returns a float from 0-1 indicating the progress of the current animation
+     * @param eased Boolean indicating whether the returned position should be eased or not
+     * @return number
+     */
+  , progress: function(easeIt){
+      return easeIt ? this.situation.ease(this.pos) : this.pos
+    }
+
+    /**
+     * adds a callback function which is called when the current animation is finished
+     * @param fn Function which should be executed as callback
+     * @return number
+     */
+  , after: function(fn){
+      var c = this.last()
+        , wrapper = function wrapper(e){
+            if(e.detail.situation == c){
+              fn.call(this, c)
+              this.off('finished.fx', wrapper) // prevent memory leak
+            }
+          }
+
+      this.target().on('finished.fx', wrapper)
+
+      return this._callStart()
+    }
+
+    // adds a callback which is called whenever one animation step is performed
+  , during: function(fn){
+      var c = this.last()
+        , wrapper = function(e){
+            if(e.detail.situation == c){
+              fn.call(this, e.detail.pos, SVG.morph(e.detail.pos), e.detail.eased, c)
+            }
+          }
+
+      // see above
+      this.target().off('during.fx', wrapper).on('during.fx', wrapper)
+
+      this.after(function(){
+        this.off('during.fx', wrapper)
+      })
+
+      return this._callStart()
+    }
+
+    // calls after ALL animations in the queue are finished
+  , afterAll: function(fn){
+      var wrapper = function wrapper(e){
+            fn.call(this)
+            this.off('allfinished.fx', wrapper)
+          }
+
+      // see above
+      this.target().off('allfinished.fx', wrapper).on('allfinished.fx', wrapper)
+
+      return this._callStart()
+    }
+
+    // calls on every animation step for all animations
+  , duringAll: function(fn){
+      var wrapper = function(e){
+            fn.call(this, e.detail.pos, SVG.morph(e.detail.pos), e.detail.eased, e.detail.situation)
+          }
+
+      this.target().off('during.fx', wrapper).on('during.fx', wrapper)
+
+      this.afterAll(function(){
+        this.off('during.fx', wrapper)
+      })
+
+      return this._callStart()
+    }
+
+  , last: function(){
+      return this.situations.length ? this.situations[this.situations.length-1] : this.situation
+    }
+
+    // adds one property to the animations
+  , add: function(method, args, type){
+      this.last()[type || 'animations'][method] = args
+      return this._callStart()
+    }
+
+    /** perform one step of the animation
+     *  @param ignoreTime Boolean indicating whether to ignore time and use position directly or recalculate position based on time
+     *  @return this
+     */
+  , step: function(ignoreTime){
+
+      // convert current time to an absolute position
+      if(!ignoreTime) this.absPos = this.timeToAbsPos(+new Date)
+
+      // This part convert an absolute position to a position
+      if(this.situation.loops !== false) {
+        var absPos, absPosInt, lastLoop
+
+        // If the absolute position is below 0, we just treat it as if it was 0
+        absPos = Math.max(this.absPos, 0)
+        absPosInt = Math.floor(absPos)
+
+        if(this.situation.loops === true || absPosInt < this.situation.loops) {
+          this.pos = absPos - absPosInt
+          lastLoop = this.situation.loop
+          this.situation.loop = absPosInt
+        } else {
+          this.absPos = this.situation.loops
+          this.pos = 1
+          // The -1 here is because we don't want to toggle reversed when all the loops have been completed
+          lastLoop = this.situation.loop - 1
+          this.situation.loop = this.situation.loops
+        }
+
+        if(this.situation.reversing) {
+          // Toggle reversed if an odd number of loops as occured since the last call of step
+          this.situation.reversed = this.situation.reversed != Boolean((this.situation.loop - lastLoop) % 2)
+        }
+
+      } else {
+        // If there are no loop, the absolute position must not be above 1
+        this.absPos = Math.min(this.absPos, 1)
+        this.pos = this.absPos
+      }
+
+      // while the absolute position can be below 0, the position must not be below 0
+      if(this.pos < 0) this.pos = 0
+
+      if(this.situation.reversed) this.pos = 1 - this.pos
+
+
+      // apply easing
+      var eased = this.situation.ease(this.pos)
+
+      // call once-callbacks
+      for(var i in this.situation.once){
+        if(i > this.lastPos && i <= eased){
+          this.situation.once[i].call(this.target(), this.pos, eased)
+          delete this.situation.once[i]
+        }
+      }
+
+      // fire during callback with position, eased position and current situation as parameter
+      if(this.active) this.target().fire('during', {pos: this.pos, eased: eased, fx: this, situation: this.situation})
+
+      // the user may call stop or finish in the during callback
+      // so make sure that we still have a valid situation
+      if(!this.situation){
+        return this
+      }
+
+      // apply the actual animation to every property
+      this.eachAt()
+
+      // do final code when situation is finished
+      if((this.pos == 1 && !this.situation.reversed) || (this.situation.reversed && this.pos == 0)){
+
+        // stop animation callback
+        this.stopAnimFrame()
+
+        // fire finished callback with current situation as parameter
+        this.target().fire('finished', {fx:this, situation: this.situation})
+
+        if(!this.situations.length){
+          this.target().fire('allfinished')
+
+          // Recheck the length since the user may call animate in the afterAll callback
+          if(!this.situations.length){
+            this.target().off('.fx') // there shouldnt be any binding left, but to make sure...
+            this.active = false
+          }
+        }
+
+        // start next animation
+        if(this.active) this.dequeue()
+        else this.clearCurrent()
+
+      }else if(!this.paused && this.active){
+        // we continue animating when we are not at the end
+        this.startAnimFrame()
+      }
+
+      // save last eased position for once callback triggering
+      this.lastPos = eased
+      return this
+
+    }
+
+    // calculates the step for every property and calls block with it
+  , eachAt: function(){
+      var i, len, at, self = this, target = this.target(), s = this.situation
+
+      // apply animations which can be called trough a method
+      for(i in s.animations){
+
+        at = [].concat(s.animations[i]).map(function(el){
+          return typeof el !== 'string' && el.at ? el.at(s.ease(self.pos), self.pos) : el
+        })
+
+        target[i].apply(target, at)
+
+      }
+
+      // apply animation which has to be applied with attr()
+      for(i in s.attrs){
+
+        at = [i].concat(s.attrs[i]).map(function(el){
+          return typeof el !== 'string' && el.at ? el.at(s.ease(self.pos), self.pos) : el
+        })
+
+        target.attr.apply(target, at)
+
+      }
+
+      // apply animation which has to be applied with style()
+      for(i in s.styles){
+
+        at = [i].concat(s.styles[i]).map(function(el){
+          return typeof el !== 'string' && el.at ? el.at(s.ease(self.pos), self.pos) : el
+        })
+
+        target.style.apply(target, at)
+
+      }
+
+      // animate initialTransformation which has to be chained
+      if(s.transforms.length){
+
+        // get initial initialTransformation
+        at = s.initialTransformation
+        for(i = 0, len = s.transforms.length; i < len; i++){
+
+          // get next transformation in chain
+          var a = s.transforms[i]
+
+          // multiply matrix directly
+          if(a instanceof SVG.Matrix){
+
+            if(a.relative){
+              at = at.multiply(new SVG.Matrix().morph(a).at(s.ease(this.pos)))
+            }else{
+              at = at.morph(a).at(s.ease(this.pos))
+            }
+            continue
+          }
+
+          // when transformation is absolute we have to reset the needed transformation first
+          if(!a.relative)
+            a.undo(at.extract())
+
+          // and reapply it after
+          at = at.multiply(a.at(s.ease(this.pos)))
+
+        }
+
+        // set new matrix on element
+        target.matrix(at)
+      }
+
+      return this
+
+    }
+
+
+    // adds an once-callback which is called at a specific position and never again
+  , once: function(pos, fn, isEased){
+      var c = this.last()
+      if(!isEased) pos = c.ease(pos)
+
+      c.once[pos] = fn
+
+      return this
+    }
+
+  , _callStart: function() {
+      setTimeout(function(){this.start()}.bind(this), 0)
+      return this
+    }
+
+  }
+
+, parent: SVG.Element
+
+  // Add method to parent elements
+, construct: {
+    // Get fx module or create a new one, then animate with given duration and ease
+    animate: function(o, ease, delay) {
+      return (this.fx || (this.fx = new SVG.FX(this))).animate(o, ease, delay)
+    }
+  , delay: function(delay){
+      return (this.fx || (this.fx = new SVG.FX(this))).delay(delay)
+    }
+  , stop: function(jumpToEnd, clearQueue) {
+      if (this.fx)
+        this.fx.stop(jumpToEnd, clearQueue)
+
+      return this
+    }
+  , finish: function() {
+      if (this.fx)
+        this.fx.finish()
+
+      return this
+    }
+    // Pause current animation
+  , pause: function() {
+      if (this.fx)
+        this.fx.pause()
+
+      return this
+    }
+    // Play paused current animation
+  , play: function() {
+      if (this.fx)
+        this.fx.play()
+
+      return this
+    }
+    // Set/Get the speed of the animations
+  , speed: function(speed) {
+      if (this.fx)
+        if (speed == null)
+          return this.fx.speed()
+        else
+          this.fx.speed(speed)
+
+      return this
+    }
+  }
+
+})
+
+// MorphObj is used whenever no morphable object is given
+SVG.MorphObj = SVG.invent({
+
+  create: function(from, to){
+    // prepare color for morphing
+    if(SVG.Color.isColor(to)) return new SVG.Color(from).morph(to)
+    // prepare value list for morphing
+    if(SVG.regex.delimiter.test(from)) return new SVG.Array(from).morph(to)
+    // prepare number for morphing
+    if(SVG.regex.numberAndUnit.test(to)) return new SVG.Number(from).morph(to)
+
+    // prepare for plain morphing
+    this.value = from
+    this.destination = to
+  }
+
+, extend: {
+    at: function(pos, real){
+      return real < 1 ? this.value : this.destination
+    },
+
+    valueOf: function(){
+      return this.value
+    }
+  }
+
+})
+
+SVG.extend(SVG.FX, {
+  // Add animatable attributes
+  attr: function(a, v, relative) {
+    // apply attributes individually
+    if (typeof a == 'object') {
+      for (var key in a)
+        this.attr(key, a[key])
+
+    } else {
+      this.add(a, v, 'attrs')
+    }
+
+    return this
+  }
+  // Add animatable styles
+, style: function(s, v) {
+    if (typeof s == 'object')
+      for (var key in s)
+        this.style(key, s[key])
+
+    else
+      this.add(s, v, 'styles')
+
+    return this
+  }
+  // Animatable x-axis
+, x: function(x, relative) {
+    if(this.target() instanceof SVG.G){
+      this.transform({x:x}, relative)
+      return this
+    }
+
+    var num = new SVG.Number(x)
+    num.relative = relative
+    return this.add('x', num)
+  }
+  // Animatable y-axis
+, y: function(y, relative) {
+    if(this.target() instanceof SVG.G){
+      this.transform({y:y}, relative)
+      return this
+    }
+
+    var num = new SVG.Number(y)
+    num.relative = relative
+    return this.add('y', num)
+  }
+  // Animatable center x-axis
+, cx: function(x) {
+    return this.add('cx', new SVG.Number(x))
+  }
+  // Animatable center y-axis
+, cy: function(y) {
+    return this.add('cy', new SVG.Number(y))
+  }
+  // Add animatable move
+, move: function(x, y) {
+    return this.x(x).y(y)
+  }
+  // Add animatable center
+, center: function(x, y) {
+    return this.cx(x).cy(y)
+  }
+  // Add animatable size
+, size: function(width, height) {
+    if (this.target() instanceof SVG.Text) {
+      // animate font size for Text elements
+      this.attr('font-size', width)
+
+    } else {
+      // animate bbox based size for all other elements
+      var box
+
+      if(!width || !height){
+        box = this.target().bbox()
+      }
+
+      if(!width){
+        width = box.width / box.height  * height
+      }
+
+      if(!height){
+        height = box.height / box.width  * width
+      }
+
+      this.add('width' , new SVG.Number(width))
+          .add('height', new SVG.Number(height))
+
+    }
+
+    return this
+  }
+  // Add animatable width
+, width: function(width) {
+    return this.add('width', new SVG.Number(width))
+  }
+  // Add animatable height
+, height: function(height) {
+    return this.add('height', new SVG.Number(height))
+  }
+  // Add animatable plot
+, plot: function(a, b, c, d) {
+    // Lines can be plotted with 4 arguments
+    if(arguments.length == 4) {
+      return this.plot([a, b, c, d])
+    }
+
+    return this.add('plot', new (this.target().morphArray)(a))
+  }
+  // Add leading method
+, leading: function(value) {
+    return this.target().leading ?
+      this.add('leading', new SVG.Number(value)) :
+      this
+  }
+  // Add animatable viewbox
+, viewbox: function(x, y, width, height) {
+    if (this.target() instanceof SVG.Container) {
+      this.add('viewbox', new SVG.ViewBox(x, y, width, height))
+    }
+
+    return this
+  }
+, update: function(o) {
+    if (this.target() instanceof SVG.Stop) {
+      if (typeof o == 'number' || o instanceof SVG.Number) {
+        return this.update({
+          offset:  arguments[0]
+        , color:   arguments[1]
+        , opacity: arguments[2]
+        })
+      }
+
+      if (o.opacity != null) this.attr('stop-opacity', o.opacity)
+      if (o.color   != null) this.attr('stop-color', o.color)
+      if (o.offset  != null) this.attr('offset', o.offset)
+    }
+
+    return this
+  }
+})
+
+SVG.Box = SVG.invent({
+  create: function(x, y, width, height) {
+    if (typeof x == 'object' && !(x instanceof SVG.Element)) {
+      // chromes getBoundingClientRect has no x and y property
+      return SVG.Box.call(this, x.left != null ? x.left : x.x , x.top != null ? x.top : x.y, x.width, x.height)
+    } else if (arguments.length == 4) {
+      this.x = x
+      this.y = y
+      this.width = width
+      this.height = height
+    }
+
+    // add center, right, bottom...
+    fullBox(this)
+  }
+, extend: {
+    // Merge rect box with another, return a new instance
+    merge: function(box) {
+      var b = new this.constructor()
+
+      // merge boxes
+      b.x      = Math.min(this.x, box.x)
+      b.y      = Math.min(this.y, box.y)
+      b.width  = Math.max(this.x + this.width,  box.x + box.width)  - b.x
+      b.height = Math.max(this.y + this.height, box.y + box.height) - b.y
+
+      return fullBox(b)
+    }
+
+  , transform: function(m) {
+      var xMin = Infinity, xMax = -Infinity, yMin = Infinity, yMax = -Infinity, p, bbox
+
+      var pts = [
+        new SVG.Point(this.x, this.y),
+        new SVG.Point(this.x2, this.y),
+        new SVG.Point(this.x, this.y2),
+        new SVG.Point(this.x2, this.y2)
+      ]
+
+      pts.forEach(function(p) {
+        p = p.transform(m)
+        xMin = Math.min(xMin,p.x)
+        xMax = Math.max(xMax,p.x)
+        yMin = Math.min(yMin,p.y)
+        yMax = Math.max(yMax,p.y)
+      })
+
+      bbox = new this.constructor()
+      bbox.x = xMin
+      bbox.width = xMax-xMin
+      bbox.y = yMin
+      bbox.height = yMax-yMin
+
+      fullBox(bbox)
+
+      return bbox
+    }
+  }
+})
+
+SVG.BBox = SVG.invent({
+  // Initialize
+  create: function(element) {
+    SVG.Box.apply(this, [].slice.call(arguments))
+
+    // get values if element is given
+    if (element instanceof SVG.Element) {
+      var box
+
+      // yes this is ugly, but Firefox can be a bitch when it comes to elements that are not yet rendered
+      try {
+
+        if (!document.documentElement.contains){
+          // This is IE - it does not support contains() for top-level SVGs
+          var topParent = element.node
+          while (topParent.parentNode){
+            topParent = topParent.parentNode
+          }
+          if (topParent != document) throw new Exception('Element not in the dom')
+        } else {
+          // the element is NOT in the dom, throw error
+          if(!document.documentElement.contains(element.node)) throw new Exception('Element not in the dom')
+        }
+
+        // find native bbox
+        box = element.node.getBBox()
+      } catch(e) {
+        if(element instanceof SVG.Shape){
+          var clone = element.clone(SVG.parser.draw.instance).show()
+          box = clone.node.getBBox()
+          clone.remove()
+        }else{
+          box = {
+            x:      element.node.clientLeft
+          , y:      element.node.clientTop
+          , width:  element.node.clientWidth
+          , height: element.node.clientHeight
+          }
+        }
+      }
+
+      SVG.Box.call(this, box)
+    }
+
+  }
+
+  // Define ancestor
+, inherit: SVG.Box
+
+  // Define Parent
+, parent: SVG.Element
+
+  // Constructor
+, construct: {
+    // Get bounding box
+    bbox: function() {
+      return new SVG.BBox(this)
+    }
+  }
+
+})
+
+SVG.BBox.prototype.constructor = SVG.BBox
+
+
+SVG.extend(SVG.Element, {
+  tbox: function(){
+    console.warn('Use of TBox is deprecated and mapped to RBox. Use .rbox() instead.')
+    return this.rbox(this.doc())
+  }
+})
+
+SVG.RBox = SVG.invent({
+  // Initialize
+  create: function(element) {
+    SVG.Box.apply(this, [].slice.call(arguments))
+
+    if (element instanceof SVG.Element) {
+      SVG.Box.call(this, element.node.getBoundingClientRect())
+    }
+  }
+
+, inherit: SVG.Box
+
+  // define Parent
+, parent: SVG.Element
+
+, extend: {
+    addOffset: function() {
+      // offset by window scroll position, because getBoundingClientRect changes when window is scrolled
+      this.x += window.pageXOffset
+      this.y += window.pageYOffset
+      return this
+    }
+  }
+
+  // Constructor
+, construct: {
+    // Get rect box
+    rbox: function(el) {
+      if (el) return new SVG.RBox(this).transform(el.screenCTM().inverse())
+      return new SVG.RBox(this).addOffset()
+    }
+  }
+
+})
+
+SVG.RBox.prototype.constructor = SVG.RBox
+
+SVG.Matrix = SVG.invent({
+  // Initialize
+  create: function(source) {
+    var i, base = arrayToMatrix([1, 0, 0, 1, 0, 0])
+
+    // ensure source as object
+    source = source instanceof SVG.Element ?
+      source.matrixify() :
+    typeof source === 'string' ?
+      arrayToMatrix(source.split(SVG.regex.delimiter).map(parseFloat)) :
+    arguments.length == 6 ?
+      arrayToMatrix([].slice.call(arguments)) :
+    Array.isArray(source) ?
+      arrayToMatrix(source) :
+    typeof source === 'object' ?
+      source : base
+
+    // merge source
+    for (i = abcdef.length - 1; i >= 0; --i)
+      this[abcdef[i]] = source[abcdef[i]] != null ?
+        source[abcdef[i]] : base[abcdef[i]]
+  }
+
+  // Add methods
+, extend: {
+    // Extract individual transformations
+    extract: function() {
+      // find delta transform points
+      var px    = deltaTransformPoint(this, 0, 1)
+        , py    = deltaTransformPoint(this, 1, 0)
+        , skewX = 180 / Math.PI * Math.atan2(px.y, px.x) - 90
+
+      return {
+        // translation
+        x:        this.e
+      , y:        this.f
+      , transformedX:(this.e * Math.cos(skewX * Math.PI / 180) + this.f * Math.sin(skewX * Math.PI / 180)) / Math.sqrt(this.a * this.a + this.b * this.b)
+      , transformedY:(this.f * Math.cos(skewX * Math.PI / 180) + this.e * Math.sin(-skewX * Math.PI / 180)) / Math.sqrt(this.c * this.c + this.d * this.d)
+        // skew
+      , skewX:    -skewX
+      , skewY:    180 / Math.PI * Math.atan2(py.y, py.x)
+        // scale
+      , scaleX:   Math.sqrt(this.a * this.a + this.b * this.b)
+      , scaleY:   Math.sqrt(this.c * this.c + this.d * this.d)
+        // rotation
+      , rotation: skewX
+      , a: this.a
+      , b: this.b
+      , c: this.c
+      , d: this.d
+      , e: this.e
+      , f: this.f
+      , matrix: new SVG.Matrix(this)
+      }
+    }
+    // Clone matrix
+  , clone: function() {
+      return new SVG.Matrix(this)
+    }
+    // Morph one matrix into another
+  , morph: function(matrix) {
+      // store new destination
+      this.destination = new SVG.Matrix(matrix)
+
+      return this
+    }
+    // Get morphed matrix at a given position
+  , at: function(pos) {
+      // make sure a destination is defined
+      if (!this.destination) return this
+
+      // calculate morphed matrix at a given position
+      var matrix = new SVG.Matrix({
+        a: this.a + (this.destination.a - this.a) * pos
+      , b: this.b + (this.destination.b - this.b) * pos
+      , c: this.c + (this.destination.c - this.c) * pos
+      , d: this.d + (this.destination.d - this.d) * pos
+      , e: this.e + (this.destination.e - this.e) * pos
+      , f: this.f + (this.destination.f - this.f) * pos
+      })
+
+      return matrix
+    }
+    // Multiplies by given matrix
+  , multiply: function(matrix) {
+      return new SVG.Matrix(this.native().multiply(parseMatrix(matrix).native()))
+    }
+    // Inverses matrix
+  , inverse: function() {
+      return new SVG.Matrix(this.native().inverse())
+    }
+    // Translate matrix
+  , translate: function(x, y) {
+      return new SVG.Matrix(this.native().translate(x || 0, y || 0))
+    }
+    // Scale matrix
+  , scale: function(x, y, cx, cy) {
+      // support uniformal scale
+      if (arguments.length == 1) {
+        y = x
+      } else if (arguments.length == 3) {
+        cy = cx
+        cx = y
+        y = x
+      }
+
+      return this.around(cx, cy, new SVG.Matrix(x, 0, 0, y, 0, 0))
+    }
+    // Rotate matrix
+  , rotate: function(r, cx, cy) {
+      // convert degrees to radians
+      r = SVG.utils.radians(r)
+
+      return this.around(cx, cy, new SVG.Matrix(Math.cos(r), Math.sin(r), -Math.sin(r), Math.cos(r), 0, 0))
+    }
+    // Flip matrix on x or y, at a given offset
+  , flip: function(a, o) {
+      return a == 'x' ?
+          this.scale(-1, 1, o, 0) :
+        a == 'y' ?
+          this.scale(1, -1, 0, o) :
+          this.scale(-1, -1, a, o != null ? o : a)
+    }
+    // Skew
+  , skew: function(x, y, cx, cy) {
+      // support uniformal skew
+      if (arguments.length == 1) {
+        y = x
+      } else if (arguments.length == 3) {
+        cy = cx
+        cx = y
+        y = x
+      }
+
+      // convert degrees to radians
+      x = SVG.utils.radians(x)
+      y = SVG.utils.radians(y)
+
+      return this.around(cx, cy, new SVG.Matrix(1, Math.tan(y), Math.tan(x), 1, 0, 0))
+    }
+    // SkewX
+  , skewX: function(x, cx, cy) {
+      return this.skew(x, 0, cx, cy)
+    }
+    // SkewY
+  , skewY: function(y, cx, cy) {
+      return this.skew(0, y, cx, cy)
+    }
+    // Transform around a center point
+  , around: function(cx, cy, matrix) {
+      return this
+        .multiply(new SVG.Matrix(1, 0, 0, 1, cx || 0, cy || 0))
+        .multiply(matrix)
+        .multiply(new SVG.Matrix(1, 0, 0, 1, -cx || 0, -cy || 0))
+    }
+    // Convert to native SVGMatrix
+  , native: function() {
+      // create new matrix
+      var matrix = SVG.parser.native.createSVGMatrix()
+
+      // update with current values
+      for (var i = abcdef.length - 1; i >= 0; i--)
+        matrix[abcdef[i]] = this[abcdef[i]]
+
+      return matrix
+    }
+    // Convert matrix to string
+  , toString: function() {
+      return 'matrix(' + this.a + ',' + this.b + ',' + this.c + ',' + this.d + ',' + this.e + ',' + this.f + ')'
+    }
+  }
+
+  // Define parent
+, parent: SVG.Element
+
+  // Add parent method
+, construct: {
+    // Get current matrix
+    ctm: function() {
+      return new SVG.Matrix(this.node.getCTM())
+    },
+    // Get current screen matrix
+    screenCTM: function() {
+      /* https://bugzilla.mozilla.org/show_bug.cgi?id=1344537
+         This is needed because FF does not return the transformation matrix
+         for the inner coordinate system when getScreenCTM() is called on nested svgs.
+         However all other Browsers do that */
+      if(this instanceof SVG.Nested) {
+        var rect = this.rect(1,1)
+        var m = rect.node.getScreenCTM()
+        rect.remove()
+        return new SVG.Matrix(m)
+      }
+      return new SVG.Matrix(this.node.getScreenCTM())
+    }
+
+  }
+
+})
+
+SVG.Point = SVG.invent({
+  // Initialize
+  create: function(x,y) {
+    var i, source, base = {x:0, y:0}
+
+    // ensure source as object
+    source = Array.isArray(x) ?
+      {x:x[0], y:x[1]} :
+    typeof x === 'object' ?
+      {x:x.x, y:x.y} :
+    x != null ?
+      {x:x, y:(y != null ? y : x)} : base // If y has no value, then x is used has its value
+
+    // merge source
+    this.x = source.x
+    this.y = source.y
+  }
+
+  // Add methods
+, extend: {
+    // Clone point
+    clone: function() {
+      return new SVG.Point(this)
+    }
+    // Morph one point into another
+  , morph: function(x, y) {
+      // store new destination
+      this.destination = new SVG.Point(x, y)
+
+      return this
+    }
+    // Get morphed point at a given position
+  , at: function(pos) {
+      // make sure a destination is defined
+      if (!this.destination) return this
+
+      // calculate morphed matrix at a given position
+      var point = new SVG.Point({
+        x: this.x + (this.destination.x - this.x) * pos
+      , y: this.y + (this.destination.y - this.y) * pos
+      })
+
+      return point
+    }
+    // Convert to native SVGPoint
+  , native: function() {
+      // create new point
+      var point = SVG.parser.native.createSVGPoint()
+
+      // update with current values
+      point.x = this.x
+      point.y = this.y
+
+      return point
+    }
+    // transform point with matrix
+  , transform: function(matrix) {
+      return new SVG.Point(this.native().matrixTransform(matrix.native()))
+    }
+
+  }
+
+})
+
+SVG.extend(SVG.Element, {
+
+  // Get point
+  point: function(x, y) {
+    return new SVG.Point(x,y).transform(this.screenCTM().inverse());
+  }
+
+})
+
+SVG.extend(SVG.Element, {
+  // Set svg element attribute
+  attr: function(a, v, n) {
+    // act as full getter
+    if (a == null) {
+      // get an object of attributes
+      a = {}
+      v = this.node.attributes
+      for (n = v.length - 1; n >= 0; n--)
+        a[v[n].nodeName] = SVG.regex.isNumber.test(v[n].nodeValue) ? parseFloat(v[n].nodeValue) : v[n].nodeValue
+
+      return a
+
+    } else if (typeof a == 'object') {
+      // apply every attribute individually if an object is passed
+      for (v in a) this.attr(v, a[v])
+
+    } else if (v === null) {
+        // remove value
+        this.node.removeAttribute(a)
+
+    } else if (v == null) {
+      // act as a getter if the first and only argument is not an object
+      v = this.node.getAttribute(a)
+      return v == null ?
+        SVG.defaults.attrs[a] :
+      SVG.regex.isNumber.test(v) ?
+        parseFloat(v) : v
+
+    } else {
+      // BUG FIX: some browsers will render a stroke if a color is given even though stroke width is 0
+      if (a == 'stroke-width')
+        this.attr('stroke', parseFloat(v) > 0 ? this._stroke : null)
+      else if (a == 'stroke')
+        this._stroke = v
+
+      // convert image fill and stroke to patterns
+      if (a == 'fill' || a == 'stroke') {
+        if (SVG.regex.isImage.test(v))
+          v = this.doc().defs().image(v, 0, 0)
+
+        if (v instanceof SVG.Image)
+          v = this.doc().defs().pattern(0, 0, function() {
+            this.add(v)
+          })
+      }
+
+      // ensure correct numeric values (also accepts NaN and Infinity)
+      if (typeof v === 'number')
+        v = new SVG.Number(v)
+
+      // ensure full hex color
+      else if (SVG.Color.isColor(v))
+        v = new SVG.Color(v)
+
+      // parse array values
+      else if (Array.isArray(v))
+        v = new SVG.Array(v)
+
+      // if the passed attribute is leading...
+      if (a == 'leading') {
+        // ... call the leading method instead
+        if (this.leading)
+          this.leading(v)
+      } else {
+        // set given attribute on node
+        typeof n === 'string' ?
+          this.node.setAttributeNS(n, a, v.toString()) :
+          this.node.setAttribute(a, v.toString())
+      }
+
+      // rebuild if required
+      if (this.rebuild && (a == 'font-size' || a == 'x'))
+        this.rebuild(a, v)
+    }
+
+    return this
+  }
+})
+SVG.extend(SVG.Element, {
+  // Add transformations
+  transform: function(o, relative) {
+    // get target in case of the fx module, otherwise reference this
+    var target = this
+      , matrix, bbox
+
+    // act as a getter
+    if (typeof o !== 'object') {
+      // get current matrix
+      matrix = new SVG.Matrix(target).extract()
+
+      return typeof o === 'string' ? matrix[o] : matrix
+    }
+
+    // get current matrix
+    matrix = new SVG.Matrix(target)
+
+    // ensure relative flag
+    relative = !!relative || !!o.relative
+
+    // act on matrix
+    if (o.a != null) {
+      matrix = relative ?
+        // relative
+        matrix.multiply(new SVG.Matrix(o)) :
+        // absolute
+        new SVG.Matrix(o)
+
+    // act on rotation
+    } else if (o.rotation != null) {
+      // ensure centre point
+      ensureCentre(o, target)
+
+      // apply transformation
+      matrix = relative ?
+        // relative
+        matrix.rotate(o.rotation, o.cx, o.cy) :
+        // absolute
+        matrix.rotate(o.rotation - matrix.extract().rotation, o.cx, o.cy)
+
+    // act on scale
+    } else if (o.scale != null || o.scaleX != null || o.scaleY != null) {
+      // ensure centre point
+      ensureCentre(o, target)
+
+      // ensure scale values on both axes
+      o.scaleX = o.scale != null ? o.scale : o.scaleX != null ? o.scaleX : 1
+      o.scaleY = o.scale != null ? o.scale : o.scaleY != null ? o.scaleY : 1
+
+      if (!relative) {
+        // absolute; multiply inversed values
+        var e = matrix.extract()
+        o.scaleX = o.scaleX * 1 / e.scaleX
+        o.scaleY = o.scaleY * 1 / e.scaleY
+      }
+
+      matrix = matrix.scale(o.scaleX, o.scaleY, o.cx, o.cy)
+
+    // act on skew
+    } else if (o.skew != null || o.skewX != null || o.skewY != null) {
+      // ensure centre point
+      ensureCentre(o, target)
+
+      // ensure skew values on both axes
+      o.skewX = o.skew != null ? o.skew : o.skewX != null ? o.skewX : 0
+      o.skewY = o.skew != null ? o.skew : o.skewY != null ? o.skewY : 0
+
+      if (!relative) {
+        // absolute; reset skew values
+        var e = matrix.extract()
+        matrix = matrix.multiply(new SVG.Matrix().skew(e.skewX, e.skewY, o.cx, o.cy).inverse())
+      }
+
+      matrix = matrix.skew(o.skewX, o.skewY, o.cx, o.cy)
+
+    // act on flip
+    } else if (o.flip) {
+      if(o.flip == 'x' || o.flip == 'y') {
+        o.offset = o.offset == null ? target.bbox()['c' + o.flip] : o.offset
+      } else {
+        if(o.offset == null) {
+          bbox = target.bbox()
+          o.flip = bbox.cx
+          o.offset = bbox.cy
+        } else {
+          o.flip = o.offset
+        }
+      }
+
+      matrix = new SVG.Matrix().flip(o.flip, o.offset)
+
+    // act on translate
+    } else if (o.x != null || o.y != null) {
+      if (relative) {
+        // relative
+        matrix = matrix.translate(o.x, o.y)
+      } else {
+        // absolute
+        if (o.x != null) matrix.e = o.x
+        if (o.y != null) matrix.f = o.y
+      }
+    }
+
+    return this.attr('transform', matrix)
+  }
+})
+
+SVG.extend(SVG.FX, {
+  transform: function(o, relative) {
+    // get target in case of the fx module, otherwise reference this
+    var target = this.target()
+      , matrix, bbox
+
+    // act as a getter
+    if (typeof o !== 'object') {
+      // get current matrix
+      matrix = new SVG.Matrix(target).extract()
+
+      return typeof o === 'string' ? matrix[o] : matrix
+    }
+
+    // ensure relative flag
+    relative = !!relative || !!o.relative
+
+    // act on matrix
+    if (o.a != null) {
+      matrix = new SVG.Matrix(o)
+
+    // act on rotation
+    } else if (o.rotation != null) {
+      // ensure centre point
+      ensureCentre(o, target)
+
+      // apply transformation
+      matrix = new SVG.Rotate(o.rotation, o.cx, o.cy)
+
+    // act on scale
+    } else if (o.scale != null || o.scaleX != null || o.scaleY != null) {
+      // ensure centre point
+      ensureCentre(o, target)
+
+      // ensure scale values on both axes
+      o.scaleX = o.scale != null ? o.scale : o.scaleX != null ? o.scaleX : 1
+      o.scaleY = o.scale != null ? o.scale : o.scaleY != null ? o.scaleY : 1
+
+      matrix = new SVG.Scale(o.scaleX, o.scaleY, o.cx, o.cy)
+
+    // act on skew
+    } else if (o.skewX != null || o.skewY != null) {
+      // ensure centre point
+      ensureCentre(o, target)
+
+      // ensure skew values on both axes
+      o.skewX = o.skewX != null ? o.skewX : 0
+      o.skewY = o.skewY != null ? o.skewY : 0
+
+      matrix = new SVG.Skew(o.skewX, o.skewY, o.cx, o.cy)
+
+    // act on flip
+    } else if (o.flip) {
+      if(o.flip == 'x' || o.flip == 'y') {
+        o.offset = o.offset == null ? target.bbox()['c' + o.flip] : o.offset
+      } else {
+        if(o.offset == null) {
+          bbox = target.bbox()
+          o.flip = bbox.cx
+          o.offset = bbox.cy
+        } else {
+          o.flip = o.offset
+        }
+      }
+
+      matrix = new SVG.Matrix().flip(o.flip, o.offset)
+
+    // act on translate
+    } else if (o.x != null || o.y != null) {
+      matrix = new SVG.Translate(o.x, o.y)
+    }
+
+    if(!matrix) return this
+
+    matrix.relative = relative
+
+    this.last().transforms.push(matrix)
+
+    return this._callStart()
+  }
+})
+
+SVG.extend(SVG.Element, {
+  // Reset all transformations
+  untransform: function() {
+    return this.attr('transform', null)
+  },
+  // merge the whole transformation chain into one matrix and returns it
+  matrixify: function() {
+
+    var matrix = (this.attr('transform') || '')
+      // split transformations
+      .split(SVG.regex.transforms).slice(0,-1).map(function(str){
+        // generate key => value pairs
+        var kv = str.trim().split('(')
+        return [kv[0], kv[1].split(SVG.regex.delimiter).map(function(str){ return parseFloat(str) })]
+      })
+      // merge every transformation into one matrix
+      .reduce(function(matrix, transform){
+
+        if(transform[0] == 'matrix') return matrix.multiply(arrayToMatrix(transform[1]))
+        return matrix[transform[0]].apply(matrix, transform[1])
+
+      }, new SVG.Matrix())
+
+    return matrix
+  },
+  // add an element to another parent without changing the visual representation on the screen
+  toParent: function(parent) {
+    if(this == parent) return this
+    var ctm = this.screenCTM()
+    var pCtm = parent.screenCTM().inverse()
+
+    this.addTo(parent).untransform().transform(pCtm.multiply(ctm))
+
+    return this
+  },
+  // same as above with parent equals root-svg
+  toDoc: function() {
+    return this.toParent(this.doc())
+  }
+
+})
+
+SVG.Transformation = SVG.invent({
+
+  create: function(source, inversed){
+
+    if(arguments.length > 1 && typeof inversed != 'boolean'){
+      return this.constructor.call(this, [].slice.call(arguments))
+    }
+
+    if(Array.isArray(source)){
+      for(var i = 0, len = this.arguments.length; i < len; ++i){
+        this[this.arguments[i]] = source[i]
+      }
+    } else if(typeof source == 'object'){
+      for(var i = 0, len = this.arguments.length; i < len; ++i){
+        this[this.arguments[i]] = source[this.arguments[i]]
+      }
+    }
+
+    this.inversed = false
+
+    if(inversed === true){
+      this.inversed = true
+    }
+
+  }
+
+, extend: {
+
+    arguments: []
+  , method: ''
+
+  , at: function(pos){
+
+      var params = []
+
+      for(var i = 0, len = this.arguments.length; i < len; ++i){
+        params.push(this[this.arguments[i]])
+      }
+
+      var m = this._undo || new SVG.Matrix()
+
+      m = new SVG.Matrix().morph(SVG.Matrix.prototype[this.method].apply(m, params)).at(pos)
+
+      return this.inversed ? m.inverse() : m
+
+    }
+
+  , undo: function(o){
+      for(var i = 0, len = this.arguments.length; i < len; ++i){
+        o[this.arguments[i]] = typeof this[this.arguments[i]] == 'undefined' ? 0 : o[this.arguments[i]]
+      }
+
+      // The method SVG.Matrix.extract which was used before calling this
+      // method to obtain a value for the parameter o doesn't return a cx and
+      // a cy so we use the ones that were provided to this object at its creation
+      o.cx = this.cx
+      o.cy = this.cy
+
+      this._undo = new SVG[capitalize(this.method)](o, true).at(1)
+
+      return this
+    }
+
+  }
+
+})
+
+SVG.Translate = SVG.invent({
+
+  parent: SVG.Matrix
+, inherit: SVG.Transformation
+
+, create: function(source, inversed){
+    this.constructor.apply(this, [].slice.call(arguments))
+  }
+
+, extend: {
+    arguments: ['transformedX', 'transformedY']
+  , method: 'translate'
+  }
+
+})
+
+SVG.Rotate = SVG.invent({
+
+  parent: SVG.Matrix
+, inherit: SVG.Transformation
+
+, create: function(source, inversed){
+    this.constructor.apply(this, [].slice.call(arguments))
+  }
+
+, extend: {
+    arguments: ['rotation', 'cx', 'cy']
+  , method: 'rotate'
+  , at: function(pos){
+      var m = new SVG.Matrix().rotate(new SVG.Number().morph(this.rotation - (this._undo ? this._undo.rotation : 0)).at(pos), this.cx, this.cy)
+      return this.inversed ? m.inverse() : m
+    }
+  , undo: function(o){
+      this._undo = o
+      return this
+    }
+  }
+
+})
+
+SVG.Scale = SVG.invent({
+
+  parent: SVG.Matrix
+, inherit: SVG.Transformation
+
+, create: function(source, inversed){
+    this.constructor.apply(this, [].slice.call(arguments))
+  }
+
+, extend: {
+    arguments: ['scaleX', 'scaleY', 'cx', 'cy']
+  , method: 'scale'
+  }
+
+})
+
+SVG.Skew = SVG.invent({
+
+  parent: SVG.Matrix
+, inherit: SVG.Transformation
+
+, create: function(source, inversed){
+    this.constructor.apply(this, [].slice.call(arguments))
+  }
+
+, extend: {
+    arguments: ['skewX', 'skewY', 'cx', 'cy']
+  , method: 'skew'
+  }
+
+})
+
+SVG.extend(SVG.Element, {
+  // Dynamic style generator
+  style: function(s, v) {
+    if (arguments.length == 0) {
+      // get full style
+      return this.node.style.cssText || ''
+
+    } else if (arguments.length < 2) {
+      // apply every style individually if an object is passed
+      if (typeof s == 'object') {
+        for (v in s) this.style(v, s[v])
+
+      } else if (SVG.regex.isCss.test(s)) {
+        // parse css string
+        s = s.split(/\s*;\s*/)
+          // filter out suffix ; and stuff like ;;
+          .filter(function(e) { return !!e })
+          .map(function(e){ return e.split(/\s*:\s*/) })
+
+        // apply every definition individually
+        while (v = s.pop()) {
+          this.style(v[0], v[1])
+        }
+      } else {
+        // act as a getter if the first and only argument is not an object
+        return this.node.style[camelCase(s)]
+      }
+
+    } else {
+      this.node.style[camelCase(s)] = v === null || SVG.regex.isBlank.test(v) ? '' : v
+    }
+
+    return this
+  }
+})
+SVG.Parent = SVG.invent({
+  // Initialize node
+  create: function(element) {
+    this.constructor.call(this, element)
+  }
+
+  // Inherit from
+, inherit: SVG.Element
+
+  // Add class methods
+, extend: {
+    // Returns all child elements
+    children: function() {
+      return SVG.utils.map(SVG.utils.filterSVGElements(this.node.childNodes), function(node) {
+        return SVG.adopt(node)
+      })
+    }
+    // Add given element at a position
+  , add: function(element, i) {
+      if (i == null)
+        this.node.appendChild(element.node)
+      else if (element.node != this.node.childNodes[i])
+        this.node.insertBefore(element.node, this.node.childNodes[i])
+
+      return this
+    }
+    // Basically does the same as `add()` but returns the added element instead
+  , put: function(element, i) {
+      this.add(element, i)
+      return element
+    }
+    // Checks if the given element is a child
+  , has: function(element) {
+      return this.index(element) >= 0
+    }
+    // Gets index of given element
+  , index: function(element) {
+      return [].slice.call(this.node.childNodes).indexOf(element.node)
+    }
+    // Get a element at the given index
+  , get: function(i) {
+      return SVG.adopt(this.node.childNodes[i])
+    }
+    // Get first child
+  , first: function() {
+      return this.get(0)
+    }
+    // Get the last child
+  , last: function() {
+      return this.get(this.node.childNodes.length - 1)
+    }
+    // Iterates over all children and invokes a given block
+  , each: function(block, deep) {
+      var i, il
+        , children = this.children()
+
+      for (i = 0, il = children.length; i < il; i++) {
+        if (children[i] instanceof SVG.Element)
+          block.apply(children[i], [i, children])
+
+        if (deep && (children[i] instanceof SVG.Container))
+          children[i].each(block, deep)
+      }
+
+      return this
+    }
+    // Remove a given child
+  , removeElement: function(element) {
+      this.node.removeChild(element.node)
+
+      return this
+    }
+    // Remove all elements in this container
+  , clear: function() {
+      // remove children
+      while(this.node.hasChildNodes())
+        this.node.removeChild(this.node.lastChild)
+
+      // remove defs reference
+      delete this._defs
+
+      return this
+    }
+  , // Get defs
+    defs: function() {
+      return this.doc().defs()
+    }
+  }
+
+})
+
+SVG.extend(SVG.Parent, {
+
+  ungroup: function(parent, depth) {
+    if(depth === 0 || this instanceof SVG.Defs || this.node == SVG.parser.draw) return this
+
+    parent = parent || (this instanceof SVG.Doc ? this : this.parent(SVG.Parent))
+    depth = depth || Infinity
+
+    this.each(function(){
+      if(this instanceof SVG.Defs) return this
+      if(this instanceof SVG.Parent) return this.ungroup(parent, depth-1)
+      return this.toParent(parent)
+    })
+
+    this.node.firstChild || this.remove()
+
+    return this
+  },
+
+  flatten: function(parent, depth) {
+    return this.ungroup(parent, depth)
+  }
+
+})
+SVG.Container = SVG.invent({
+  // Initialize node
+  create: function(element) {
+    this.constructor.call(this, element)
+  }
+
+  // Inherit from
+, inherit: SVG.Parent
+
+})
+
+SVG.ViewBox = SVG.invent({
+
+  create: function(source) {
+    var i, base = [0, 0, 0, 0]
+
+    var x, y, width, height, box, view, we, he
+      , wm   = 1 // width multiplier
+      , hm   = 1 // height multiplier
+      , reg  = /[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?/gi
+
+    if(source instanceof SVG.Element){
+
+      we = source
+      he = source
+      view = (source.attr('viewBox') || '').match(reg)
+      box = source.bbox
+
+      // get dimensions of current node
+      width  = new SVG.Number(source.width())
+      height = new SVG.Number(source.height())
+
+      // find nearest non-percentual dimensions
+      while (width.unit == '%') {
+        wm *= width.value
+        width = new SVG.Number(we instanceof SVG.Doc ? we.parent().offsetWidth : we.parent().width())
+        we = we.parent()
+      }
+      while (height.unit == '%') {
+        hm *= height.value
+        height = new SVG.Number(he instanceof SVG.Doc ? he.parent().offsetHeight : he.parent().height())
+        he = he.parent()
+      }
+
+      // ensure defaults
+      this.x      = 0
+      this.y      = 0
+      this.width  = width  * wm
+      this.height = height * hm
+      this.zoom   = 1
+
+      if (view) {
+        // get width and height from viewbox
+        x      = parseFloat(view[0])
+        y      = parseFloat(view[1])
+        width  = parseFloat(view[2])
+        height = parseFloat(view[3])
+
+        // calculate zoom accoring to viewbox
+        this.zoom = ((this.width / this.height) > (width / height)) ?
+          this.height / height :
+          this.width  / width
+
+        // calculate real pixel dimensions on parent SVG.Doc element
+        this.x      = x
+        this.y      = y
+        this.width  = width
+        this.height = height
+
+      }
+
+    }else{
+
+      // ensure source as object
+      source = typeof source === 'string' ?
+        source.match(reg).map(function(el){ return parseFloat(el) }) :
+      Array.isArray(source) ?
+        source :
+      typeof source == 'object' ?
+        [source.x, source.y, source.width, source.height] :
+      arguments.length == 4 ?
+        [].slice.call(arguments) :
+        base
+
+      this.x = source[0]
+      this.y = source[1]
+      this.width = source[2]
+      this.height = source[3]
+    }
+
+
+  }
+
+, extend: {
+
+    toString: function() {
+      return this.x + ' ' + this.y + ' ' + this.width + ' ' + this.height
+    }
+  , morph: function(x, y, width, height){
+      this.destination = new SVG.ViewBox(x, y, width, height)
+      return this
+    }
+
+  , at: function(pos) {
+
+      if(!this.destination) return this
+
+      return new SVG.ViewBox([
+          this.x + (this.destination.x - this.x) * pos
+        , this.y + (this.destination.y - this.y) * pos
+        , this.width + (this.destination.width - this.width) * pos
+        , this.height + (this.destination.height - this.height) * pos
+      ])
+
+    }
+
+  }
+
+  // Define parent
+, parent: SVG.Container
+
+  // Add parent method
+, construct: {
+
+    // get/set viewbox
+    viewbox: function(x, y, width, height) {
+      if (arguments.length == 0)
+        // act as a getter if there are no arguments
+        return new SVG.ViewBox(this)
+
+      // otherwise act as a setter
+      return this.attr('viewBox', new SVG.ViewBox(x, y, width, height))
+    }
+
+  }
+
+})
+// Add events to elements
+;[  'click'
+  , 'dblclick'
+  , 'mousedown'
+  , 'mouseup'
+  , 'mouseover'
+  , 'mouseout'
+  , 'mousemove'
+  // , 'mouseenter' -> not supported by IE
+  // , 'mouseleave' -> not supported by IE
+  , 'touchstart'
+  , 'touchmove'
+  , 'touchleave'
+  , 'touchend'
+  , 'touchcancel' ].forEach(function(event) {
+
+  // add event to SVG.Element
+  SVG.Element.prototype[event] = function(f) {
+    // bind event to element rather than element node
+    SVG.on(this.node, event, f)
+    return this
+  }
+})
+
+// Initialize listeners stack
+SVG.listeners = []
+SVG.handlerMap = []
+SVG.listenerId = 0
+
+// Add event binder in the SVG namespace
+SVG.on = function(node, event, listener, binding, options) {
+  // create listener, get object-index
+  var l     = listener.bind(binding || node.instance || node)
+    , index = (SVG.handlerMap.indexOf(node) + 1 || SVG.handlerMap.push(node)) - 1
+    , ev    = event.split('.')[0]
+    , ns    = event.split('.')[1] || '*'
+
+
+  // ensure valid object
+  SVG.listeners[index]         = SVG.listeners[index]         || {}
+  SVG.listeners[index][ev]     = SVG.listeners[index][ev]     || {}
+  SVG.listeners[index][ev][ns] = SVG.listeners[index][ev][ns] || {}
+
+  if(!listener._svgjsListenerId)
+    listener._svgjsListenerId = ++SVG.listenerId
+
+  // reference listener
+  SVG.listeners[index][ev][ns][listener._svgjsListenerId] = l
+
+  // add listener
+  node.addEventListener(ev, l, options || false)
+}
+
+// Add event unbinder in the SVG namespace
+SVG.off = function(node, event, listener) {
+  var index = SVG.handlerMap.indexOf(node)
+    , ev    = event && event.split('.')[0]
+    , ns    = event && event.split('.')[1]
+    , namespace = ''
+
+  if(index == -1) return
+
+  if (listener) {
+    if(typeof listener == 'function') listener = listener._svgjsListenerId
+    if(!listener) return
+
+    // remove listener reference
+    if (SVG.listeners[index][ev] && SVG.listeners[index][ev][ns || '*']) {
+      // remove listener
+      node.removeEventListener(ev, SVG.listeners[index][ev][ns || '*'][listener], false)
+
+      delete SVG.listeners[index][ev][ns || '*'][listener]
+    }
+
+  } else if (ns && ev) {
+    // remove all listeners for a namespaced event
+    if (SVG.listeners[index][ev] && SVG.listeners[index][ev][ns]) {
+      for (listener in SVG.listeners[index][ev][ns])
+        SVG.off(node, [ev, ns].join('.'), listener)
+
+      delete SVG.listeners[index][ev][ns]
+    }
+
+  } else if (ns){
+    // remove all listeners for a specific namespace
+    for(event in SVG.listeners[index]){
+        for(namespace in SVG.listeners[index][event]){
+            if(ns === namespace){
+                SVG.off(node, [event, ns].join('.'))
+            }
+        }
+    }
+
+  } else if (ev) {
+    // remove all listeners for the event
+    if (SVG.listeners[index][ev]) {
+      for (namespace in SVG.listeners[index][ev])
+        SVG.off(node, [ev, namespace].join('.'))
+
+      delete SVG.listeners[index][ev]
+    }
+
+  } else {
+    // remove all listeners on a given node
+    for (event in SVG.listeners[index])
+      SVG.off(node, event)
+
+    delete SVG.listeners[index]
+    delete SVG.handlerMap[index]
+
+  }
+}
+
+//
+SVG.extend(SVG.Element, {
+  // Bind given event to listener
+  on: function(event, listener, binding, options) {
+    SVG.on(this.node, event, listener, binding, options)
+
+    return this
+  }
+  // Unbind event from listener
+, off: function(event, listener) {
+    SVG.off(this.node, event, listener)
+
+    return this
+  }
+  // Fire given event
+, fire: function(event, data) {
+
+    // Dispatch event
+    if(event instanceof window.Event){
+        this.node.dispatchEvent(event)
+    }else{
+        this.node.dispatchEvent(event = new window.CustomEvent(event, {detail:data, cancelable: true}))
+    }
+
+    this._event = event
+    return this
+  }
+, event: function() {
+    return this._event
+  }
+})
+
+
+SVG.Defs = SVG.invent({
+  // Initialize node
+  create: 'defs'
+
+  // Inherit from
+, inherit: SVG.Container
+
+})
+SVG.G = SVG.invent({
+  // Initialize node
+  create: 'g'
+
+  // Inherit from
+, inherit: SVG.Container
+
+  // Add class methods
+, extend: {
+    // Move over x-axis
+    x: function(x) {
+      return x == null ? this.transform('x') : this.transform({ x: x - this.x() }, true)
+    }
+    // Move over y-axis
+  , y: function(y) {
+      return y == null ? this.transform('y') : this.transform({ y: y - this.y() }, true)
+    }
+    // Move by center over x-axis
+  , cx: function(x) {
+      return x == null ? this.gbox().cx : this.x(x - this.gbox().width / 2)
+    }
+    // Move by center over y-axis
+  , cy: function(y) {
+      return y == null ? this.gbox().cy : this.y(y - this.gbox().height / 2)
+    }
+  , gbox: function() {
+
+      var bbox  = this.bbox()
+        , trans = this.transform()
+
+      bbox.x  += trans.x
+      bbox.x2 += trans.x
+      bbox.cx += trans.x
+
+      bbox.y  += trans.y
+      bbox.y2 += trans.y
+      bbox.cy += trans.y
+
+      return bbox
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // Create a group element
+    group: function() {
+      return this.put(new SVG.G)
+    }
+  }
+})
+
+// ### This module adds backward / forward functionality to elements.
+
+//
+SVG.extend(SVG.Element, {
+  // Get all siblings, including myself
+  siblings: function() {
+    return this.parent().children()
+  }
+  // Get the curent position siblings
+, position: function() {
+    return this.parent().index(this)
+  }
+  // Get the next element (will return null if there is none)
+, next: function() {
+    return this.siblings()[this.position() + 1]
+  }
+  // Get the next element (will return null if there is none)
+, previous: function() {
+    return this.siblings()[this.position() - 1]
+  }
+  // Send given element one step forward
+, forward: function() {
+    var i = this.position() + 1
+      , p = this.parent()
+
+    // move node one step forward
+    p.removeElement(this).add(this, i)
+
+    // make sure defs node is always at the top
+    if (p instanceof SVG.Doc)
+      p.node.appendChild(p.defs().node)
+
+    return this
+  }
+  // Send given element one step backward
+, backward: function() {
+    var i = this.position()
+
+    if (i > 0)
+      this.parent().removeElement(this).add(this, i - 1)
+
+    return this
+  }
+  // Send given element all the way to the front
+, front: function() {
+    var p = this.parent()
+
+    // Move node forward
+    p.node.appendChild(this.node)
+
+    // Make sure defs node is always at the top
+    if (p instanceof SVG.Doc)
+      p.node.appendChild(p.defs().node)
+
+    return this
+  }
+  // Send given element all the way to the back
+, back: function() {
+    if (this.position() > 0)
+      this.parent().removeElement(this).add(this, 0)
+
+    return this
+  }
+  // Inserts a given element before the targeted element
+, before: function(element) {
+    element.remove()
+
+    var i = this.position()
+
+    this.parent().add(element, i)
+
+    return this
+  }
+  // Insters a given element after the targeted element
+, after: function(element) {
+    element.remove()
+
+    var i = this.position()
+
+    this.parent().add(element, i + 1)
+
+    return this
+  }
+
+})
+SVG.Mask = SVG.invent({
+  // Initialize node
+  create: function() {
+    this.constructor.call(this, SVG.create('mask'))
+
+    // keep references to masked elements
+    this.targets = []
+  }
+
+  // Inherit from
+, inherit: SVG.Container
+
+  // Add class methods
+, extend: {
+    // Unmask all masked elements and remove itself
+    remove: function() {
+      // unmask all targets
+      for (var i = this.targets.length - 1; i >= 0; i--)
+        if (this.targets[i])
+          this.targets[i].unmask()
+      this.targets = []
+
+      // remove mask from parent
+      this.parent().removeElement(this)
+
+      return this
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // Create masking element
+    mask: function() {
+      return this.defs().put(new SVG.Mask)
+    }
+  }
+})
+
+
+SVG.extend(SVG.Element, {
+  // Distribute mask to svg element
+  maskWith: function(element) {
+    // use given mask or create a new one
+    this.masker = element instanceof SVG.Mask ? element : this.parent().mask().add(element)
+
+    // store reverence on self in mask
+    this.masker.targets.push(this)
+
+    // apply mask
+    return this.attr('mask', 'url("#' + this.masker.attr('id') + '")')
+  }
+  // Unmask element
+, unmask: function() {
+    delete this.masker
+    return this.attr('mask', null)
+  }
+
+})
+
+SVG.ClipPath = SVG.invent({
+  // Initialize node
+  create: function() {
+    this.constructor.call(this, SVG.create('clipPath'))
+
+    // keep references to clipped elements
+    this.targets = []
+  }
+
+  // Inherit from
+, inherit: SVG.Container
+
+  // Add class methods
+, extend: {
+    // Unclip all clipped elements and remove itself
+    remove: function() {
+      // unclip all targets
+      for (var i = this.targets.length - 1; i >= 0; i--)
+        if (this.targets[i])
+          this.targets[i].unclip()
+      this.targets = []
+
+      // remove clipPath from parent
+      this.parent().removeElement(this)
+
+      return this
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // Create clipping element
+    clip: function() {
+      return this.defs().put(new SVG.ClipPath)
+    }
+  }
+})
+
+//
+SVG.extend(SVG.Element, {
+  // Distribute clipPath to svg element
+  clipWith: function(element) {
+    // use given clip or create a new one
+    this.clipper = element instanceof SVG.ClipPath ? element : this.parent().clip().add(element)
+
+    // store reverence on self in mask
+    this.clipper.targets.push(this)
+
+    // apply mask
+    return this.attr('clip-path', 'url("#' + this.clipper.attr('id') + '")')
+  }
+  // Unclip element
+, unclip: function() {
+    delete this.clipper
+    return this.attr('clip-path', null)
+  }
+
+})
+SVG.Gradient = SVG.invent({
+  // Initialize node
+  create: function(type) {
+    this.constructor.call(this, SVG.create(type + 'Gradient'))
+
+    // store type
+    this.type = type
+  }
+
+  // Inherit from
+, inherit: SVG.Container
+
+  // Add class methods
+, extend: {
+    // Add a color stop
+    at: function(offset, color, opacity) {
+      return this.put(new SVG.Stop).update(offset, color, opacity)
+    }
+    // Update gradient
+  , update: function(block) {
+      // remove all stops
+      this.clear()
+
+      // invoke passed block
+      if (typeof block == 'function')
+        block.call(this, this)
+
+      return this
+    }
+    // Return the fill id
+  , fill: function() {
+      return 'url(#' + this.id() + ')'
+    }
+    // Alias string convertion to fill
+  , toString: function() {
+      return this.fill()
+    }
+    // custom attr to handle transform
+  , attr: function(a, b, c) {
+      if(a == 'transform') a = 'gradientTransform'
+      return SVG.Container.prototype.attr.call(this, a, b, c)
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // Create gradient element in defs
+    gradient: function(type, block) {
+      return this.defs().gradient(type, block)
+    }
+  }
+})
+
+// Add animatable methods to both gradient and fx module
+SVG.extend(SVG.Gradient, SVG.FX, {
+  // From position
+  from: function(x, y) {
+    return (this._target || this).type == 'radial' ?
+      this.attr({ fx: new SVG.Number(x), fy: new SVG.Number(y) }) :
+      this.attr({ x1: new SVG.Number(x), y1: new SVG.Number(y) })
+  }
+  // To position
+, to: function(x, y) {
+    return (this._target || this).type == 'radial' ?
+      this.attr({ cx: new SVG.Number(x), cy: new SVG.Number(y) }) :
+      this.attr({ x2: new SVG.Number(x), y2: new SVG.Number(y) })
+  }
+})
+
+// Base gradient generation
+SVG.extend(SVG.Defs, {
+  // define gradient
+  gradient: function(type, block) {
+    return this.put(new SVG.Gradient(type)).update(block)
+  }
+
+})
+
+SVG.Stop = SVG.invent({
+  // Initialize node
+  create: 'stop'
+
+  // Inherit from
+, inherit: SVG.Element
+
+  // Add class methods
+, extend: {
+    // add color stops
+    update: function(o) {
+      if (typeof o == 'number' || o instanceof SVG.Number) {
+        o = {
+          offset:  arguments[0]
+        , color:   arguments[1]
+        , opacity: arguments[2]
+        }
+      }
+
+      // set attributes
+      if (o.opacity != null) this.attr('stop-opacity', o.opacity)
+      if (o.color   != null) this.attr('stop-color', o.color)
+      if (o.offset  != null) this.attr('offset', new SVG.Number(o.offset))
+
+      return this
+    }
+  }
+
+})
+
+SVG.Pattern = SVG.invent({
+  // Initialize node
+  create: 'pattern'
+
+  // Inherit from
+, inherit: SVG.Container
+
+  // Add class methods
+, extend: {
+    // Return the fill id
+    fill: function() {
+      return 'url(#' + this.id() + ')'
+    }
+    // Update pattern by rebuilding
+  , update: function(block) {
+      // remove content
+      this.clear()
+
+      // invoke passed block
+      if (typeof block == 'function')
+        block.call(this, this)
+
+      return this
+    }
+    // Alias string convertion to fill
+  , toString: function() {
+      return this.fill()
+    }
+    // custom attr to handle transform
+  , attr: function(a, b, c) {
+      if(a == 'transform') a = 'patternTransform'
+      return SVG.Container.prototype.attr.call(this, a, b, c)
+    }
+
+  }
+
+  // Add parent method
+, construct: {
+    // Create pattern element in defs
+    pattern: function(width, height, block) {
+      return this.defs().pattern(width, height, block)
+    }
+  }
+})
+
+SVG.extend(SVG.Defs, {
+  // Define gradient
+  pattern: function(width, height, block) {
+    return this.put(new SVG.Pattern).update(block).attr({
+      x:            0
+    , y:            0
+    , width:        width
+    , height:       height
+    , patternUnits: 'userSpaceOnUse'
+    })
+  }
+
+})
+SVG.Doc = SVG.invent({
+  // Initialize node
+  create: function(element) {
+    if (element) {
+      // ensure the presence of a dom element
+      element = typeof element == 'string' ?
+        document.getElementById(element) :
+        element
+
+      // If the target is an svg element, use that element as the main wrapper.
+      // This allows svg.js to work with svg documents as well.
+      if (element.nodeName == 'svg') {
+        this.constructor.call(this, element)
+      } else {
+        this.constructor.call(this, SVG.create('svg'))
+        element.appendChild(this.node)
+        this.size('100%', '100%')
+      }
+
+      // set svg element attributes and ensure defs node
+      this.namespace().defs()
+    }
+  }
+
+  // Inherit from
+, inherit: SVG.Container
+
+  // Add class methods
+, extend: {
+    // Add namespaces
+    namespace: function() {
+      return this
+        .attr({ xmlns: SVG.ns, version: '1.1' })
+        .attr('xmlns:xlink', SVG.xlink, SVG.xmlns)
+        .attr('xmlns:svgjs', SVG.svgjs, SVG.xmlns)
+    }
+    // Creates and returns defs element
+  , defs: function() {
+      if (!this._defs) {
+        var defs
+
+        // Find or create a defs element in this instance
+        if (defs = this.node.getElementsByTagName('defs')[0])
+          this._defs = SVG.adopt(defs)
+        else
+          this._defs = new SVG.Defs
+
+        // Make sure the defs node is at the end of the stack
+        this.node.appendChild(this._defs.node)
+      }
+
+      return this._defs
+    }
+    // custom parent method
+  , parent: function() {
+      return this.node.parentNode.nodeName == '#document' ? null : this.node.parentNode
+    }
+    // Fix for possible sub-pixel offset. See:
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=608812
+  , spof: function() {
+      var pos = this.node.getScreenCTM()
+
+      if (pos)
+        this
+          .style('left', (-pos.e % 1) + 'px')
+          .style('top',  (-pos.f % 1) + 'px')
+
+      return this
+    }
+
+      // Removes the doc from the DOM
+  , remove: function() {
+      if(this.parent()) {
+        this.parent().removeChild(this.node)
+      }
+
+      return this
+    }
+  , clear: function() {
+      // remove children
+      while(this.node.hasChildNodes())
+        this.node.removeChild(this.node.lastChild)
+
+      // remove defs reference
+      delete this._defs
+
+      // add back parser
+      if(!SVG.parser.draw.parentNode)
+        this.node.appendChild(SVG.parser.draw)
+
+      return this
+    }
+  }
+
+})
+
+SVG.Shape = SVG.invent({
+  // Initialize node
+  create: function(element) {
+    this.constructor.call(this, element)
+  }
+
+  // Inherit from
+, inherit: SVG.Element
+
+})
+
+SVG.Bare = SVG.invent({
+  // Initialize
+  create: function(element, inherit) {
+    // construct element
+    this.constructor.call(this, SVG.create(element))
+
+    // inherit custom methods
+    if (inherit)
+      for (var method in inherit.prototype)
+        if (typeof inherit.prototype[method] === 'function')
+          this[method] = inherit.prototype[method]
+  }
+
+  // Inherit from
+, inherit: SVG.Element
+
+  // Add methods
+, extend: {
+    // Insert some plain text
+    words: function(text) {
+      // remove contents
+      while (this.node.hasChildNodes())
+        this.node.removeChild(this.node.lastChild)
+
+      // create text node
+      this.node.appendChild(document.createTextNode(text))
+
+      return this
+    }
+  }
+})
+
+
+SVG.extend(SVG.Parent, {
+  // Create an element that is not described by SVG.js
+  element: function(element, inherit) {
+    return this.put(new SVG.Bare(element, inherit))
+  }
+})
+
+SVG.Symbol = SVG.invent({
+  // Initialize node
+  create: 'symbol'
+
+  // Inherit from
+, inherit: SVG.Container
+
+, construct: {
+    // create symbol
+    symbol: function() {
+      return this.put(new SVG.Symbol)
+    }
+  }
+})
+
+SVG.Use = SVG.invent({
+  // Initialize node
+  create: 'use'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add class methods
+, extend: {
+    // Use element as a reference
+    element: function(element, file) {
+      // Set lined element
+      return this.attr('href', (file || '') + '#' + element, SVG.xlink)
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // Create a use element
+    use: function(element, file) {
+      return this.put(new SVG.Use).element(element, file)
+    }
+  }
+})
+SVG.Rect = SVG.invent({
+  // Initialize node
+  create: 'rect'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add parent method
+, construct: {
+    // Create a rect element
+    rect: function(width, height) {
+      return this.put(new SVG.Rect()).size(width, height)
+    }
+  }
+})
+SVG.Circle = SVG.invent({
+  // Initialize node
+  create: 'circle'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add parent method
+, construct: {
+    // Create circle element, based on ellipse
+    circle: function(size) {
+      return this.put(new SVG.Circle).rx(new SVG.Number(size).divide(2)).move(0, 0)
+    }
+  }
+})
+
+SVG.extend(SVG.Circle, SVG.FX, {
+  // Radius x value
+  rx: function(rx) {
+    return this.attr('r', rx)
+  }
+  // Alias radius x value
+, ry: function(ry) {
+    return this.rx(ry)
+  }
+})
+
+SVG.Ellipse = SVG.invent({
+  // Initialize node
+  create: 'ellipse'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add parent method
+, construct: {
+    // Create an ellipse
+    ellipse: function(width, height) {
+      return this.put(new SVG.Ellipse).size(width, height).move(0, 0)
+    }
+  }
+})
+
+SVG.extend(SVG.Ellipse, SVG.Rect, SVG.FX, {
+  // Radius x value
+  rx: function(rx) {
+    return this.attr('rx', rx)
+  }
+  // Radius y value
+, ry: function(ry) {
+    return this.attr('ry', ry)
+  }
+})
+
+// Add common method
+SVG.extend(SVG.Circle, SVG.Ellipse, {
+    // Move over x-axis
+    x: function(x) {
+      return x == null ? this.cx() - this.rx() : this.cx(x + this.rx())
+    }
+    // Move over y-axis
+  , y: function(y) {
+      return y == null ? this.cy() - this.ry() : this.cy(y + this.ry())
+    }
+    // Move by center over x-axis
+  , cx: function(x) {
+      return x == null ? this.attr('cx') : this.attr('cx', x)
+    }
+    // Move by center over y-axis
+  , cy: function(y) {
+      return y == null ? this.attr('cy') : this.attr('cy', y)
+    }
+    // Set width of element
+  , width: function(width) {
+      return width == null ? this.rx() * 2 : this.rx(new SVG.Number(width).divide(2))
+    }
+    // Set height of element
+  , height: function(height) {
+      return height == null ? this.ry() * 2 : this.ry(new SVG.Number(height).divide(2))
+    }
+    // Custom size function
+  , size: function(width, height) {
+      var p = proportionalSize(this, width, height)
+
+      return this
+        .rx(new SVG.Number(p.width).divide(2))
+        .ry(new SVG.Number(p.height).divide(2))
+    }
+})
+SVG.Line = SVG.invent({
+  // Initialize node
+  create: 'line'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add class methods
+, extend: {
+    // Get array
+    array: function() {
+      return new SVG.PointArray([
+        [ this.attr('x1'), this.attr('y1') ]
+      , [ this.attr('x2'), this.attr('y2') ]
+      ])
+    }
+    // Overwrite native plot() method
+  , plot: function(x1, y1, x2, y2) {
+      if (x1 == null)
+        return this.array()
+      else if (typeof y1 !== 'undefined')
+        x1 = { x1: x1, y1: y1, x2: x2, y2: y2 }
+      else
+        x1 = new SVG.PointArray(x1).toLine()
+
+      return this.attr(x1)
+    }
+    // Move by left top corner
+  , move: function(x, y) {
+      return this.attr(this.array().move(x, y).toLine())
+    }
+    // Set element size to given width and height
+  , size: function(width, height) {
+      var p = proportionalSize(this, width, height)
+
+      return this.attr(this.array().size(p.width, p.height).toLine())
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // Create a line element
+    line: function(x1, y1, x2, y2) {
+      // make sure plot is called as a setter
+      // x1 is not necessarily a number, it can also be an array, a string and a SVG.PointArray
+      return SVG.Line.prototype.plot.apply(
+        this.put(new SVG.Line)
+      , x1 != null ? [x1, y1, x2, y2] : [0, 0, 0, 0]
+      )
+    }
+  }
+})
+
+SVG.Polyline = SVG.invent({
+  // Initialize node
+  create: 'polyline'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add parent method
+, construct: {
+    // Create a wrapped polyline element
+    polyline: function(p) {
+      // make sure plot is called as a setter
+      return this.put(new SVG.Polyline).plot(p || new SVG.PointArray)
+    }
+  }
+})
+
+SVG.Polygon = SVG.invent({
+  // Initialize node
+  create: 'polygon'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add parent method
+, construct: {
+    // Create a wrapped polygon element
+    polygon: function(p) {
+      // make sure plot is called as a setter
+      return this.put(new SVG.Polygon).plot(p || new SVG.PointArray)
+    }
+  }
+})
+
+// Add polygon-specific functions
+SVG.extend(SVG.Polyline, SVG.Polygon, {
+  // Get array
+  array: function() {
+    return this._array || (this._array = new SVG.PointArray(this.attr('points')))
+  }
+  // Plot new path
+, plot: function(p) {
+    return (p == null) ?
+      this.array() :
+      this.clear().attr('points', typeof p == 'string' ? p : (this._array = new SVG.PointArray(p)))
+  }
+  // Clear array cache
+, clear: function() {
+    delete this._array
+    return this
+  }
+  // Move by left top corner
+, move: function(x, y) {
+    return this.attr('points', this.array().move(x, y))
+  }
+  // Set element size to given width and height
+, size: function(width, height) {
+    var p = proportionalSize(this, width, height)
+
+    return this.attr('points', this.array().size(p.width, p.height))
+  }
+
+})
+
+// unify all point to point elements
+SVG.extend(SVG.Line, SVG.Polyline, SVG.Polygon, {
+  // Define morphable array
+  morphArray:  SVG.PointArray
+  // Move by left top corner over x-axis
+, x: function(x) {
+    return x == null ? this.bbox().x : this.move(x, this.bbox().y)
+  }
+  // Move by left top corner over y-axis
+, y: function(y) {
+    return y == null ? this.bbox().y : this.move(this.bbox().x, y)
+  }
+  // Set width of element
+, width: function(width) {
+    var b = this.bbox()
+
+    return width == null ? b.width : this.size(width, b.height)
+  }
+  // Set height of element
+, height: function(height) {
+    var b = this.bbox()
+
+    return height == null ? b.height : this.size(b.width, height)
+  }
+})
+SVG.Path = SVG.invent({
+  // Initialize node
+  create: 'path'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add class methods
+, extend: {
+    // Define morphable array
+    morphArray:  SVG.PathArray
+    // Get array
+  , array: function() {
+      return this._array || (this._array = new SVG.PathArray(this.attr('d')))
+    }
+    // Plot new path
+  , plot: function(d) {
+      return (d == null) ?
+        this.array() :
+        this.clear().attr('d', typeof d == 'string' ? d : (this._array = new SVG.PathArray(d)))
+    }
+    // Clear array cache
+  , clear: function() {
+      delete this._array
+      return this
+    }
+    // Move by left top corner
+  , move: function(x, y) {
+      return this.attr('d', this.array().move(x, y))
+    }
+    // Move by left top corner over x-axis
+  , x: function(x) {
+      return x == null ? this.bbox().x : this.move(x, this.bbox().y)
+    }
+    // Move by left top corner over y-axis
+  , y: function(y) {
+      return y == null ? this.bbox().y : this.move(this.bbox().x, y)
+    }
+    // Set element size to given width and height
+  , size: function(width, height) {
+      var p = proportionalSize(this, width, height)
+
+      return this.attr('d', this.array().size(p.width, p.height))
+    }
+    // Set width of element
+  , width: function(width) {
+      return width == null ? this.bbox().width : this.size(width, this.bbox().height)
+    }
+    // Set height of element
+  , height: function(height) {
+      return height == null ? this.bbox().height : this.size(this.bbox().width, height)
+    }
+
+  }
+
+  // Add parent method
+, construct: {
+    // Create a wrapped path element
+    path: function(d) {
+      // make sure plot is called as a setter
+      return this.put(new SVG.Path).plot(d || new SVG.PathArray)
+    }
+  }
+})
+
+SVG.Image = SVG.invent({
+  // Initialize node
+  create: 'image'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add class methods
+, extend: {
+    // (re)load image
+    load: function(url) {
+      if (!url) return this
+
+      var self = this
+        , img  = new window.Image()
+
+      // preload image
+      SVG.on(img, 'load', function() {
+        var p = self.parent(SVG.Pattern)
+
+        if(p === null) return
+
+        // ensure image size
+        if (self.width() == 0 && self.height() == 0)
+          self.size(img.width, img.height)
+
+        // ensure pattern size if not set
+        if (p && p.width() == 0 && p.height() == 0)
+          p.size(self.width(), self.height())
+
+        // callback
+        if (typeof self._loaded === 'function')
+          self._loaded.call(self, {
+            width:  img.width
+          , height: img.height
+          , ratio:  img.width / img.height
+          , url:    url
+          })
+      })
+
+      SVG.on(img, 'error', function(e){
+        if (typeof self._error === 'function'){
+            self._error.call(self, e)
+        }
+      })
+
+      return this.attr('href', (img.src = this.src = url), SVG.xlink)
+    }
+    // Add loaded callback
+  , loaded: function(loaded) {
+      this._loaded = loaded
+      return this
+    }
+
+  , error: function(error) {
+      this._error = error
+      return this
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // create image element, load image and set its size
+    image: function(source, width, height) {
+      return this.put(new SVG.Image).load(source).size(width || 0, height || width || 0)
+    }
+  }
+
+})
+SVG.Text = SVG.invent({
+  // Initialize node
+  create: function() {
+    this.constructor.call(this, SVG.create('text'))
+
+    this.dom.leading = new SVG.Number(1.3)    // store leading value for rebuilding
+    this._rebuild = true                      // enable automatic updating of dy values
+    this._build   = false                     // disable build mode for adding multiple lines
+
+    // set default font
+    this.attr('font-family', SVG.defaults.attrs['font-family'])
+  }
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add class methods
+, extend: {
+    // Move over x-axis
+    x: function(x) {
+      // act as getter
+      if (x == null)
+        return this.attr('x')
+
+      return this.attr('x', x)
+    }
+    // Move over y-axis
+  , y: function(y) {
+      var oy = this.attr('y')
+        , o  = typeof oy === 'number' ? oy - this.bbox().y : 0
+
+      // act as getter
+      if (y == null)
+        return typeof oy === 'number' ? oy - o : oy
+
+      return this.attr('y', typeof y === 'number' ? y + o : y)
+    }
+    // Move center over x-axis
+  , cx: function(x) {
+      return x == null ? this.bbox().cx : this.x(x - this.bbox().width / 2)
+    }
+    // Move center over y-axis
+  , cy: function(y) {
+      return y == null ? this.bbox().cy : this.y(y - this.bbox().height / 2)
+    }
+    // Set the text content
+  , text: function(text) {
+      // act as getter
+      if (typeof text === 'undefined'){
+        var text = ''
+        var children = this.node.childNodes
+        for(var i = 0, len = children.length; i < len; ++i){
+
+          // add newline if its not the first child and newLined is set to true
+          if(i != 0 && children[i].nodeType != 3 && SVG.adopt(children[i]).dom.newLined == true){
+            text += '\n'
+          }
+
+          // add content of this node
+          text += children[i].textContent
+        }
+
+        return text
+      }
+
+      // remove existing content
+      this.clear().build(true)
+
+      if (typeof text === 'function') {
+        // call block
+        text.call(this, this)
+
+      } else {
+        // store text and make sure text is not blank
+        text = text.split('\n')
+
+        // build new lines
+        for (var i = 0, il = text.length; i < il; i++)
+          this.tspan(text[i]).newLine()
+      }
+
+      // disable build mode and rebuild lines
+      return this.build(false).rebuild()
+    }
+    // Set font size
+  , size: function(size) {
+      return this.attr('font-size', size).rebuild()
+    }
+    // Set / get leading
+  , leading: function(value) {
+      // act as getter
+      if (value == null)
+        return this.dom.leading
+
+      // act as setter
+      this.dom.leading = new SVG.Number(value)
+
+      return this.rebuild()
+    }
+    // Get all the first level lines
+  , lines: function() {
+      var node = (this.textPath && this.textPath() || this).node
+
+      // filter tspans and map them to SVG.js instances
+      var lines = SVG.utils.map(SVG.utils.filterSVGElements(node.childNodes), function(el){
+        return SVG.adopt(el)
+      })
+
+      // return an instance of SVG.set
+      return new SVG.Set(lines)
+    }
+    // Rebuild appearance type
+  , rebuild: function(rebuild) {
+      // store new rebuild flag if given
+      if (typeof rebuild == 'boolean')
+        this._rebuild = rebuild
+
+      // define position of all lines
+      if (this._rebuild) {
+        var self = this
+          , blankLineOffset = 0
+          , dy = this.dom.leading * new SVG.Number(this.attr('font-size'))
+
+        this.lines().each(function() {
+          if (this.dom.newLined) {
+            if (!self.textPath())
+              this.attr('x', self.attr('x'))
+            if(this.text() == '\n') {
+              blankLineOffset += dy
+            }else{
+              this.attr('dy', dy + blankLineOffset)
+              blankLineOffset = 0
+            }
+          }
+        })
+
+        this.fire('rebuild')
+      }
+
+      return this
+    }
+    // Enable / disable build mode
+  , build: function(build) {
+      this._build = !!build
+      return this
+    }
+    // overwrite method from parent to set data properly
+  , setData: function(o){
+      this.dom = o
+      this.dom.leading = new SVG.Number(o.leading || 1.3)
+      return this
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // Create text element
+    text: function(text) {
+      return this.put(new SVG.Text).text(text)
+    }
+    // Create plain text element
+  , plain: function(text) {
+      return this.put(new SVG.Text).plain(text)
+    }
+  }
+
+})
+
+SVG.Tspan = SVG.invent({
+  // Initialize node
+  create: 'tspan'
+
+  // Inherit from
+, inherit: SVG.Shape
+
+  // Add class methods
+, extend: {
+    // Set text content
+    text: function(text) {
+      if(text == null) return this.node.textContent + (this.dom.newLined ? '\n' : '')
+
+      typeof text === 'function' ? text.call(this, this) : this.plain(text)
+
+      return this
+    }
+    // Shortcut dx
+  , dx: function(dx) {
+      return this.attr('dx', dx)
+    }
+    // Shortcut dy
+  , dy: function(dy) {
+      return this.attr('dy', dy)
+    }
+    // Create new line
+  , newLine: function() {
+      // fetch text parent
+      var t = this.parent(SVG.Text)
+
+      // mark new line
+      this.dom.newLined = true
+
+      // apply new hy¡n
+      return this.dy(t.dom.leading * t.attr('font-size')).attr('x', t.x())
+    }
+  }
+
+})
+
+SVG.extend(SVG.Text, SVG.Tspan, {
+  // Create plain text node
+  plain: function(text) {
+    // clear if build mode is disabled
+    if (this._build === false)
+      this.clear()
+
+    // create text node
+    this.node.appendChild(document.createTextNode(text))
+
+    return this
+  }
+  // Create a tspan
+, tspan: function(text) {
+    var node  = (this.textPath && this.textPath() || this).node
+      , tspan = new SVG.Tspan
+
+    // clear if build mode is disabled
+    if (this._build === false)
+      this.clear()
+
+    // add new tspan
+    node.appendChild(tspan.node)
+
+    return tspan.text(text)
+  }
+  // Clear all lines
+, clear: function() {
+    var node = (this.textPath && this.textPath() || this).node
+
+    // remove existing child nodes
+    while (node.hasChildNodes())
+      node.removeChild(node.lastChild)
+
+    return this
+  }
+  // Get length of text element
+, length: function() {
+    return this.node.getComputedTextLength()
+  }
+})
+
+SVG.TextPath = SVG.invent({
+  // Initialize node
+  create: 'textPath'
+
+  // Inherit from
+, inherit: SVG.Parent
+
+  // Define parent class
+, parent: SVG.Text
+
+  // Add parent method
+, construct: {
+    morphArray: SVG.PathArray
+    // Create path for text to run on
+  , path: function(d) {
+      // create textPath element
+      var path  = new SVG.TextPath
+        , track = this.doc().defs().path(d)
+
+      // move lines to textpath
+      while (this.node.hasChildNodes())
+        path.node.appendChild(this.node.firstChild)
+
+      // add textPath element as child node
+      this.node.appendChild(path.node)
+
+      // link textPath to path and add content
+      path.attr('href', '#' + track, SVG.xlink)
+
+      return this
+    }
+    // return the array of the path track element
+  , array: function() {
+      var track = this.track()
+
+      return track ? track.array() : null
+    }
+    // Plot path if any
+  , plot: function(d) {
+      var track = this.track()
+        , pathArray = null
+
+      if (track) {
+        pathArray = track.plot(d)
+      }
+
+      return (d == null) ? pathArray : this
+    }
+    // Get the path track element
+  , track: function() {
+      var path = this.textPath()
+
+      if (path)
+        return path.reference('href')
+    }
+    // Get the textPath child
+  , textPath: function() {
+      if (this.node.firstChild && this.node.firstChild.nodeName == 'textPath')
+        return SVG.adopt(this.node.firstChild)
+    }
+  }
+})
+
+SVG.Nested = SVG.invent({
+  // Initialize node
+  create: function() {
+    this.constructor.call(this, SVG.create('svg'))
+
+    this.style('overflow', 'visible')
+  }
+
+  // Inherit from
+, inherit: SVG.Container
+
+  // Add parent method
+, construct: {
+    // Create nested svg document
+    nested: function() {
+      return this.put(new SVG.Nested)
+    }
+  }
+})
+SVG.A = SVG.invent({
+  // Initialize node
+  create: 'a'
+
+  // Inherit from
+, inherit: SVG.Container
+
+  // Add class methods
+, extend: {
+    // Link url
+    to: function(url) {
+      return this.attr('href', url, SVG.xlink)
+    }
+    // Link show attribute
+  , show: function(target) {
+      return this.attr('show', target, SVG.xlink)
+    }
+    // Link target attribute
+  , target: function(target) {
+      return this.attr('target', target)
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // Create a hyperlink element
+    link: function(url) {
+      return this.put(new SVG.A).to(url)
+    }
+  }
+})
+
+SVG.extend(SVG.Element, {
+  // Create a hyperlink element
+  linkTo: function(url) {
+    var link = new SVG.A
+
+    if (typeof url == 'function')
+      url.call(link, link)
+    else
+      link.to(url)
+
+    return this.parent().put(link).put(this)
+  }
+
+})
+SVG.Marker = SVG.invent({
+  // Initialize node
+  create: 'marker'
+
+  // Inherit from
+, inherit: SVG.Container
+
+  // Add class methods
+, extend: {
+    // Set width of element
+    width: function(width) {
+      return this.attr('markerWidth', width)
+    }
+    // Set height of element
+  , height: function(height) {
+      return this.attr('markerHeight', height)
+    }
+    // Set marker refX and refY
+  , ref: function(x, y) {
+      return this.attr('refX', x).attr('refY', y)
+    }
+    // Update marker
+  , update: function(block) {
+      // remove all content
+      this.clear()
+
+      // invoke passed block
+      if (typeof block == 'function')
+        block.call(this, this)
+
+      return this
+    }
+    // Return the fill id
+  , toString: function() {
+      return 'url(#' + this.id() + ')'
+    }
+  }
+
+  // Add parent method
+, construct: {
+    marker: function(width, height, block) {
+      // Create marker element in defs
+      return this.defs().marker(width, height, block)
+    }
+  }
+
+})
+
+SVG.extend(SVG.Defs, {
+  // Create marker
+  marker: function(width, height, block) {
+    // Set default viewbox to match the width and height, set ref to cx and cy and set orient to auto
+    return this.put(new SVG.Marker)
+      .size(width, height)
+      .ref(width / 2, height / 2)
+      .viewbox(0, 0, width, height)
+      .attr('orient', 'auto')
+      .update(block)
+  }
+
+})
+
+SVG.extend(SVG.Line, SVG.Polyline, SVG.Polygon, SVG.Path, {
+  // Create and attach markers
+  marker: function(marker, width, height, block) {
+    var attr = ['marker']
+
+    // Build attribute name
+    if (marker != 'all') attr.push(marker)
+    attr = attr.join('-')
+
+    // Set marker attribute
+    marker = arguments[1] instanceof SVG.Marker ?
+      arguments[1] :
+      this.doc().marker(width, height, block)
+
+    return this.attr(attr, marker)
+  }
+
+})
+// Define list of available attributes for stroke and fill
+var sugar = {
+  stroke: ['color', 'width', 'opacity', 'linecap', 'linejoin', 'miterlimit', 'dasharray', 'dashoffset']
+, fill:   ['color', 'opacity', 'rule']
+, prefix: function(t, a) {
+    return a == 'color' ? t : t + '-' + a
+  }
+}
+
+// Add sugar for fill and stroke
+;['fill', 'stroke'].forEach(function(m) {
+  var i, extension = {}
+
+  extension[m] = function(o) {
+    if (typeof o == 'undefined')
+      return this
+    if (typeof o == 'string' || SVG.Color.isRgb(o) || (o && typeof o.fill === 'function'))
+      this.attr(m, o)
+
+    else
+      // set all attributes from sugar.fill and sugar.stroke list
+      for (i = sugar[m].length - 1; i >= 0; i--)
+        if (o[sugar[m][i]] != null)
+          this.attr(sugar.prefix(m, sugar[m][i]), o[sugar[m][i]])
+
+    return this
+  }
+
+  SVG.extend(SVG.Element, SVG.FX, extension)
+
+})
+
+SVG.extend(SVG.Element, SVG.FX, {
+  // Map rotation to transform
+  rotate: function(d, cx, cy) {
+    return this.transform({ rotation: d, cx: cx, cy: cy })
+  }
+  // Map skew to transform
+, skew: function(x, y, cx, cy) {
+    return arguments.length == 1  || arguments.length == 3 ?
+      this.transform({ skew: x, cx: y, cy: cx }) :
+      this.transform({ skewX: x, skewY: y, cx: cx, cy: cy })
+  }
+  // Map scale to transform
+, scale: function(x, y, cx, cy) {
+    return arguments.length == 1  || arguments.length == 3 ?
+      this.transform({ scale: x, cx: y, cy: cx }) :
+      this.transform({ scaleX: x, scaleY: y, cx: cx, cy: cy })
+  }
+  // Map translate to transform
+, translate: function(x, y) {
+    return this.transform({ x: x, y: y })
+  }
+  // Map flip to transform
+, flip: function(a, o) {
+    o = typeof a == 'number' ? a : o
+    return this.transform({ flip: a || 'both', offset: o })
+  }
+  // Map matrix to transform
+, matrix: function(m) {
+    return this.attr('transform', new SVG.Matrix(arguments.length == 6 ? [].slice.call(arguments) : m))
+  }
+  // Opacity
+, opacity: function(value) {
+    return this.attr('opacity', value)
+  }
+  // Relative move over x axis
+, dx: function(x) {
+    return this.x(new SVG.Number(x).plus(this instanceof SVG.FX ? 0 : this.x()), true)
+  }
+  // Relative move over y axis
+, dy: function(y) {
+    return this.y(new SVG.Number(y).plus(this instanceof SVG.FX ? 0 : this.y()), true)
+  }
+  // Relative move over x and y axes
+, dmove: function(x, y) {
+    return this.dx(x).dy(y)
+  }
+})
+
+SVG.extend(SVG.Rect, SVG.Ellipse, SVG.Circle, SVG.Gradient, SVG.FX, {
+  // Add x and y radius
+  radius: function(x, y) {
+    var type = (this._target || this).type;
+    return type == 'radial' || type == 'circle' ?
+      this.attr('r', new SVG.Number(x)) :
+      this.rx(x).ry(y == null ? x : y)
+  }
+})
+
+SVG.extend(SVG.Path, {
+  // Get path length
+  length: function() {
+    return this.node.getTotalLength()
+  }
+  // Get point at length
+, pointAt: function(length) {
+    return this.node.getPointAtLength(length)
+  }
+})
+
+SVG.extend(SVG.Parent, SVG.Text, SVG.Tspan, SVG.FX, {
+  // Set font
+  font: function(a, v) {
+    if (typeof a == 'object') {
+      for (v in a) this.font(v, a[v])
+    }
+
+    return a == 'leading' ?
+        this.leading(v) :
+      a == 'anchor' ?
+        this.attr('text-anchor', v) :
+      a == 'size' || a == 'family' || a == 'weight' || a == 'stretch' || a == 'variant' || a == 'style' ?
+        this.attr('font-'+ a, v) :
+        this.attr(a, v)
+  }
+})
+
+SVG.Set = SVG.invent({
+  // Initialize
+  create: function(members) {
+    // Set initial state
+    Array.isArray(members) ? this.members = members : this.clear()
+  }
+
+  // Add class methods
+, extend: {
+    // Add element to set
+    add: function() {
+      var i, il, elements = [].slice.call(arguments)
+
+      for (i = 0, il = elements.length; i < il; i++)
+        this.members.push(elements[i])
+
+      return this
+    }
+    // Remove element from set
+  , remove: function(element) {
+      var i = this.index(element)
+
+      // remove given child
+      if (i > -1)
+        this.members.splice(i, 1)
+
+      return this
+    }
+    // Iterate over all members
+  , each: function(block) {
+      for (var i = 0, il = this.members.length; i < il; i++)
+        block.apply(this.members[i], [i, this.members])
+
+      return this
+    }
+    // Restore to defaults
+  , clear: function() {
+      // initialize store
+      this.members = []
+
+      return this
+    }
+    // Get the length of a set
+  , length: function() {
+      return this.members.length
+    }
+    // Checks if a given element is present in set
+  , has: function(element) {
+      return this.index(element) >= 0
+    }
+    // retuns index of given element in set
+  , index: function(element) {
+      return this.members.indexOf(element)
+    }
+    // Get member at given index
+  , get: function(i) {
+      return this.members[i]
+    }
+    // Get first member
+  , first: function() {
+      return this.get(0)
+    }
+    // Get last member
+  , last: function() {
+      return this.get(this.members.length - 1)
+    }
+    // Default value
+  , valueOf: function() {
+      return this.members
+    }
+    // Get the bounding box of all members included or empty box if set has no items
+  , bbox: function(){
+      // return an empty box of there are no members
+      if (this.members.length == 0)
+        return new SVG.RBox()
+
+      // get the first rbox and update the target bbox
+      var rbox = this.members[0].rbox(this.members[0].doc())
+
+      this.each(function() {
+        // user rbox for correct position and visual representation
+        rbox = rbox.merge(this.rbox(this.doc()))
+      })
+
+      return rbox
+    }
+  }
+
+  // Add parent method
+, construct: {
+    // Create a new set
+    set: function(members) {
+      return new SVG.Set(members)
+    }
+  }
+})
+
+SVG.FX.Set = SVG.invent({
+  // Initialize node
+  create: function(set) {
+    // store reference to set
+    this.set = set
+  }
+
+})
+
+// Alias methods
+SVG.Set.inherit = function() {
+  var m
+    , methods = []
+
+  // gather shape methods
+  for(var m in SVG.Shape.prototype)
+    if (typeof SVG.Shape.prototype[m] == 'function' && typeof SVG.Set.prototype[m] != 'function')
+      methods.push(m)
+
+  // apply shape aliasses
+  methods.forEach(function(method) {
+    SVG.Set.prototype[method] = function() {
+      for (var i = 0, il = this.members.length; i < il; i++)
+        if (this.members[i] && typeof this.members[i][method] == 'function')
+          this.members[i][method].apply(this.members[i], arguments)
+
+      return method == 'animate' ? (this.fx || (this.fx = new SVG.FX.Set(this))) : this
+    }
+  })
+
+  // clear methods for the next round
+  methods = []
+
+  // gather fx methods
+  for(var m in SVG.FX.prototype)
+    if (typeof SVG.FX.prototype[m] == 'function' && typeof SVG.FX.Set.prototype[m] != 'function')
+      methods.push(m)
+
+  // apply fx aliasses
+  methods.forEach(function(method) {
+    SVG.FX.Set.prototype[method] = function() {
+      for (var i = 0, il = this.set.members.length; i < il; i++)
+        this.set.members[i].fx[method].apply(this.set.members[i].fx, arguments)
+
+      return this
+    }
+  })
+}
+
+
+
+
+SVG.extend(SVG.Element, {
+  // Store data values on svg nodes
+  data: function(a, v, r) {
+    if (typeof a == 'object') {
+      for (v in a)
+        this.data(v, a[v])
+
+    } else if (arguments.length < 2) {
+      try {
+        return JSON.parse(this.attr('data-' + a))
+      } catch(e) {
+        return this.attr('data-' + a)
+      }
+
+    } else {
+      this.attr(
+        'data-' + a
+      , v === null ?
+          null :
+        r === true || typeof v === 'string' || typeof v === 'number' ?
+          v :
+          JSON.stringify(v)
+      )
+    }
+
+    return this
+  }
+})
+SVG.extend(SVG.Element, {
+  // Remember arbitrary data
+  remember: function(k, v) {
+    // remember every item in an object individually
+    if (typeof arguments[0] == 'object')
+      for (var v in k)
+        this.remember(v, k[v])
+
+    // retrieve memory
+    else if (arguments.length == 1)
+      return this.memory()[k]
+
+    // store memory
+    else
+      this.memory()[k] = v
+
+    return this
+  }
+
+  // Erase a given memory
+, forget: function() {
+    if (arguments.length == 0)
+      this._memory = {}
+    else
+      for (var i = arguments.length - 1; i >= 0; i--)
+        delete this.memory()[arguments[i]]
+
+    return this
+  }
+
+  // Initialize or return local memory object
+, memory: function() {
+    return this._memory || (this._memory = {})
+  }
+
+})
+// Method for getting an element by id
+SVG.get = function(id) {
+  var node = document.getElementById(idFromReference(id) || id)
+  return SVG.adopt(node)
+}
+
+// Select elements by query string
+SVG.select = function(query, parent) {
+  return new SVG.Set(
+    SVG.utils.map((parent || document).querySelectorAll(query), function(node) {
+      return SVG.adopt(node)
+    })
+  )
+}
+
+SVG.extend(SVG.Parent, {
+  // Scoped select method
+  select: function(query) {
+    return SVG.select(query, this.node)
+  }
+
+})
+function pathRegReplace(a, b, c, d) {
+  return c + d.replace(SVG.regex.dots, ' .')
+}
+
+// creates deep clone of array
+function array_clone(arr){
+  var clone = arr.slice(0)
+  for(var i = clone.length; i--;){
+    if(Array.isArray(clone[i])){
+      clone[i] = array_clone(clone[i])
+    }
+  }
+  return clone
+}
+
+// tests if a given element is instance of an object
+function is(el, obj){
+  return el instanceof obj
+}
+
+// tests if a given selector matches an element
+function matches(el, selector) {
+  return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector).call(el, selector);
+}
+
+// Convert dash-separated-string to camelCase
+function camelCase(s) {
+  return s.toLowerCase().replace(/-(.)/g, function(m, g) {
+    return g.toUpperCase()
+  })
+}
+
+// Capitalize first letter of a string
+function capitalize(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
+// Ensure to six-based hex
+function fullHex(hex) {
+  return hex.length == 4 ?
+    [ '#',
+      hex.substring(1, 2), hex.substring(1, 2)
+    , hex.substring(2, 3), hex.substring(2, 3)
+    , hex.substring(3, 4), hex.substring(3, 4)
+    ].join('') : hex
+}
+
+// Component to hex value
+function compToHex(comp) {
+  var hex = comp.toString(16)
+  return hex.length == 1 ? '0' + hex : hex
+}
+
+// Calculate proportional width and height values when necessary
+function proportionalSize(element, width, height) {
+  if (width == null || height == null) {
+    var box = element.bbox()
+
+    if (width == null)
+      width = box.width / box.height * height
+    else if (height == null)
+      height = box.height / box.width * width
+  }
+
+  return {
+    width:  width
+  , height: height
+  }
+}
+
+// Delta transform point
+function deltaTransformPoint(matrix, x, y) {
+  return {
+    x: x * matrix.a + y * matrix.c + 0
+  , y: x * matrix.b + y * matrix.d + 0
+  }
+}
+
+// Map matrix array to object
+function arrayToMatrix(a) {
+  return { a: a[0], b: a[1], c: a[2], d: a[3], e: a[4], f: a[5] }
+}
+
+// Parse matrix if required
+function parseMatrix(matrix) {
+  if (!(matrix instanceof SVG.Matrix))
+    matrix = new SVG.Matrix(matrix)
+
+  return matrix
+}
+
+// Add centre point to transform object
+function ensureCentre(o, target) {
+  o.cx = o.cx == null ? target.bbox().cx : o.cx
+  o.cy = o.cy == null ? target.bbox().cy : o.cy
+}
+
+// PathArray Helpers
+function arrayToString(a) {
+  for (var i = 0, il = a.length, s = ''; i < il; i++) {
+    s += a[i][0]
+
+    if (a[i][1] != null) {
+      s += a[i][1]
+
+      if (a[i][2] != null) {
+        s += ' '
+        s += a[i][2]
+
+        if (a[i][3] != null) {
+          s += ' '
+          s += a[i][3]
+          s += ' '
+          s += a[i][4]
+
+          if (a[i][5] != null) {
+            s += ' '
+            s += a[i][5]
+            s += ' '
+            s += a[i][6]
+
+            if (a[i][7] != null) {
+              s += ' '
+              s += a[i][7]
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return s + ' '
+}
+
+// Deep new id assignment
+function assignNewId(node) {
+  // do the same for SVG child nodes as well
+  for (var i = node.childNodes.length - 1; i >= 0; i--)
+    if (node.childNodes[i] instanceof window.SVGElement)
+      assignNewId(node.childNodes[i])
+
+  return SVG.adopt(node).id(SVG.eid(node.nodeName))
+}
+
+// Add more bounding box properties
+function fullBox(b) {
+  if (b.x == null) {
+    b.x      = 0
+    b.y      = 0
+    b.width  = 0
+    b.height = 0
+  }
+
+  b.w  = b.width
+  b.h  = b.height
+  b.x2 = b.x + b.width
+  b.y2 = b.y + b.height
+  b.cx = b.x + b.width / 2
+  b.cy = b.y + b.height / 2
+
+  return b
+}
+
+// Get id from reference string
+function idFromReference(url) {
+  var m = url.toString().match(SVG.regex.reference)
+
+  if (m) return m[1]
+}
+
+// Create matrix array for looping
+var abcdef = 'abcdef'.split('')
+// Add CustomEvent to IE9 and IE10
+if (typeof window.CustomEvent !== 'function') {
+  // Code from: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
+  var CustomEvent = function(event, options) {
+    options = options || { bubbles: false, cancelable: false, detail: undefined }
+    var e = document.createEvent('CustomEvent')
+    e.initCustomEvent(event, options.bubbles, options.cancelable, options.detail)
+    return e
+  }
+
+  CustomEvent.prototype = window.Event.prototype
+
+  window.CustomEvent = CustomEvent
+}
+
+// requestAnimationFrame / cancelAnimationFrame Polyfill with fallback based on Paul Irish
+(function(w) {
+  var lastTime = 0
+  var vendors = ['moz', 'webkit']
+
+  for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+    w.requestAnimationFrame = w[vendors[x] + 'RequestAnimationFrame']
+    w.cancelAnimationFrame  = w[vendors[x] + 'CancelAnimationFrame'] ||
+                              w[vendors[x] + 'CancelRequestAnimationFrame']
+  }
+
+  w.requestAnimationFrame = w.requestAnimationFrame ||
+    function(callback) {
+      var currTime = new Date().getTime()
+      var timeToCall = Math.max(0, 16 - (currTime - lastTime))
+
+      var id = w.setTimeout(function() {
+        callback(currTime + timeToCall)
+      }, timeToCall)
+
+      lastTime = currTime + timeToCall
+      return id
+    }
+
+  w.cancelAnimationFrame = w.cancelAnimationFrame || w.clearTimeout;
+
+}(window))
+
+return SVG
+
+}));
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _nLogo = __webpack_require__(0);
+
+var _nLogo2 = _interopRequireDefault(_nLogo);
+
+var _samai = __webpack_require__(2);
+
+var _samai2 = _interopRequireDefault(_samai);
+
+var _index = __webpack_require__(5);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var resizing = false;
+var logoEl = document.getElementById('logo');
+var body = document.querySelector('body');
+var cont = document.getElementById('container');
+var info = document.getElementById('info');
+var logoSize = getLogoSize(logoEl);
+var logo = new _nLogo2.default('canvas', logoSize);
+var samai = new _samai2.default({
+  fabric_enabled: true,
+  dark_colors: ["#222", "#072", "#000"],
+  light_colors: ["#3A6", "#AAA", "#777"]
+});
+
+samai.getPNG().then(function (src) {
+  body.style.backgroundImage = "url('" + src + "')";
+  body.style.backgroundSize = samai.width + "px";
+});
+
+bodyHeight();
+logo.animate();
+
+cont.onclick = function () {
+  return window.location.href = "samai/";
+};
+
+setInterval(function () {
+  samai.getPNG().then(function (src) {
+    samai.next();
+    body.style.backgroundImage = "url('" + src + "')";
+    body.style.backgroundSize = samai.width + "px";
+  });
+}, 5000);
+
+function bodyHeight() {
+  if (cont.clientHeight > window.innerHeight || window.innerWidth > window.innerHeight && window.innerWidth <= 768) {
+    cont.style.height = 'auto';
+    logoEl.style.paddingTop = '50px';
+  } else {
+    var h = logoEl.clientHeight + info.clientHeight;
+    cont.style.height = '100vh';
+    logoEl.style.paddingTop = (window.innerHeight - h) / 2 + 'px';
+  }
+}
+
+function getLogoSize(el) {
+  var w = window.innerWidth - 20;
+  var h = window.innerHeight;
+  var result = (w > h ? h : w) * (window.innerWidth <= 768 ? 0.8 : 0.4);
+  el.style.width = el.style.height = result;
+  return result;
+}
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ })
+/******/ ]);
