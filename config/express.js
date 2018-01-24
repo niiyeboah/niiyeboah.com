@@ -1,32 +1,36 @@
-var express = require('express')
-var morgan = require('morgan')
-var compress = require('compression')
-var bodyParser = require('body-parser')
-var methodOverride = require('method-override')
+var express = require('express');
+var morgan = require('morgan');
+var compress = require('compression');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var webpack = require('webpack');
+var webpackConfig = require('../webpack.config');
 
-module.exports = function () {
-  var app = express()
+var compiler = webpack(webpackConfig);
 
-  if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
-  else if (process.env.NODE_ENV === 'production') app.use(compress())
+module.exports = function() {
+    var app = express();
 
-  app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(bodyParser.json())
-  app.use(methodOverride())
+    if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+    else if (process.env.NODE_ENV === 'production') app.use(compress());
 
-  app.set('views', './app/views')
-  app.set('view engine', 'ejs')
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+    app.use(methodOverride());
 
-  require('../app/routes/index.server.routes.js')(app)
-  require('../app/routes/samai.server.routes.js')(app)
-  require('../app/routes/zs.server.routes.js')(app)
+    app.set('views', './app/views');
+    app.set('view engine', 'ejs');
 
-  app.use(express.static('./public'))
-  app.use(express.static('./doc'))
+    require('../app/routes/index.server.routes.js')(app);
+    require('../app/routes/samai.server.routes.js')(app);
+    require('../app/routes/zs.server.routes.js')(app);
 
-  app.use((req, res) => {
-    res.render('error.ejs', { title: 'Error' })
-  })
+    app.use(express.static('./public'));
+    app.use(express.static('./doc'));
 
-  return app
-}
+    app.use((req, res) => {
+        res.render('error.ejs', { title: 'Error' });
+    });
+
+    return app;
+};
