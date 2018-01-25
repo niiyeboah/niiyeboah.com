@@ -1,5 +1,5 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-process.env.PORT = process.env.PORT || 8080;
+process.env.PORT = process.env.PORT || 3000;
 
 var mongoose = require('mongoose');
 var uri = require('./server/config/config').db.uri;
