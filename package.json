@@ -1,18 +1,18 @@
 {
-    "name": "niiyeboah",
-    "version": "0.0.2",
+    "name": "niiyeboah-donate",
+    "version": "0.0.1",
     "dependencies": {
         "body-parser": "~1.18.2",
         "compression": "~1.7.1",
         "ejs": "~2.5.7",
         "express": "~4.16.2",
         "method-override": "~2.3.10",
+        "mongoose": "^5.0.1",
         "morgan": "^1.9.0"
     },
     "scripts": {
         "start": "node server.js",
         "build": "webpack",
-        "doc": "jsdoc node_modules/samai/dist/samai.js -d ./doc/",
         "dev": "webpack && nodemon server.js"
     },
     "description": "Personal Website",
@@ -39,9 +39,19 @@
         "vue": "^2.5.13",
         "vue-loader": "^13.7.0",
         "vue-template-compiler": "^2.5.13",
-        "vue-template-es2015-compiler": "^1.6.0",
         "vuelidate": "^0.6.1",
         "vuetify": "^0.17.6",
         "webpack": "^3.10.0"
-    }
+    },
+    "directories": {
+        "doc": "doc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/niiyeboah/niiyeboah.com.git"
+    },
+    "bugs": {
+        "url": "https://github.com/niiyeboah/niiyeboah.com/issues"
+    },
+    "homepage": "https://github.com/niiyeboah/niiyeboah.com#readme"
 }

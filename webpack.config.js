@@ -3,9 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
-        'index.bundle': './public/js/index.js',
-        'samai.bundle': './public/js/samai.js',
-        'donate.bundle': './public/js/donate.js'
+        'index.bundle': './public/js/index.js'
     },
     output: {
         filename: './public/js/[name].js'
@@ -45,5 +43,8 @@ module.exports = {
             }
         ]
     },
-    plugins: [new webpack.optimize.UglifyJsPlugin({ minimize: true }), new ExtractTextPlugin('public/css/[name].css')]
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+        new ExtractTextPlugin('public/css/[name].css')
+    ]
 };
