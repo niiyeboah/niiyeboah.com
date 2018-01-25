@@ -30,8 +30,7 @@
                     </v-flex>
                     <v-flex xs12 md6>
                         <v-container 
-                            id="donationForm" 
-                            transition="slide-y-reverse-transition" 
+                            id="donationForm"
                             fluid 
                             class="grey lighten-3" 
                             v-if="payOptions.length">
@@ -101,7 +100,7 @@
                             </v-layout>
                             <v-layout row wrap>
                                 <v-flex xs12 md4>
-                                    <v-btn @click="submit">
+                                    <v-btn @click="submit" :loading="loading">
                                         <v-icon left>payment</v-icon>
                                         <span v-text="'Donate'"></span>
                                     </v-btn>
