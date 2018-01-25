@@ -1,10 +1,11 @@
 # niiyeboah-donate
 
-> Donation page made with the SlydePay API.
+Donation page made with the SlydePay API.
 
 ## Requirements
 
--[Node.js](https://nodejs.org/en/download/ 'Download Node.js') -[MongoDB](https://www.mongodb.com/download-center#community 'Download MongoDB')
+* [Node.js](https://nodejs.org/en/download/ 'Download Node.js')
+* [MongoDB](https://www.mongodb.com/download-center#community 'Download MongoDB')
 
 ## Build Setup
 
