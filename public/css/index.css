@@ -1,9 +1,9 @@
 body {
-    background-image: url('/img/me.large.jpg');
+    /* background-image: url('/img/me.large.jpg'); */
     background-position: center right;
     background-size: 100%;
     background-repeat: no-repeat;
-    background-color: #1b5e20;
+    background-color: #ccc;
 }
 
 #app {
