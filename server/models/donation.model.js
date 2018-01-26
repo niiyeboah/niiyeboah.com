@@ -6,6 +6,7 @@ var donationSchema = new Schema({
     phone: String,
     email: String,
     amount: Number,
+    completed: { type: Boolean, default: false },
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now }
 });

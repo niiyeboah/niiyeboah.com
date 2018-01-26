@@ -1,10 +1,10 @@
 var express = require('axios');
-var config = require('./config');
 var express = require('express');
 var morgan = require('morgan');
 var compress = require('compression');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var config = require('./config');
 var donations = require('../routes/donation.routes');
 
 module.exports = function() {
@@ -43,7 +43,6 @@ module.exports = function() {
     app.use('/donation', donations);
 
     app.use(express.static('./public'));
-    app.use(express.static('./doc'));
 
     return app;
 };
