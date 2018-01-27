@@ -1,9 +1,10 @@
 <template>
-    <div
-        id="background"        
-        class="lazy-loaded" 
-        v-lazy-load-bg="fullbackground"
-        src="img/bojo.2048.ph.jpg">
+    <div id="container">
+        <div
+            id="background"        
+            class="lazy-loaded" 
+            v-lazy-load-bg="fullbackground">
+        </div>
         <v-app id="app">
             <v-toolbar app color="green accent-4" dark>
                 <v-toolbar-title>

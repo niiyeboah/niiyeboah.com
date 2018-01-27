@@ -1,9 +1,19 @@
+#container {
+    position: relative;
+}
+
 #background {
-    /* background-image: url('/img/me.large.jpg'); */
+    background-image: url('/img/bojo.2048.ph.jpg');
     background-position: center right;
     background-size: 100%;
     background-repeat: no-repeat;
     background-color: #ccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
 }
 
 #app {
@@ -63,7 +73,7 @@
 }
 
 .lazy-loaded.lazy-load-progress {
-    filter: blur(5px);
+    filter: blur(10px);
 }
 
 .lazy-loaded.lazy-load-success {
@@ -71,7 +81,7 @@
 }
 
 .lazy-loaded.lazy-load-error {
-    filter: blur(3px) sepia(1);
+    filter: blur(10px) sepia(1);
     outline: 4px solid red;
 }
 
